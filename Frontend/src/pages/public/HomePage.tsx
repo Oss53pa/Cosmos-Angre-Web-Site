@@ -23,8 +23,7 @@ import {
 import AmbientMusic from '../../components/features/AmbientMusic';
 import TestimonialsSection from '../../components/features/TestimonialsSection';
 import OptimizedImage from '../../components/common/OptimizedImage';
-import GalaxyHero from '../../components/features/galaxy/GalaxyHero';
-import BrandGalaxy from '../../components/features/galaxy/BrandGalaxy';
+import ConstellationHero from '../../components/features/galaxy/ConstellationHero';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
 import GrainOverlay from '../../components/features/galaxy/GrainOverlay';
 
@@ -118,14 +117,11 @@ const HomePage: React.FC = () => {
 
       <AmbientMusic />
 
-      {/* ════════ HERO GALAXIE IMMERSIF ════════ */}
-      <GalaxyHero />
-
-      {/* ════════ LA GALAXIE DES ENSEIGNES ════════ */}
-      <BrandGalaxy />
+      {/* ════════ HERO = CONSTELLATION (prototype A) ════════ */}
+      <ConstellationHero />
 
       {/* ════════ À LA UNE — Bento ════════ */}
-      <section className="section bg-cosmos-warm" ref={bentoReveal.ref}>
+      <section id="apres-hero" className="section bg-cosmos-warm" ref={bentoReveal.ref}>
         <div className="container-cosmos">
           <CosmicDivider className="mb-12" />
           <div className="text-center mb-16">
