@@ -32,7 +32,14 @@ const GalaxyPageHeader: React.FC<GalaxyPageHeaderProps> = ({
       className={`relative w-full overflow-hidden bg-cosmos-night-deep flex items-center justify-center ${heightClassName}`}
     >
       <div className="absolute inset-0">
-        <GalaxyCanvas density="med" interactive centerX={0.68} centerY={0.42} />
+        <GalaxyCanvas
+          density="med"
+          interactive
+          centerX={0.82}
+          centerY={0.24}
+          coreIntensity={0.5}
+          coreScale={0.7}
+        />
       </div>
 
       {/* Vignette + fondu vers le contenu clair */}
@@ -40,14 +47,17 @@ const GalaxyPageHeader: React.FC<GalaxyPageHeaderProps> = ({
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(120% 100% at 60% 38%, transparent 35%, rgb(var(--cosmos-night-deep) / 0.6) 100%)',
+            'radial-gradient(130% 120% at 50% 45%, transparent 30%, rgb(var(--cosmos-night-deep) / 0.72) 100%)',
         }}
       />
       <GrainOverlay opacity={0.06} />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-cosmos-warm pointer-events-none" />
 
       {/* Contenu */}
-      <div className="container-cosmos relative z-10 text-center pt-16">
+      <div
+        className="container-cosmos relative z-10 text-center pt-16"
+        style={{ textShadow: '0 2px 24px rgb(var(--cosmos-night-deep) / 0.8)' }}
+      >
         <div className="inline-flex items-center gap-3 mb-5 animate-fade-in-down">
           <span className="w-6 h-px bg-cosmos-gold/60" />
           <span className="overline text-cosmos-gold">{overline}</span>

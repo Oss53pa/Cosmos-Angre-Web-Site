@@ -13,6 +13,9 @@ dist-ssr
 coverage
 *.local
 
+# Harness / tooling
+.claude/scheduled_tasks.lock
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

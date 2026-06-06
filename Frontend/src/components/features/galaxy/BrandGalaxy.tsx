@@ -186,7 +186,8 @@ const BrandGalaxy: React.FC = () => {
             <div
               key={i}
               ref={(el) => (orbitRef.current[i] = el)}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-cosmos-gold/22 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none"
+              style={{ border: '1px solid rgb(var(--cosmos-gold) / 0.28)' }}
             />
           ))}
 
@@ -226,19 +227,23 @@ const BrandGalaxy: React.FC = () => {
               <div className="inline-block">
                 <CosmosLogo height={54} />
               </div>
-              <div className="mt-4 h-12 flex items-center justify-center">
+              <div
+                className="mt-3 h-14 flex items-center justify-center"
+                style={{ textShadow: '0 2px 16px rgba(0,0,0,0.65)' }}
+              >
                 {hovered !== null ? (
                   <div className="animate-fade-in">
-                    <p className="font-cormorant text-lg text-cosmos-gold-light leading-tight">
+                    <p className="font-cormorant text-xl text-cosmos-gold-light leading-tight">
                       {PLANETS[hovered].label}
                     </p>
-                    <p className="text-[11px] text-cosmos-cream/55 font-inter font-light mt-0.5">
+                    <p className="text-xs text-cosmos-cream/80 font-inter font-light mt-0.5">
                       {PLANETS[hovered].desc}
                     </p>
                   </div>
                 ) : (
-                  <p className="text-[10px] text-cosmos-cream/40 font-inter font-light uppercase tracking-[0.25em]">
-                    Centre de vie · Angré
+                  <p className="font-cormorant text-lg md:text-xl text-cosmos-cream font-medium leading-snug">
+                    Le meilleur du quotidien,{' '}
+                    <span className="italic text-cosmos-gold-light">ici.</span>
                   </p>
                 )}
               </div>

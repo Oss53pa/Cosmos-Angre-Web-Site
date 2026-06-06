@@ -30,6 +30,10 @@ interface GalaxyCanvasProps {
   centerX?: number;
   /** Position verticale du cœur galactique (fraction 0–1). */
   centerY?: number;
+  /** Intensité (alpha) du cœur lumineux et du bloom (1 = défaut). */
+  coreIntensity?: number;
+  /** Échelle du rayon du cœur/bloom (1 = défaut). */
+  coreScale?: number;
 }
 
 interface Star {
@@ -69,6 +73,8 @@ const GalaxyCanvas: React.FC<GalaxyCanvasProps> = ({
   opacity = 1,
   centerX = 0.62,
   centerY = 0.46,
+  coreIntensity = 1,
+  coreScale = 1,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
@@ -216,33 +222,36 @@ const GalaxyCanvas: React.FC<GalaxyCanvasProps> = ({
 
     const drawCore = (pulse: number) => {
       ctx.globalCompositeOperation = 'lighter';
+      const ci = coreIntensity;
+      // Rayon plafonné par la hauteur pour éviter le « blob » sur les bandeaux courts
+      const baseR = Math.min(maxR, h * 0.7) * coreScale;
 
       // Bloom large et doux (halo qui enveloppe le cœur)
-      const br = maxR * 0.44;
+      const br = baseR * 0.44;
       const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, br);
-      bloom.addColorStop(0, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, 0.16)`);
-      bloom.addColorStop(0.5, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, 0.05)`);
+      bloom.addColorStop(0, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, ${0.16 * ci})`);
+      bloom.addColorStop(0.5, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, ${0.05 * ci})`);
       bloom.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = bloom;
       ctx.fillRect(cx - br, cy - br, br * 2, br * 2);
 
       // Noyau (centre chaud presque blanc → or)
-      const r = maxR * (0.16 + pulse * 0.012);
+      const r = baseR * (0.16 + pulse * 0.012);
       const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-      core.addColorStop(0, 'rgba(255, 253, 246, 0.98)');
-      core.addColorStop(0.12, `rgba(${cream[0]}, ${cream[1]}, ${cream[2]}, 0.85)`);
-      core.addColorStop(0.32, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, 0.55)`);
-      core.addColorStop(0.6, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, 0.16)`);
+      core.addColorStop(0, `rgba(255, 253, 246, ${0.98 * ci})`);
+      core.addColorStop(0.12, `rgba(${cream[0]}, ${cream[1]}, ${cream[2]}, ${0.85 * ci})`);
+      core.addColorStop(0.32, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, ${0.55 * ci})`);
+      core.addColorStop(0.6, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, ${0.16 * ci})`);
       core.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = core;
       ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
 
       // Éclat anamorphique horizontal — discret (un simple glint, pas une barre)
-      const fw = maxR * 0.42;
+      const fw = baseR * 0.42;
       const fh = 1.4 + pulse * 0.6;
       const flareH = ctx.createLinearGradient(cx - fw, cy, cx + fw, cy);
       flareH.addColorStop(0, 'rgba(0,0,0,0)');
-      flareH.addColorStop(0.5, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, ${0.16 + pulse * 0.05})`);
+      flareH.addColorStop(0.5, `rgba(${goldSoft[0]}, ${goldSoft[1]}, ${goldSoft[2]}, ${(0.16 + pulse * 0.05) * ci})`);
       flareH.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = flareH;
       ctx.fillRect(cx - fw, cy - fh, fw * 2, fh * 2);
@@ -389,7 +398,7 @@ const GalaxyCanvas: React.FC<GalaxyCanvasProps> = ({
       io.disconnect();
       if (interactive) window.removeEventListener('mousemove', onMove);
     };
-  }, [density, interactive, speed, opacity, centerX, centerY]);
+  }, [density, interactive, speed, opacity, centerX, centerY, coreIntensity, coreScale]);
 
   return (
     <canvas
