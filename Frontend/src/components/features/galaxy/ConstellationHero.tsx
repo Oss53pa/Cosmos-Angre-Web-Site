@@ -283,27 +283,15 @@ const ConstellationHero: React.FC = () => {
           <div className="h-6 sm:h-9 md:h-10" />
 
           <h1
-            className="font-cormorant text-4xl sm:text-5xl md:text-6xl text-cosmos-cream font-light leading-[1.05] mb-5"
+            className="font-cormorant text-4xl sm:text-5xl md:text-6xl text-cosmos-cream font-light leading-[1.05] mb-9"
             style={{ textShadow: '0 2px 30px rgb(var(--cosmos-night-deep) / 0.9)' }}
           >
             Le meilleur du quotidien,{' '}
             <span className="text-gradient-gold italic">ici.</span>
           </h1>
 
-          <p
-            className="text-sm md:text-base text-cosmos-cream/70 font-inter font-light max-w-md mx-auto mb-9"
-            style={{ textShadow: '0 1px 16px rgba(0,0,0,0.7)' }}
-          >
-            Tout Angré gravite autour de vous. Touchez une étoile pour explorer,
-            ou préparez votre visite.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-            <Link to="/boutiques" className="btn-primary">
-              <Sparkles className="w-4 h-4" strokeWidth={1.5} />
-              Explorer les enseignes
-            </Link>
-            <Link to="/preparer-visite" className="btn-outline">
+          <div className="flex justify-center mb-10">
+            <Link to="/preparer-visite" className="btn-primary">
               Préparer ma visite
               <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
             </Link>
