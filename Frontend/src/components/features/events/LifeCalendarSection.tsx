@@ -1,5 +1,36 @@
 import React, { useMemo, useState } from 'react';
-import * as Lucide from 'lucide-react';
+import {
+  Sparkles,
+  Heart,
+  ShoppingBag,
+  PartyPopper,
+  Calendar,
+  Gift,
+  Star,
+  Sun,
+  Music,
+  Camera,
+  Trophy,
+  Leaf,
+  type LucideIcon,
+} from 'lucide-react';
+
+// Liste blanche des icônes proposées par l'admin (cf. ICON_SUGGESTIONS).
+// Évite le barrel import de toute la librairie (~700 Ko) : seules ces icônes sont bundlées.
+const HIGHLIGHT_ICONS: Record<string, LucideIcon> = {
+  Sparkles,
+  Heart,
+  ShoppingBag,
+  PartyPopper,
+  Calendar,
+  Gift,
+  Star,
+  Sun,
+  Music,
+  Camera,
+  Trophy,
+  Leaf,
+};
 import {
   useLifeCalendar,
   type LifeCalendarCategory,
@@ -128,10 +159,9 @@ function formatDateRange(event: LifeCalendarEvent): string {
   return `${startDay} ${startMonth} – ${endDay} ${endMonth}`;
 }
 
-function getLucideIcon(name: string | null | undefined): React.ComponentType<{ className?: string; strokeWidth?: number }> {
-  if (!name) return Lucide.Sparkles;
-  const Icon = (Lucide as unknown as Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>>)[name];
-  return Icon ?? Lucide.Sparkles;
+function getLucideIcon(name: string | null | undefined): LucideIcon {
+  if (!name) return Sparkles;
+  return HIGHLIGHT_ICONS[name] ?? Sparkles;
 }
 
 // ============================================================
