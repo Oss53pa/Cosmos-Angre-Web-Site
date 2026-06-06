@@ -209,7 +209,7 @@ const DesktopScreen: React.FC = () => (
       <CosmosLogo height={42} dotColor="rgb(var(--cosmos-or-clair, 217 201 160))" />
       <div className="flex gap-7 text-[12px] uppercase tracking-[0.25em]">
         <span>Boutiques</span>
-        <span>Gastronomie</span>
+        <span>Restaurants</span>
         <span>Loisirs</span>
         <span>Événements</span>
         <span>Services</span>
@@ -284,7 +284,7 @@ const DesktopScreen: React.FC = () => (
         },
         {
           i: Utensils,
-          l: 'Gastronomie',
+          l: 'Restaurants',
           n: '14 restaurants',
           accent: 'text-cosmos-vert-profond',
           bg: 'bg-cosmos-sable/40',

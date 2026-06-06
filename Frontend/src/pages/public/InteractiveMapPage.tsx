@@ -52,9 +52,9 @@ const STORE_DATA: StoreEntry[] = [
   ["Aldo",                "mode",       0xC2185B, 650,465, 700,490,"44m²","Chaussures & maroquinerie premium","loue"],
   ["City Sport",          "mode",       0xC2185B, 960,460, 1100,540,"222m²","Sport · Multimarque · Équipements","loue"],
   // ─── Terrasses & Food Court Est ───
-  ["Terrasse T1",         "restaurant", 0xE53935, 1110,475,1170,540,"152m²","Terrasse restaurant 1 · Food court","loue"],
-  ["Terrasse T2",         "restaurant", 0xE53935, 1175,475,1240,540,"174m²","Terrasse restaurant 2 · Food court","loue"],
-  ["Terrasse T3",         "restaurant", 0xE53935, 1245,475,1310,540,"175m²","Terrasse restaurant 3 · Food court","loue"],
+  ["Terrasse T1",         "restaurant", 0xE53935, 1110,475,1170,540,"152m²","Terrasse restaurant 1 · La Halle Gourmande","loue"],
+  ["Terrasse T2",         "restaurant", 0xE53935, 1175,475,1240,540,"174m²","Terrasse restaurant 2 · La Halle Gourmande","loue"],
+  ["Terrasse T3",         "restaurant", 0xE53935, 1245,475,1310,540,"175m²","Terrasse restaurant 3 · La Halle Gourmande","loue"],
   // ─── Aile Ouest ───
   ["Oïmo Shoes",          "mode",       0xC2185B, 95,570,  260,650,"275m²","Chaussures · Grande surface spécialisée","loue"],
   ["Boutique Mode Ouest", "mode",       0xC2185B, 95,655,  200,710,"113m²","Boutique mode · Aile ouest","accord"],
@@ -126,7 +126,7 @@ const JOURNEY: JourneyStep[] = [
   {n:"Kiabi & Mode Nord",d:"648m² mode famille", px:1200,py:220},
   {n:"Craft Market",d:"456m² artisanat · Produits locaux", px:1350,py:350},
   {n:"Bonus & Services",d:"300m² multiservice · C15-C16", px:920,py:380},
-  {n:"Food Court & Terrasses",d:"T1-T2-T3 · Destination food", px:1100,py:510},
+  {n:"La Halle Gourmande & Terrasses",d:"T1-T2-T3 · Destination food", px:1100,py:510},
   {n:"City Sport & Aldo",d:"Sport · Chaussures premium", px:1020,py:500},
   {n:"Dreamland",d:"1 125m² loisirs enfants", px:860,py:670},
   {n:"Zone d'Expo",d:"Pop-up stores · Animations", px:550,py:680},

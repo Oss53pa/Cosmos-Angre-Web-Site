@@ -649,7 +649,7 @@ const Bache: React.FC = () => (
           className="mt-4 text-[13px] uppercase tracking-[0.3em]"
           style={{ color: SABLE }}
         >
-          Shopping · Gastronomie · Cinéma · Hôtel
+          Shopping · Restaurants · Cinéma · Hôtel
         </p>
       </div>
       <div className="flex flex-col items-center gap-3 border-l border-white/15 pl-8">

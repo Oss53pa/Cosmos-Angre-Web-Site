@@ -17,10 +17,10 @@ const ARTICLES = [
     category: 'Actualit\u00e9s',
     image: galleryInterior,
     paragraphs: [
-      'Cosmos Angr\u00e9, le plus grand complexe commercial et de loisirs de C\u00f4te d\u2019Ivoire, ouvrira bient\u00f4t ses portes \u00e0 Cocody-Angr\u00e9. Avec plus de 17 400 m\u00b2 de surface, ce lieu d\u2019exception accueillera plus de 55 enseignes, des restaurants gastronomiques, un cin\u00e9ma derni\u00e8re g\u00e9n\u00e9ration, un h\u00f4tel premium et bien plus encore.',
+      'Cosmos Angr\u00e9, le centre de vie de C\u00f4te d\u2019Ivoire, ouvrira bient\u00f4t ses portes \u00e0 Cocody-Angr\u00e9. Avec plus de 17 400 m\u00b2 de surface, ce lieu d\u2019exception accueillera plus de 55 enseignes, des restaurants, un cin\u00e9ma derni\u00e8re g\u00e9n\u00e9ration, un h\u00f4tel et bien plus encore.',
       'Con\u00e7u pour offrir une exp\u00e9rience in\u00e9gal\u00e9e, Cosmos Angr\u00e9 est certifi\u00e9 EDGE Advanced, t\u00e9moignant de son engagement envers le d\u00e9veloppement durable. Chaque d\u00e9tail a \u00e9t\u00e9 pens\u00e9 pour cr\u00e9er un lieu o\u00f9 se m\u00ealent \u00e9l\u00e9gance, confort et innovation.',
       'La galerie commerciale, v\u00e9ritable colonne vert\u00e9brale du complexe, accueillera des marques internationales et locales soigneusement s\u00e9lectionn\u00e9es. Du pr\u00eat-\u00e0-porter de luxe aux cr\u00e9ateurs ivoiriens \u00e9mergents, chaque boutique a \u00e9t\u00e9 pens\u00e9e comme une destination \u00e0 part enti\u00e8re.',
-      'Le Food Court, au c\u0153ur du complexe, proposera une offre culinaire vari\u00e9e : cuisine ivoirienne contemporaine, gastronomie asiatique, brasserie parisienne et bien plus. Chaque restaurant a \u00e9t\u00e9 con\u00e7u comme un univers sensoriel unique.',
+      'La Halle Gourmande, au c\u0153ur du complexe, proposera une offre culinaire vari\u00e9e : cuisine ivoirienne contemporaine, cuisine asiatique, brasserie parisienne et bien plus. Chaque restaurant a \u00e9t\u00e9 con\u00e7u comme un univers sensoriel unique.',
       'Rejoignez-nous pour d\u00e9couvrir un monde \u00e0 part. L\u2019inauguration sera un \u00e9v\u00e9nement exceptionnel, avec des surprises, des spectacles et des offres exclusives pour les premiers visiteurs.',
     ],
   },
@@ -48,7 +48,7 @@ const ARTICLES = [
     image: familyLifestyle,
     paragraphs: [
       'Cosmos Angr\u00e9 a \u00e9t\u00e9 con\u00e7u pour que chaque membre de la famille y trouve son bonheur. Les enfants profitent d\u2019espaces de jeux s\u00e9curis\u00e9s et d\u2019ateliers cr\u00e9atifs, tandis que les parents explorent les boutiques et les restaurants.',
-      'Le cin\u00e9ma propose une programmation vari\u00e9e, l\u2019entertainment zone offre bowling et r\u00e9alit\u00e9 virtuelle, et le food court satisfait toutes les envies culinaires.',
+      'Le cin\u00e9ma propose une programmation vari\u00e9e, l\u2019entertainment zone offre bowling et r\u00e9alit\u00e9 virtuelle, et La Halle Gourmande satisfait toutes les envies culinaires.',
       'Pour les plus jeunes, un espace Kids Club avec animateurs professionnels permet aux parents de profiter du centre en toute s\u00e9r\u00e9nit\u00e9. Ateliers de dessin, jeux \u00e9ducatifs et activit\u00e9s ludiques sont au programme chaque week-end.',
       'Les espaces de bien-\u00eatre ne sont pas en reste : spa, salon de coiffure, espace fitness \u2014 chaque visiteur peut s\u2019accorder un moment de d\u00e9tente dans un cadre premium.',
       'Une journ\u00e9e ne suffit pas pour tout d\u00e9couvrir \u2014 c\u2019est la promesse d\u2019une exp\u00e9rience renouvel\u00e9e \u00e0 chaque visite.',

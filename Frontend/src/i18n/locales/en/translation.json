@@ -104,7 +104,7 @@
     "newArrivals": "New arrivals",
     "gastronomy": "Dining",
     "restaurants": "Restaurants",
-    "foodCourt": "Food Court",
+    "foodCourt": "La Halle Gourmande",
     "reservation": "Reservations",
     "services": "Services",
     "interactiveMap": "Interactive map",
@@ -174,7 +174,7 @@
           "subtitle": "63+ international-class boutiques"
         },
         "gastronomy": {
-          "title": "Gastronomy",
+          "title": "Restaurants & Cafés",
           "subtitle": "15 exceptional restaurants & cafés"
         },
         "leisure": {
@@ -269,7 +269,7 @@
       "christmasMarket": {
         "title": "Christmas Market",
         "location": "Artisan Market",
-        "desc": "Handcrafted creations, festive gastronomy and magical atmosphere."
+        "desc": "Handcrafted creations, festive flavors and magical atmosphere."
       }
     },
     "newsletter": {
@@ -295,7 +295,7 @@
         },
         "3": {
           "name": "Fatou D.",
-          "text": "The food court is incredible, with options for every taste. The kids love the play area. We come back every weekend."
+          "text": "La Halle Gourmande is incredible, with options for every taste. The kids love the play area. We come back every weekend."
         },
         "4": {
           "name": "Kouame A.",
@@ -325,7 +325,7 @@
       "jewelry": "Jewelry & Watches",
       "services": "Services",
       "restaurants": "Restaurants",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "supermarket": "Supermarket",
       "bigBox": "Big Box"
     },
@@ -449,7 +449,7 @@
       "title": "Restaurants & Bars",
       "terraceAvailable": "Terrace available",
       "leCosmos": {
-        "cuisine": "African gastronomy",
+        "cuisine": "African cuisine",
         "desc": "Contemporary African cuisine in a refined setting."
       },
       "laBrasserie": {
@@ -467,7 +467,7 @@
     },
     "foodCourt": {
       "overline": "Quick dining",
-      "title": "Food Court",
+      "title": "La Halle Gourmande",
       "description": "A convivial space bringing together the best flavors from around the world — from African grills to Asian bowls.",
       "viewPlan": "View the map"
     }
@@ -1153,7 +1153,7 @@
     "zones": {
       "all": "All zones",
       "gallery": "Commercial Gallery",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "restaurants": "Restaurants",
       "bigBox": "Big Boxes",
       "craftMarket": "Artisan Market",
@@ -1969,7 +1969,7 @@
         "fashionWeek": "Abidjan Fashion Week - Exceptional Show",
         "fashionWeekContent": "Cosmos Angre hosts Abidjan Fashion Week! Attend an exceptional fashion show on November 10 from 6pm to 10pm. Discover creations from local and international designers. Free admission upon registration.",
         "newRestaurants": "5 New Restaurants Opening",
-        "newRestaurantsContent": "We are delighted to announce the opening of 5 new restaurants at the Food Court! Ivorian, Italian, Asian, Lebanese and American cuisine. Come discover these new flavors and enjoy -20% for the opening.",
+        "newRestaurantsContent": "We are delighted to announce the opening of 5 new restaurants at La Halle Gourmande! Ivorian, Italian, Asian, Lebanese and American cuisine. Come discover these new flavors and enjoy -20% for the opening.",
         "kidsDay": "Kids Day - Free Activities",
         "kidsDayContent": "On Saturday October 5, Cosmos Angre is organizing a special day for children! Creative workshops, shows, games, face painting and much more. All activities are free. From 10am to 6pm.",
         "electronicsPromo": "Electronics Promotion - Up to -40%",
@@ -2398,7 +2398,7 @@
   "storeDirectory": {
     "zones": {
       "gallery": "Commercial Gallery",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "restaurants": "Restaurants",
       "bigBox": "Big Boxes",
       "craftMarket": "Artisan Market",
@@ -2478,7 +2478,7 @@
         "description": "Gold and diamond creations. Fine jewelry and prestigious watches."
       },
       "leCosmos": {
-        "description": "Contemporary African gastronomy in a refined and elegant setting."
+        "description": "Contemporary African cuisine in a refined and elegant setting."
       },
       "laBrasserie": {
         "description": "Parisian brasserie revisited with fresh, seasonal local products."

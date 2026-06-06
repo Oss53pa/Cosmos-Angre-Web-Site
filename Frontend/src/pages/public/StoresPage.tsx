@@ -319,7 +319,7 @@ const StoresPage: React.FC = () => {
     <div className="bg-cosmos-warm">
       <Seo
         title="Les Enseignes"
-        description="Plus de 80 enseignes à Cosmos Angré : mode, beauté, gastronomie, tech, joaillerie et bien plus. Cherchez, filtrez, et trouvez la vôtre au cœur d'Angré, Cocody."
+        description="Plus de 80 enseignes à Cosmos Angré : mode, beauté, restaurants, tech, joaillerie et bien plus. Cherchez, filtrez, et trouvez la vôtre au cœur d'Angré, Cocody."
         keywords={['enseignes Cosmos Angré', 'boutiques Cocody', 'mode Abidjan', 'shopping Angré', "Côte d'Ivoire"]}
         jsonLd={breadcrumbJsonLd([
           { name: 'Accueil', url: '/' },
@@ -331,7 +331,7 @@ const StoresPage: React.FC = () => {
         overline="Les Enseignes"
         title="Vos marques préférées,"
         titleAccent="réunies."
-        subtitle={`${stores.length} enseignes à explorer. Mode, beauté, tech, gastronomie, maison. Cherchez, filtrez, et trouvez la vôtre en un clin d'œil.`}
+        subtitle={`${stores.length} enseignes à explorer. Mode, beauté, tech, restaurants, maison. Cherchez, filtrez, et trouvez la vôtre en un clin d'œil.`}
       />
 
       {/* Bandeau filtre actif (offres / nouveautés) */}

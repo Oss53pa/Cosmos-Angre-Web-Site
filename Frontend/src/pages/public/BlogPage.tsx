@@ -22,7 +22,7 @@ const BlogPage: React.FC = () => {
     <div className="bg-cosmos-warm">
       <Seo
         title="Magazine & actualités"
-        description="Articles, interviews, tendances lifestyle, gastronomie et culture à Cosmos Angré. Le magazine premium de Cocody-Angré."
+        description="Articles, interviews, tendances lifestyle, restaurants et culture à Cosmos Angré. Le magazine de Cocody-Angré."
         keywords={['blog Cosmos', 'magazine Abidjan', 'actualités shopping', 'lifestyle Cocody', 'tendances Côte Ivoire']}
         jsonLd={breadcrumbJsonLd([
           { name: 'Accueil', url: '/' },

@@ -22,7 +22,7 @@ const AboutPage: React.FC = () => {
     <div className="bg-cosmos-warm">
       <Seo
         title="À propos"
-        description="Découvrez Cosmos Angré, l'écrin de vie premium à Cocody-Angré qui réunit shopping, gastronomie, hôtels et bien-être au cœur d'Abidjan."
+        description="Découvrez Cosmos Angré, le centre de vie d'Angré, à Cocody, qui réunit enseignes, restaurants, hôtels et bien-être au cœur d'Abidjan."
         keywords={['Cosmos Angré', 'à propos', 'centre commercial Abidjan', 'Cocody Angré', 'lifestyle premium', 'Côte d\'Ivoire']}
         jsonLd={breadcrumbJsonLd([
           { name: 'Accueil', url: '/' },

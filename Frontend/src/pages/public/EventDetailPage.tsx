@@ -43,7 +43,7 @@ const EventDetailPage: React.FC = () => {
       location: 'Promenade Exterieure',
       attendees: 'Ouvert a tous',
       category: 'Festival',
-      description: 'Artisanat local, gastronomie de fete et animations pour toute la famille dans un cadre feerique.',
+      description: 'Artisanat local, saveurs de fete et animations pour toute la famille dans un cadre feerique.',
       image: christmasMarket,
     },
   ];

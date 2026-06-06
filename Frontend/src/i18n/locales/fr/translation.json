@@ -104,7 +104,7 @@
     "newArrivals": "Nouveautes",
     "gastronomy": "Restaurants & Cafés",
     "restaurants": "Restaurants",
-    "foodCourt": "Food Court",
+    "foodCourt": "La Halle Gourmande",
     "reservation": "Reservation",
     "services": "Services",
     "interactiveMap": "Plan interactif",
@@ -147,7 +147,7 @@
         "overline": "Cocody-Angre, Abidjan",
         "title": "Un monde",
         "titleAccent": "a part",
-        "description": "Destination urbaine premium. Shopping, gastronomie, loisirs, bien-etre et plus encore."
+        "description": "Le centre de vie d'Angre. Shopping, restaurants, loisirs, bien-etre et plus encore."
       },
       "slide2": {
         "overline": "63 enseignes",
@@ -174,7 +174,7 @@
           "subtitle": "63+ boutiques de standing international"
         },
         "gastronomy": {
-          "title": "Gastronomie",
+          "title": "Restaurants & Cafés",
           "subtitle": "15 restaurants & cafés d'exception"
         },
         "leisure": {
@@ -272,7 +272,7 @@
       "christmasMarket": {
         "title": "Marche de Noel",
         "location": "Marche Artisanal",
-        "desc": "Creations artisanales, gastronomie festive et ambiance magique."
+        "desc": "Creations artisanales, saveurs de fete et ambiance magique."
       }
     },
     "newsletter": {
@@ -298,7 +298,7 @@
         },
         "3": {
           "name": "Fatou D.",
-          "text": "Le food court est incroyable, avec des options pour tous les gouts. Les enfants adorent l'espace de jeux. On y revient chaque week-end."
+          "text": "La Halle Gourmande est incroyable, avec des options pour tous les gouts. Les enfants adorent l'espace de jeux. On y revient chaque week-end."
         },
         "4": {
           "name": "Kouame A.",
@@ -328,7 +328,7 @@
       "jewelry": "Bijoux & Montres",
       "services": "Services",
       "restaurants": "Restaurants",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "supermarket": "Supermarche",
       "bigBox": "Big Box"
     },
@@ -470,7 +470,7 @@
     },
     "foodCourt": {
       "overline": "Restauration rapide",
-      "title": "Food Court",
+      "title": "La Halle Gourmande",
       "description": "Un espace convivial regroupant les meilleures saveurs du monde — du grille africain aux bowls asiatiques.",
       "viewPlan": "Voir le plan"
     }
@@ -558,7 +558,7 @@
     "packages": {
       "overline": "Packages exclusifs",
       "title": "Sejour + Experience Cosmos",
-      "description": "Combinez votre sejour avec shopping, gastronomie et spa pour une experience complete."
+      "description": "Combinez votre sejour avec shopping, restaurants et spa pour une experience complete."
     }
   },
 
@@ -1099,7 +1099,7 @@
         "date": "5 Nov 2025",
         "author": "Equipe Cosmos",
         "category": "Lifestyle",
-        "excerpt": "Shopping, loisirs et gastronomie sous un meme toit pour des moments inoubliables en famille."
+        "excerpt": "Shopping, loisirs et restaurants sous un meme toit pour des moments inoubliables en famille."
       }
     }
   },
@@ -1165,7 +1165,7 @@
     "zones": {
       "all": "Toutes les zones",
       "gallery": "Galerie Commerciale",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "restaurants": "Restaurants",
       "bigBox": "Big Boxes",
       "craftMarket": "Marche Artisanal",
@@ -2014,7 +2014,7 @@
         "fashionWeek": "Fashion Week Abidjan - Defile Exceptionnel",
         "fashionWeekContent": "Cosmos Angre accueille la Fashion Week Abidjan ! Assistez a un defile de mode exceptionnel le 10 novembre de 18h a 22h. Decouvrez les creations des designers locaux et internationaux. Entree gratuite sur inscription.",
         "newRestaurants": "Ouverture de 5 Nouveaux Restaurants",
-        "newRestaurantsContent": "Nous sommes ravis de vous annoncer l'ouverture de 5 nouveaux restaurants au Food Court ! Cuisine ivoirienne, italienne, asiatique, libanaise et americaine. Venez decouvrir ces nouvelles saveurs et profitez de -20% pour l'ouverture.",
+        "newRestaurantsContent": "Nous sommes ravis de vous annoncer l'ouverture de 5 nouveaux restaurants à La Halle Gourmande ! Cuisine ivoirienne, italienne, asiatique, libanaise et americaine. Venez decouvrir ces nouvelles saveurs et profitez de -20% pour l'ouverture.",
         "kidsDay": "Journee des Enfants - Activites Gratuites",
         "kidsDayContent": "Le samedi 5 octobre, Cosmos Angre organise une journee speciale pour les enfants ! Ateliers creatifs, spectacles, jeux, maquillage et bien plus encore. Toutes les activites sont gratuites. De 10h a 18h.",
         "electronicsPromo": "Promotion Electronique - Jusqu'a -40%",
@@ -2413,7 +2413,7 @@
   "storeDirectory": {
     "zones": {
       "gallery": "Galerie Commerciale",
-      "foodCourt": "Food Court",
+      "foodCourt": "La Halle Gourmande",
       "restaurants": "Restaurants",
       "bigBox": "Big Boxes",
       "craftMarket": "Marche Artisanal",
@@ -2493,7 +2493,7 @@
         "description": "Creations en or et diamant. Joaillerie fine et montres de prestige."
       },
       "leCosmos": {
-        "description": "Gastronomie africaine contemporaine dans un cadre raffine et elegant."
+        "description": "Cuisine africaine contemporaine dans un cadre raffine et elegant."
       },
       "laBrasserie": {
         "description": "Brasserie parisienne revisitee avec des produits locaux frais et de saison."
