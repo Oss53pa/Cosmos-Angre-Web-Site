@@ -64,7 +64,7 @@
   "nav": {
     "home": "Accueil",
     "shopping": "Shopping",
-    "gastronomy": "Gastronomie",
+    "gastronomy": "Restaurants & Cafés",
     "leisure": "Loisirs",
     "events": "Evenements",
     "hotel": "Hotel",
@@ -102,7 +102,7 @@
     "storeDirectory": "Repertoire enseignes",
     "currentOffers": "Offres du moment",
     "newArrivals": "Nouveautes",
-    "gastronomy": "Gastronomie",
+    "gastronomy": "Restaurants & Cafés",
     "restaurants": "Restaurants",
     "foodCourt": "Food Court",
     "reservation": "Reservation",
@@ -200,7 +200,7 @@
       "title": "Explorez nos univers",
       "subtitle": "Huit espaces d'exception pour une experience complete. Chaque univers est une promesse d'emotion.",
       "shopping": { "title": "Shopping", "desc": "Mode, beaute, lifestyle" },
-      "gastronomy": { "title": "Gastronomie", "desc": "Restaurants, food court, cafes" },
+      "gastronomy": { "title": "Restaurants & Cafés", "desc": "Restaurants, cafes et cuisines du monde" },
       "leisure": { "title": "Loisirs & Culture", "desc": "Cinema, jeux, expositions" },
       "wellness": { "title": "Bien-etre", "desc": "Fitness, spa, sante" },
       "hotel": { "title": "Hotel", "desc": "Sejour au coeur de l'experience" },
@@ -444,15 +444,15 @@
   "gastronomy": {
     "hero": {
       "overline": "Saveurs du monde",
-      "title": "Gastronomie",
-      "subtitle": "Restaurants, food court, cafes et salons de the — une experience culinaire d'exception."
+      "title": "Restaurants & Cafés",
+      "subtitle": "Restaurants, cafes et cuisines du monde. De quoi se regaler a toute heure, en famille ou entre amis."
     },
     "restaurants": {
       "overline": "Nos tables",
       "title": "Restaurants & Bars",
       "terraceAvailable": "Terrasse disponible",
       "leCosmos": {
-        "cuisine": "Gastronomie africaine",
+        "cuisine": "Cuisine africaine",
         "desc": "Cuisine africaine contemporaine dans un cadre raffine."
       },
       "laBrasserie": {
@@ -1235,7 +1235,7 @@
       "title": "Trouvez ce que vous cherchez",
       "subtitle": "Naviguez par categorie",
       "shopsMode": "Boutiques & Mode",
-      "restaurantsCafes": "Restaurants & Cafes",
+      "restaurantsCafes": "Restaurants & Cafés",
       "cinemaLeisure": "Cinema & Loisirs",
       "artisanMarket": "Marche Artisanal",
       "servicesLabel": "Services",

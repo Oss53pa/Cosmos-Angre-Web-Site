@@ -200,7 +200,7 @@
       "title": "Explore our worlds",
       "subtitle": "Eight exceptional spaces for a complete experience. Each world is a promise of emotion.",
       "shopping": { "title": "Shopping", "desc": "Fashion, beauty, lifestyle" },
-      "gastronomy": { "title": "Dining", "desc": "Restaurants, food court, cafes" },
+      "gastronomy": { "title": "Dining", "desc": "Restaurants, cafes and world cuisines" },
       "leisure": { "title": "Leisure & Culture", "desc": "Cinema, games, exhibitions" },
       "wellness": { "title": "Wellness", "desc": "Fitness, spa, health" },
       "hotel": { "title": "Hotel", "desc": "Stay at the heart of the experience" },
@@ -442,7 +442,7 @@
     "hero": {
       "overline": "World flavors",
       "title": "Dining",
-      "subtitle": "Restaurants, food court, cafes and tea rooms — an exceptional culinary experience."
+      "subtitle": "Restaurants, cafes and world cuisines. Something to enjoy any time of day, with family or friends."
     },
     "restaurants": {
       "overline": "Our tables",

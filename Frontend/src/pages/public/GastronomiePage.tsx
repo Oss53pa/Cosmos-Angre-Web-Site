@@ -24,12 +24,12 @@ const GastronomiePage: React.FC = () => {
   return (
     <div className="bg-cosmos-warm">
       <Seo
-        title="Gastronomie"
-        description="Brasseries, fine dining, cuisines du monde et terrasses : découvrez la sélection gastronomique de Cosmos Angré à Cocody-Angré, Abidjan."
-        keywords={['restaurants Cosmos Angré', 'gastronomie Abidjan', 'fine dining Cocody', 'brasserie Angré', 'restaurants Côte d\'Ivoire']}
+        title="Restaurants & Cafés"
+        description="Brasseries, cafés, cuisines du monde et terrasses : de quoi se régaler à toute heure à Cosmos Angré, Cocody-Angré, Abidjan."
+        keywords={['restaurants Cosmos Angré', 'restaurants Cocody', 'cafés Angré', 'brasserie Angré', "Côte d'Ivoire"]}
         jsonLd={breadcrumbJsonLd([
           { name: 'Accueil', url: '/' },
-          { name: 'Gastronomie', url: '/gastronomie' },
+          { name: 'Restaurants & Cafés', url: '/gastronomie' },
         ])}
       />
       {/* Hero */}
@@ -37,7 +37,7 @@ const GastronomiePage: React.FC = () => {
         <div className="absolute inset-0 animate-ken-burns">
           <OptimizedImage
             src={fineDiningFood}
-            alt="Gastronomie Cosmos Angre"
+            alt="Restaurants & cafés Cosmos Angré"
             containerClassName="w-full h-full"
           />
         </div>
