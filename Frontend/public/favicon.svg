@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Cosmos Angré">
+  <rect width="512" height="512" rx="112" fill="#0B1929"/>
+  <path d="M 322.9 176.3 A 104 104 0 1 0 322.9 335.7"
+        fill="none" stroke="#C9A961" stroke-width="42" stroke-linecap="round"/>
+  <circle cx="334" cy="256" r="34" fill="#B01E72"/>
+</svg>
