@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Cosmos Angré",
+  "short_name": "Cosmos",
+  "description": "Centre commercial premium à Cocody-Angré, Abidjan. Shopping, gastronomie, loisirs, hôtel et événements.",
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1929",
+  "theme_color": "#0B1929",
+  "categories": ["shopping", "lifestyle", "travel", "food"],
+  "id": "cosmos-angre-pwa",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Page d'accueil"
+    },
+    {
+      "src": "/screenshots/home-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Page d'accueil"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Boutiques",
+      "short_name": "Boutiques",
+      "url": "/boutiques",
+      "description": "Découvrir les enseignes du centre",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Événements",
+      "short_name": "Events",
+      "url": "/evenements",
+      "description": "Agenda culturel et événementiel",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Plan interactif",
+      "short_name": "Plan",
+      "url": "/plan-interactif",
+      "description": "Carte du centre commercial",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

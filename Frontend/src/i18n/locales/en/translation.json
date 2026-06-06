@@ -1,0 +1,2517 @@
+{
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "cta": "Back to home",
+    "ctaSecondary": "Browse stores"
+  },
+  "common": {
+    "cosmos": "Cosmos Angre",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "viewMore": "View more",
+    "viewAll": "View all",
+    "learnMore": "Learn more",
+    "discover": "Discover",
+    "reserve": "Book",
+    "contactUs": "Contact us",
+    "seeAll": "See all",
+    "or": "or",
+    "backToSite": "Back to site",
+    "send": "Send",
+    "join": "Join",
+    "readMore": "Read more",
+    "allArticles": "All articles",
+    "requestQuote": "Request a quote",
+    "signUpNow": "Sign up now",
+    "download": "Download",
+    "storesCount": "{{count}} store",
+    "storesCount_plural": "{{count}} stores",
+    "capacity": "Capacity",
+    "surface": "Area",
+    "floors": "Floors",
+    "totalCapacity": "Total Capacity",
+    "free": "Free",
+    "perYear": "Per year",
+    "popular": "Popular",
+    "recommended": "Recommended",
+    "premium": "Premium",
+    "basicAccess": "Basic access",
+    "features": "Features",
+    "keyBenefits": "Key benefits",
+    "premiumService": "Premium Service",
+    "exclusive": "Exclusive",
+    "skipToContent": "Skip to main content",
+    "actions": "Actions",
+    "view": "View",
+    "saveChanges": "Save changes",
+    "saving": "Saving..."
+  },
+
+  "nav": {
+    "home": "Home",
+    "shopping": "Shopping",
+    "gastronomy": "Dining",
+    "leisure": "Leisure",
+    "events": "Events",
+    "hotel": "Hotel",
+    "prepareVisit": "Plan my visit",
+    "retailPark": "Retail Park",
+    "enseignes": "Stores",
+    "restaurants": "Restaurants & Cafés",
+    "agenda": "What's On",
+    "club": "Cosmos Club",
+    "infosPratiques": "Visitor Info",
+    "stores": "Stores",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Sign up",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "logout": "Logout",
+    "myAccount": "My Account",
+    "about": "Discover",
+    "journal": "Cosmos Journal",
+    "searchPlaceholder": "Search for a store, restaurant, or service...",
+    "blog": "Journal"
+  },
+
+  "footer": {
+    "tagline": "The best of everyday life, here.",
+    "description": "A life destination in the heart of Cocody-Angre, Abidjan. Stores, dining, what's on, wellness and more.",
+    "newsletter": "Newsletter",
+    "newsletterTitle": "Receive excellence in your inbox",
+    "newsletterSubtitle": "Exclusive offers, events, new arrivals — be the first to know.",
+    "emailPlaceholder": "Your email address",
+    "shopping": "Shopping",
+    "storeDirectory": "Store directory",
+    "currentOffers": "Current offers",
+    "newArrivals": "New arrivals",
+    "gastronomy": "Dining",
+    "restaurants": "Restaurants",
+    "foodCourt": "Food Court",
+    "reservation": "Reservations",
+    "services": "Services",
+    "interactiveMap": "Interactive map",
+    "parking": "Parking",
+    "hours": "Hours",
+    "concierge": "Concierge",
+    "faq": "FAQ",
+    "fidelity": "Loyalty",
+    "cosmosClub": "Cosmos Club",
+    "giftCard": "Gift card",
+    "memberOffers": "Member offers",
+    "professionals": "Professionals",
+    "becomePartner": "Become a partner",
+    "adSpaces": "Advertising spaces",
+    "investors": "Investors",
+    "press": "Press",
+    "address": "Angre Chateau, Cocody, Abidjan",
+    "phone": "+225 27 22 XX XX XX",
+    "email": "info@cosmosangre.com",
+    "openingHoursShort": "Mon - Sat: <1>9am - 9pm</1> | Sun: <2>10am - 8pm</2>",
+    "openingHoursWeek": "Mon - Sat:",
+    "openingHoursWeekValue": "9am - 9pm",
+    "openingHoursSun": "Sun:",
+    "openingHoursSunValue": "10am - 8pm",
+    "copyright": "\u00a9 {{year}} Cosmos Angre — New Heaven SA. All rights reserved.",
+    "legalNotice": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "journal": "Journal",
+    "blog": "Blog / News",
+    "events": "Events",
+    "newsletterLink": "Newsletter",
+    "about": "About"
+  },
+
+  "home": {
+    "hero": {
+      "slide1": {
+        "overline": "Cocody-Angre, Abidjan",
+        "title": "A world",
+        "titleAccent": "apart",
+        "description": "Premium urban destination. Shopping, dining, leisure, wellness and more."
+      },
+      "slide2": {
+        "overline": "63 stores",
+        "title": "Live",
+        "titleAccent": "the exceptional",
+        "description": "A unique experience redefining commerce, culture and entertainment."
+      },
+      "slide3": {
+        "overline": "EDGE Advanced Certified",
+        "title": "Sustainable",
+        "titleAccent": "architecture",
+        "description": "First EDGE Advanced certified shopping center in West Africa."
+      },
+      "discoverCta": "Discover Cosmos Angre",
+      "planVisitCta": "Plan my visit",
+      "openingDate": "Opening November 2026"
+    },
+    "cinematic": {
+      "tagline": "The best of everyday life, here.",
+      "skipIntro": "Skip intro",
+      "scenes": {
+        "shopping": {
+          "title": "Premium Shopping",
+          "subtitle": "63+ international-class boutiques"
+        },
+        "gastronomy": {
+          "title": "Gastronomy",
+          "subtitle": "15 exceptional restaurants & cafés"
+        },
+        "leisure": {
+          "title": "Leisure & Culture",
+          "subtitle": "Cinema, bowling, gaming zone"
+        },
+        "wellness": {
+          "title": "Wellness · Hotel · Offices",
+          "subtitle": "A complete lifestyle ecosystem"
+        },
+        "edge": {
+          "title": "EDGE Advanced Certified",
+          "subtitle": "The most sustainable mall in West Africa"
+        }
+      },
+      "cta": {
+        "opening": "Opening 2026",
+        "subtitle": "The largest lifestyle mall in Côte d'Ivoire"
+      }
+    },
+    "universes": {
+      "overline": "The Cosmos Experience",
+      "title": "Explore our worlds",
+      "subtitle": "Eight exceptional spaces for a complete experience. Each world is a promise of emotion.",
+      "shopping": { "title": "Shopping", "desc": "Fashion, beauty, lifestyle" },
+      "gastronomy": { "title": "Dining", "desc": "Restaurants, food court, cafes" },
+      "leisure": { "title": "Leisure & Culture", "desc": "Cinema, games, exhibitions" },
+      "wellness": { "title": "Wellness", "desc": "Fitness, spa, health" },
+      "hotel": { "title": "Hotel", "desc": "Stay at the heart of the experience" },
+      "offices": { "title": "Offices", "desc": "Premium workspaces" },
+      "events": { "title": "Events", "desc": "Calendar, exhibitions, concerts" },
+      "artisan": { "title": "Artisan Market", "desc": "50 artisans, unique creations" },
+      "discoverCta": "Discover"
+    },
+    "spotlight": {
+      "overline": "News",
+      "title": "In the spotlight",
+      "subtitle": "Events, new arrivals, offers and inspirations — the best of Cosmos Angre.",
+      "upcomingEvent": "Upcoming event",
+      "grandOpening": "Grand Opening",
+      "grandOpeningDesc": "December 2026 — Be among the first to discover the Cosmos Angre experience.",
+      "newStore": "New store",
+      "carrefourMarket": "Carrefour Market",
+      "carrefourDesc": "Your reference hypermarket in the heart of Cosmos Angre.",
+      "viewStores": "View stores",
+      "specialOffer": "Special offer",
+      "openingOffers": "Opening offers",
+      "openingOffersDesc": "Exclusive promotions at opening in over 30 stores."
+    },
+    "stats": {
+      "overline": "In numbers",
+      "title": "The Cosmos Angre Experience",
+      "commercialArea": "Commercial area",
+      "gradeAStores": "Grade A stores",
+      "parkingSpaces": "Parking spaces",
+      "visitorsPerYear": "Expected visitors/year"
+    },
+    "edge": {
+      "overline": "Sustainability",
+      "title": "EDGE Advanced Certified",
+      "description": "Cosmos Angre is on track to receive EDGE Advanced certification from IFC (World Bank) — a first in West Africa for a lifestyle destination of this scale.",
+      "energy": "Significant reduction in energy consumption",
+      "water": "Optimized water resource management",
+      "materials": "Sustainable materials and reduced carbon footprint"
+    },
+    "club": {
+      "overline": "Loyalty program",
+      "title": "Cosmos Club",
+      "description": "Join an exceptional community. Accumulate points, unlock privileges, enjoy exclusive experiences reserved for members.",
+      "silver": { "level": "Silver", "desc": "Free — Exclusive offers, points on every purchase" },
+      "gold": { "level": "Gold", "desc": "Premium parking, private event access, early access" },
+      "platinum": {
+        "level": "Platinum",
+        "desc": "By invitation — Private concierge, bespoke experiences"
+      },
+      "joinCta": "Join the Cosmos Club"
+    },
+    "upcomingEvents": {
+      "overline": "Calendar",
+      "title": "Upcoming events",
+      "viewAll": "View full calendar",
+      "softOpening": {
+        "title": "Soft Opening",
+        "location": "Cosmos Angre",
+        "desc": "Preview discovery for guests and partners."
+      },
+      "grandInauguration": {
+        "title": "Grand Inauguration",
+        "location": "Expo Zone",
+        "desc": "Official opening ceremony with artists and personalities."
+      },
+      "christmasMarket": {
+        "title": "Christmas Market",
+        "location": "Artisan Market",
+        "desc": "Handcrafted creations, festive gastronomy and magical atmosphere."
+      }
+    },
+    "newsletter": {
+      "overline": "Stay connected",
+      "title": "Live the exception",
+      "subtitle": "Sign up and receive first access to offers, events and new arrivals at Cosmos Angre.",
+      "emailPlaceholder": "Your email address",
+      "subscribe": "Subscribe"
+    },
+    "testimonials": {
+      "overline": "Testimonials",
+      "title": "What our visitors say",
+      "subtitle": "Discover reviews from those who have already experienced Cosmos Angre.",
+      "via": "via",
+      "reviews": {
+        "1": {
+          "name": "Aminata K.",
+          "text": "A shopping center on another level in Abidjan. The architecture is stunning and the stores are of international quality. Love it!"
+        },
+        "2": {
+          "name": "Jean-Pierre M.",
+          "text": "Impressed by the diversity of stores and the quality of services. The parking is spacious and well organized. A premium experience."
+        },
+        "3": {
+          "name": "Fatou D.",
+          "text": "The food court is incredible, with options for every taste. The kids love the play area. We come back every weekend."
+        },
+        "4": {
+          "name": "Kouame A.",
+          "text": "Finally a shopping center worthy of the name in Ivory Coast. The EDGE certification is a real plus for the environment. Bravo!"
+        },
+        "5": {
+          "name": "Marie-Claire B.",
+          "text": "The Cosmos Club is truly worth it. Member offers are generous and the VIP lounge is a real haven between shopping sessions."
+        }
+      }
+    }
+  },
+
+  "stores": {
+    "hero": {
+      "overline": "63 stores",
+      "title": "Shopping",
+      "subtitle": "Discover {{count}} exceptional stores in a premium setting"
+    },
+    "searchPlaceholder": "Search for a store...",
+    "allCategories": "All",
+    "categories": {
+      "fashion": "Fashion & Footwear",
+      "beauty": "Health & Beauty",
+      "electronics": "Multimedia",
+      "home": "Home & Decor",
+      "jewelry": "Jewelry & Watches",
+      "services": "Services",
+      "restaurants": "Restaurants",
+      "foodCourt": "Food Court",
+      "supermarket": "Supermarket",
+      "bigBox": "Big Box"
+    },
+    "noResults": "No stores found",
+    "ctaOverline": "Professionals",
+    "ctaTitle": "Want to open a store?",
+    "ctaSubtitle": "Join the premier premium urban destination in Ivory Coast"
+  },
+
+  "storeDetail": {
+    "notFound": "Store not found",
+    "backToStores": "Back to stores",
+    "practicalOverline": "Practical",
+    "infoTitle": "Information",
+    "location": "Location",
+    "openingHours": "Hours",
+    "phone": "Phone",
+    "email": "Email",
+    "employees": "Employees",
+    "products": "Products",
+    "views": "Views",
+    "memberSince": "Member since",
+    "visitWebsite": "Visit website",
+    "ctaOverline": "Stores",
+    "ctaTitle": "Open a store?",
+    "ctaSubtitle": "Join {{storeName}} and other stores at Cosmos Angre.",
+    "stores": {
+      "nike": {
+        "category": "Fashion & Sports",
+        "description": "Official Nike store offering shoes, clothing and sports accessories. Complete collection for men, women and children with the latest technological innovations."
+      },
+      "zara": {
+        "category": "Fashion & Accessories",
+        "description": "Trendy fashion for women and men. New collections every week inspired by the latest international trends."
+      },
+      "techParadise": {
+        "category": "Electronics",
+        "description": "Smartphones, computers, high-tech accessories and appliances. After-sales service and warranty included."
+      }
+    }
+  },
+
+  "events": {
+    "hero": {
+      "overline": "Calendar",
+      "title": "Events",
+      "subtitle": "Experience unique moments throughout the year."
+    },
+    "upcoming": {
+      "overline": "Upcoming",
+      "title": "Coming soon",
+      "event1": {
+        "title": "Launch Night",
+        "date": "December 15, 2025",
+        "time": "6:00 PM - 10:00 PM",
+        "location": "Main Gallery",
+        "attendees": "500+",
+        "category": "Corporate Event"
+      },
+      "event2": {
+        "title": "Abidjan Fashion Week",
+        "date": "January 20-22, 2026",
+        "time": "2:00 PM - 9:00 PM",
+        "location": "Event Space",
+        "attendees": "1000+",
+        "category": "Fashion"
+      },
+      "event3": {
+        "title": "Christmas Market",
+        "date": "December 1-24, 2025",
+        "time": "10:00 AM - 8:00 PM",
+        "location": "Outdoor Promenade",
+        "attendees": "Open to all",
+        "category": "Festival"
+      }
+    },
+    "spaces": {
+      "overline": "Spaces",
+      "title": "Our event spaces",
+      "capacity": "Capacity",
+      "surface": "Area",
+      "grandeSalle": {
+        "name": "Grand Hall",
+        "capacity": "500 people",
+        "surface": "800 sqm"
+      },
+      "espaceModulable": {
+        "name": "Flexible Space",
+        "capacity": "200 people",
+        "surface": "300 sqm"
+      }
+    },
+    "cta": {
+      "overline": "Private hire",
+      "title": "Organize your event",
+      "subtitle": "Flexible and modern spaces for all your professional and private events."
+    }
+  },
+
+  "eventDetail": {
+    "notFound": "Event not found",
+    "backToEvents": "Back to events",
+    "allEvents": "All events",
+    "date": "Date",
+    "time": "Time",
+    "location": "Venue",
+    "capacity": "Capacity",
+    "about": "About",
+    "register": "Register",
+    "share": "Share"
+  },
+
+  "gastronomy": {
+    "hero": {
+      "overline": "World flavors",
+      "title": "Dining",
+      "subtitle": "Restaurants, food court, cafes and tea rooms — an exceptional culinary experience."
+    },
+    "restaurants": {
+      "overline": "Our tables",
+      "title": "Restaurants & Bars",
+      "terraceAvailable": "Terrace available",
+      "leCosmos": {
+        "cuisine": "African gastronomy",
+        "desc": "Contemporary African cuisine in a refined setting."
+      },
+      "laBrasserie": {
+        "cuisine": "French cuisine",
+        "desc": "Parisian brasserie revisited with local products."
+      },
+      "sakura": {
+        "cuisine": "Asian cuisine",
+        "desc": "Authentic Japanese sushi, ramen and specialties."
+      },
+      "trattoriaBella": {
+        "cuisine": "Italian cuisine",
+        "desc": "Wood-fired pizzas, fresh pasta and antipasti."
+      }
+    },
+    "foodCourt": {
+      "overline": "Quick dining",
+      "title": "Food Court",
+      "description": "A convivial space bringing together the best flavors from around the world — from African grills to Asian bowls.",
+      "viewPlan": "View the map"
+    }
+  },
+
+  "leisure": {
+    "hero": {
+      "overline": "Entertainment",
+      "title": "Leisure & Culture",
+      "subtitle": "Cinema, entertainment, art gallery and more — experiences for the whole family."
+    },
+    "spaces": {
+      "cinema": {
+        "title": "Cinema",
+        "desc": "State-of-the-art screens, Dolby Atmos sound, premium seating. International and African programming."
+      },
+      "entertainment": {
+        "title": "Entertainment Zone",
+        "desc": "Bowling, video games, virtual reality, escape rooms — entertainment for all ages."
+      },
+      "kids": {
+        "title": "Kids Zone",
+        "desc": "Secure play area, creative workshops, weekend activities. Ages 2 to 12."
+      },
+      "gallery": {
+        "title": "Art Gallery",
+        "desc": "Temporary and permanent exhibitions. Contemporary African and international art."
+      },
+      "expo": {
+        "title": "Expo Zone",
+        "desc": "800 sqm modular space for exhibitions, fairs and cultural events."
+      }
+    },
+    "cta": {
+      "overline": "Events",
+      "title": "Upcoming programming",
+      "subtitle": "Discover upcoming films, exhibitions and activities.",
+      "viewAgenda": "View calendar"
+    }
+  },
+
+  "hotel": {
+    "hero": {
+      "overline": "Stay at the heart of the experience",
+      "title": "Hotels",
+      "subtitle": "Two international hotel brands integrated into Cosmos Angre for an exceptional stay."
+    },
+    "brands": {
+      "overline": "Our hotels",
+      "title": "Two experiences, one exceptional destination",
+      "subtitle": "Cosmos Angre welcomes two leading Accor hotel brands, for short or extended stays."
+    },
+    "ibisStyles": {
+      "overline": "Hotel",
+      "name": "Ibis Styles",
+      "subtitle": "Comfort and modernity",
+      "description": "The Ibis Styles hotel at Cosmos Angre combines colourful design and conviviality. Ideal for business travellers and families, it offers direct access to the shopping centre with breakfast and Wi-Fi included.",
+      "features": [
+        "Colourful and welcoming design",
+        "Comfortable rooms with quality bedding",
+        "Complimentary breakfast and Wi-Fi included",
+        "Direct access to the shopping centre"
+      ],
+      "priceFrom": "From 85,000 FCFA/night"
+    },
+    "adagio": {
+      "overline": "Aparthotel",
+      "name": "Adagio Aparthotel",
+      "subtitle": "Freedom and autonomy",
+      "description": "Adagio Aparthotel offers fully equipped apartments for extended stays. With integrated kitchen, 24/7 reception and a prime location in the heart of Cosmos Angre.",
+      "features": [
+        "Spacious apartments with equipped kitchen",
+        "Ideal for extended stays",
+        "Premium services: housekeeping, 24/7 reception",
+        "Prime location in the heart of Cosmos Angre"
+      ],
+      "priceFrom": "From 120,000 FCFA/night"
+    },
+    "services": {
+      "roomService": "24h Room Service",
+      "spaFitness": "Spa & Fitness Access",
+      "privateParking": "Private parking",
+      "wifi": "High-speed WiFi"
+    },
+    "packages": {
+      "overline": "Exclusive packages",
+      "title": "Stay + Cosmos Experience",
+      "description": "Combine your stay with shopping, dining and spa for a complete experience."
+    }
+  },
+
+  "retailPark": {
+    "hero": {
+      "overline": "Retail & Office Park",
+      "title": "Retail Park",
+      "subtitle": "Dedicated Big Box spaces for entertainment, health, cinema and offices."
+    },
+    "intro": {
+      "overline": "Premium spaces",
+      "title": "Large-scale spaces",
+      "description": "Cosmos Angre offers four Big Box spaces designed to host high-value activities: entertainment, cinema, healthcare and professional offices."
+    },
+    "stats": {
+      "spaces": "Big Box spaces",
+      "totalArea": "total area",
+      "accessible": "accessible",
+      "security": "security"
+    },
+    "spaces": {
+      "overline": "Our spaces",
+      "title": "The Big Boxes"
+    },
+    "boxes": {
+      "entertainment": {
+        "name": "Gaming / Entertainment",
+        "subtitle": "Entertainment and thrills",
+        "description": "A modern entertainment space offering video games, simulators, arcade and interactive activities for all ages.",
+        "features": [
+          "Modern game room with arcade and simulators",
+          "Entertainment spaces for all ages",
+          "Regular events and activities"
+        ]
+      },
+      "cinema": {
+        "name": "Cinema",
+        "subtitle": "A modern cinema for unforgettable emotions",
+        "description": "A state-of-the-art cinema in the heart of Cosmos Angre, equipped with the best audiovisual technology.",
+        "features": [
+          "Cutting-edge technology: exceptional image and sound quality",
+          "Varied programming: blockbusters, local films, premieres",
+          "Optimal comfort: ergonomic seating and welcoming atmosphere"
+        ]
+      },
+      "clinic": {
+        "name": "Clinic",
+        "subtitle": "Healthcare at the heart of Cosmos Angre",
+        "description": "A modern clinic offering quality medical services in a practical and accessible setting within the center.",
+        "features": [
+          "Various specialties: general medicine, pediatrics, gynecology, cardiology",
+          "State-of-the-art equipment for precise diagnostics",
+          "Fast and smooth service, flexible hours"
+        ]
+      },
+      "officePark": {
+        "name": "Office & Retail Park",
+        "subtitle": "A modern and functional office space",
+        "description": "A versatile and inspiring office space, ideal for businesses and professionals seeking a dynamic environment.",
+        "features": [
+          "Modular spaces: private offices, open spaces, meeting rooms",
+          "Contemporary, bright and ergonomic design",
+          "High-speed internet, air conditioning, 24/7 security"
+        ]
+      }
+    },
+    "advantages": {
+      "overline": "Advantages",
+      "title": "Why choose the Retail Park?",
+      "items": [
+        {
+          "title": "Strategic location",
+          "desc": "In the heart of Cocody-Angre, optimal accessibility and high footfall."
+        },
+        {
+          "title": "Modern infrastructure",
+          "desc": "Spaces designed to international standards with cutting-edge facilities."
+        },
+        {
+          "title": "Commercial synergy",
+          "desc": "Benefit from the shopping center's dynamics and visitor flow."
+        },
+        {
+          "title": "24/7 Security",
+          "desc": "Permanent surveillance and access control for your peace of mind."
+        }
+      ]
+    },
+    "cta": {
+      "overline": "Professionals",
+      "title": "Interested in a Big Box space?",
+      "description": "Contact us to discover the opportunities within the Cosmos Angre Retail Park."
+    }
+  },
+
+  "visit": {
+    "hero": {
+      "overline": "Practical information",
+      "title": "Plan my visit",
+      "subtitle": "Everything you need to know to make the most of your visit."
+    },
+    "access": {
+      "overline": "Access",
+      "title": "How to get here",
+      "byCar": {
+        "title": "By car",
+        "desc": "Direct access from Boulevard des Martyrs. 400-space parking available."
+      },
+      "byBus": {
+        "title": "Public transport",
+        "desc": "Bus lines serving Angre Chateau. Stop in immediate proximity."
+      },
+      "byVtc": {
+        "title": "Ride-hailing",
+        "desc": "Enter \"Cosmos Angre\" on Uber or Yango. Dedicated drop-off zone."
+      }
+    },
+    "parking": {
+      "title": "Parking",
+      "description": "400 spaces (100 underground + 300 outdoor) including disabled spaces and EV charging stations.",
+      "first2Hours": "First 2 hours",
+      "first2HoursValue": "Free",
+      "hourlyRate": "Hourly rate",
+      "hourlyRateValue": "500 FCFA/h",
+      "dailyPass": "Day pass",
+      "dailyPassValue": "3,000 FCFA"
+    },
+    "openingHours": {
+      "title": "Opening Hours",
+      "monSat": "Monday - Saturday",
+      "monSatValue": "9:00 AM - 9:00 PM",
+      "sunday": "Sunday",
+      "sundayValue": "10:00 AM - 8:00 PM",
+      "holidays": "Public holidays",
+      "holidaysValue": "10:00 AM - 8:00 PM",
+      "note": "Hours may vary by store."
+    },
+    "services": {
+      "overline": "At your service",
+      "title": "Visitor services",
+      "wifi": { "label": "Free WiFi", "desc": "High-speed connection throughout the center." },
+      "nursery": {
+        "label": "Baby room / Nursery",
+        "desc": "Dedicated space for the comfort of parents and toddlers."
+      },
+      "accessibility": {
+        "label": "Disabled access",
+        "desc": "Easy access for people with reduced mobility."
+      },
+      "atm": { "label": "Currency exchange / ATM", "desc": "ATMs and currency exchange offices." },
+      "charging": {
+        "label": "Charging stations",
+        "desc": "Charge your phone or electric vehicle."
+      },
+      "concierge": { "label": "Concierge", "desc": "Welcome and personalized guidance service." }
+    },
+    "faq": {
+      "overline": "Help",
+      "title": "Frequently asked questions",
+      "q1": "What are the center's opening hours?",
+      "a1": "Monday to Saturday 9am to 9pm, Sunday 10am to 8pm.",
+      "q2": "Is parking free?",
+      "a2": "The first 2 hours are free. After that, the rate is 500 FCFA/hour.",
+      "q3": "Is there a concierge service?",
+      "a3": "Yes, our concierge is located at the main entrance and offers guidance, luggage storage and assistance.",
+      "q4": "Is the center accessible for disabled visitors?",
+      "a4": "Yes, all buildings are accessible — elevators, ramps and dedicated parking spaces."
+    },
+    "map": {
+      "overline": "Navigation",
+      "title": "Interactive map",
+      "subtitle": "Explore the center building by building.",
+      "openMap": "Open the map"
+    }
+  },
+
+  "fidelity": {
+    "hero": {
+      "overline": "Loyalty program",
+      "title": "Cosmos Club",
+      "subtitle": "Join an exceptional community and unlock unique privileges."
+    },
+    "tiers": {
+      "overline": "Tiers",
+      "title": "Choose your experience",
+      "silver": {
+        "name": "Silver",
+        "price": "Free",
+        "benefits": [
+          "Points on every purchase",
+          "Exclusive member offers",
+          "Personalized newsletter",
+          "Access to private sales"
+        ]
+      },
+      "gold": {
+        "name": "Gold",
+        "price": "Conditional",
+        "benefits": [
+          "All Silver benefits",
+          "Free premium parking",
+          "Private event access",
+          "Early access to new stores",
+          "Additional 5% discount"
+        ]
+      },
+      "platinum": {
+        "name": "Platinum",
+        "price": "By invitation",
+        "benefits": [
+          "All Gold benefits",
+          "Private concierge",
+          "Bespoke experiences",
+          "Exclusive VIP lounge",
+          "Dedicated personal shopper",
+          "Gala & premiere invitations"
+        ]
+      },
+      "joinCta": "Join",
+      "learnMoreCta": "Learn more"
+    },
+    "benefits": {
+      "discounts": "Exclusive discounts",
+      "privateEvents": "Private events",
+      "events": "Private events",
+      "premiumParking": "Premium parking",
+      "parking": "Premium parking",
+      "surprises": "Surprises & gifts",
+      "gifts": "Surprises & gifts"
+    },
+    "cta": {
+      "overline": "Sign up",
+      "title": "Ready to live the exception?",
+      "subtitle": "Registration is free and gives you immediate access to Silver benefits.",
+      "createAccount": "Create my account"
+    }
+  },
+
+  "services": {
+    "hero": {
+      "overline": "At your service",
+      "title": "Services",
+      "subtitle": "A complete experience designed for your comfort."
+    },
+    "grid": {
+      "overline": "Our services",
+      "title": "Everything for your comfort"
+    },
+    "list": {
+      "wifi": {
+        "name": "Free WiFi",
+        "description": "High-speed connection throughout the center."
+      },
+      "parking": {
+        "name": "Secure Parking",
+        "description": "400 spaces including EV charging stations."
+      },
+      "clickCollect": {
+        "name": "Click & Collect",
+        "description": "Order online, pick up in store."
+      },
+      "guide": {
+        "name": "Digital Guide",
+        "description": "Interactive map of the center on your phone."
+      },
+      "concierge": { "name": "Concierge", "description": "Personalized assistance and guidance." },
+      "support": {
+        "name": "Customer Support",
+        "description": "Available 7 days a week to help you."
+      },
+      "security": {
+        "name": "24/7 Security",
+        "description": "Permanent surveillance for your peace of mind."
+      },
+      "loyalty": {
+        "name": "Loyalty Program",
+        "description": "Exclusive rewards with the Cosmos Club."
+      }
+    },
+    "cta": {
+      "overline": "Assistance",
+      "title": "Need help?",
+      "subtitle": "Our team is here to answer your questions.",
+      "contact": "Contact us"
+    }
+  },
+
+  "premiumServices": {
+    "hero": {
+      "overline": "Exclusive",
+      "title": "Premium Services",
+      "subtitle": "An exceptional shopping experience with exclusive services designed for your comfort"
+    },
+    "serviceLabel": "Premium Service",
+    "featuresLabel": "Features",
+    "keyBenefitsLabel": "Key Benefits",
+    "learnMore": "Learn more",
+    "clickCollect": {
+      "title": "Click & Collect",
+      "subtitle": "Order online, pick up in store",
+      "description": "Save time with our Click & Collect service. Order your favorite items online and pick them up at our dedicated collection points.",
+      "features": [
+        "24/7 online ordering",
+        "Pickup within 2 hours",
+        "Secure collection points",
+        "Free service",
+        "SMS/Email notifications",
+        "Easy in-store returns"
+      ],
+      "benefits": [
+        "Save time",
+        "Skip the queues",
+        "Plan your visit",
+        "Contactless service available"
+      ]
+    },
+    "smartParking": {
+      "title": "Smart Parking",
+      "subtitle": "Easy parking with guidance system",
+      "description": "Our smart parking guides you to available spaces in real time using sensors and digital displays.",
+      "features": [
+        "Real-time guidance to free spaces",
+        "Mobile reservation app",
+        "Automatic payment system",
+        "Reserved spaces for VIP clients",
+        "400 spaces available (100 underground + 300 outdoor)",
+        "EV charging stations"
+      ],
+      "benefits": [
+        "Find a space quickly",
+        "Book in advance",
+        "Contactless payment",
+        "24/7 security"
+      ]
+    },
+    "loyaltyProgram": {
+      "title": "Loyalty Program",
+      "subtitle": "Rewards with every visit",
+      "description": "Join our exclusive loyalty program and enjoy exceptional benefits with every purchase. The more you visit, the more you earn!",
+      "features": [
+        "Digital loyalty card",
+        "Points on all purchases",
+        "Personalized offers",
+        "Exclusive member discounts",
+        "Priority access to private sales",
+        "Birthday gifts"
+      ],
+      "benefits": [
+        "1 point = 1 FCFA spent",
+        "Welcome bonus: 500 points",
+        "Member-only events",
+        "Up to 10% cashback"
+      ]
+    },
+    "arNavigation": {
+      "title": "AR Navigation",
+      "subtitle": "Augmented reality guidance",
+      "description": "Explore the shopping center with our augmented reality navigation app. Find your favorite stores instantly.",
+      "features": [
+        "Interactive 3D routes",
+        "Real-time store location",
+        "Geo-targeted promotions",
+        "Interactive center map",
+        "Voice search",
+        "Offline mode available"
+      ],
+      "benefits": [
+        "Never get lost again",
+        "Discover nearby promotions",
+        "Plan your shopping route",
+        "Available in French and English"
+      ]
+    },
+    "personalShopper": {
+      "title": "Personal Shopper",
+      "subtitle": "Your personal shopping assistant",
+      "description": "Benefit from expert fashion and shopping advice for a bespoke experience. Book your session now.",
+      "features": [
+        "Free personalized consultation",
+        "Bespoke product selection",
+        "In-store accompaniment",
+        "Style and trends advice",
+        "Styling service",
+        "Phone or online booking"
+      ],
+      "benefits": [
+        "Considerable time savings",
+        "Professional expertise",
+        "Discover new brands",
+        "Free VIP service for Premium members"
+      ]
+    },
+    "vipLounge": {
+      "title": "VIP Lounge",
+      "subtitle": "Exclusive space for a premium experience",
+      "description": "Access our luxurious VIP lounge with concierge services, dining and private rest areas.",
+      "features": [
+        "Comfortable designer lounge",
+        "Free high-speed WiFi",
+        "Complimentary drinks and snacks",
+        "Concierge service",
+        "Secure lockers",
+        "International press"
+      ],
+      "benefits": [
+        "Rest between shopping sessions",
+        "Quiet workspace",
+        "Premium refreshments",
+        "Exclusive access for Gold and Platinum members"
+      ]
+    },
+    "subscriptions": {
+      "title": "Our subscription plans",
+      "subtitle": "Choose the plan that suits you",
+      "standard": {
+        "name": "Standard",
+        "label": "Basic access",
+        "price": "0 FCFA",
+        "period": "Per year",
+        "features": ["Click & Collect", "Standard parking", "AR Navigation"],
+        "cta": "Free sign up"
+      },
+      "gold": {
+        "name": "Gold",
+        "label": "Popular",
+        "badge": "Popular",
+        "price": "25,000 FCFA",
+        "period": "Per year",
+        "features": [
+          "All Standard services",
+          "Loyalty Program +10%",
+          "Priority parking",
+          "VIP Lounge access",
+          "Personal Shopper 2h/month"
+        ],
+        "cta": "Choose Gold"
+      },
+      "platinum": {
+        "name": "Platinum",
+        "label": "Premium",
+        "price": "50,000 FCFA",
+        "period": "Per year",
+        "features": [
+          "All Gold services",
+          "Loyalty Program +15%",
+          "Reserved parking space",
+          "Unlimited VIP Lounge",
+          "Unlimited Personal Shopper",
+          "Private event invitations"
+        ],
+        "cta": "Choose Platinum"
+      }
+    },
+    "cta": {
+      "title": "Join the premium club",
+      "subtitle": "Enjoy an exceptional shopping experience with our exclusive services",
+      "signUp": "Sign up now"
+    }
+  },
+
+  "spaces": {
+    "hero": {
+      "overline": "Worlds",
+      "title": "Our Spaces",
+      "subtitle": "From shopping to leisure, from wellness to accommodation — everything under one roof."
+    },
+    "parking": {
+      "overline": "Parking"
+    },
+    "cta": {
+      "overline": "Join us",
+      "title": "Ready to join us?"
+    }
+  },
+
+  "about": {
+    "hero": {
+      "overline": "About"
+    },
+    "vision": {
+      "overline": "Our vision",
+      "title": "An exceptional place to live the exception",
+      "ecosystem": "A dynamic ecosystem",
+      "growthLever": "A growth lever"
+    },
+    "strengths": {
+      "overline": "Our strengths"
+    },
+    "location": {
+      "overline": "Location",
+      "address": "Address"
+    },
+    "sustainability": {
+      "overline": "Commitment"
+    },
+    "figures": {
+      "overline": "In numbers"
+    },
+    "cta": {
+      "overline": "Join us",
+      "discoverSpaces": "Discover our spaces"
+    }
+  },
+
+  "blog": {
+    "hero": {
+      "overline": "Journal",
+      "title": "Blog",
+      "subtitle": "News, events and behind the scenes at Cosmos Angre."
+    },
+    "readMore": "Read more",
+    "articles": {
+      "ouverture": {
+        "title": "Cosmos Angre opening soon",
+        "date": "Nov 15, 2025",
+        "author": "Cosmos Team",
+        "category": "News",
+        "excerpt": "Discover the largest commercial complex in Ivory Coast, a unique place redefining the shopping experience in West Africa."
+      },
+      "artisans": {
+        "title": "Honoring local artisans",
+        "date": "Nov 10, 2025",
+        "author": "Cosmos Team",
+        "category": "Culture",
+        "excerpt": "Meet the creators of the Artisan Market — craftsmanship, passion and authenticity at the heart of Cosmos Angre."
+      },
+      "famille": {
+        "title": "A destination for the whole family",
+        "date": "Nov 5, 2025",
+        "author": "Cosmos Team",
+        "category": "Lifestyle",
+        "excerpt": "Shopping, leisure and dining under one roof for unforgettable family moments."
+      }
+    }
+  },
+
+  "blogPost": {
+    "notFound": "Article not found",
+    "backToBlog": "Back to blog",
+    "allArticles": "All articles"
+  },
+
+  "contact": {
+    "hero": {
+      "overline": "Let's talk",
+      "title": "Contact",
+      "subtitle": "We are here to answer any questions or requests."
+    },
+    "form": {
+      "overline": "Message",
+      "title": "Send us a message",
+      "fullName": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject of your request",
+      "subjectGeneral": "General information",
+      "subjectSpace": "Space rental",
+      "subjectEvent": "Event",
+      "subjectPartnership": "Partnership",
+      "subjectOther": "Other",
+      "message": "Your message",
+      "send": "Send",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll get back to you as soon as possible.",
+      "error": "Error sending message. Please try again.",
+      "required": "This field is required",
+      "invalidEmail": "Invalid email address"
+    },
+    "info": {
+      "overline": "Contact details",
+      "title": "Information",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone",
+      "hours": "Hours",
+      "hoursValue": "Mon-Sat: 9am-9pm | Sun: 10am-8pm"
+    }
+  },
+
+  "interactiveMap": {
+    "hero": {
+      "badge": "Interactive Digital Guide",
+      "title": "Interactive Map",
+      "subtitle": "Explore the Cosmos Angre complex and easily find your favorite stores"
+    },
+    "search": "Search",
+    "storeName": "Store name...",
+    "categories": "Categories",
+    "stats": "Statistics",
+    "storesFound": "Stores found",
+    "totalStores": "Total stores",
+    "storesList": "Stores",
+    "selectZone": "Select zone",
+    "legend": "Legend",
+    "zones": {
+      "all": "All zones",
+      "gallery": "Commercial Gallery",
+      "foodCourt": "Food Court",
+      "restaurants": "Restaurants",
+      "bigBox": "Big Boxes",
+      "craftMarket": "Artisan Market",
+      "supermarket": "Supermarket",
+      "hotels": "Hotels",
+      "parking": "Parking"
+    },
+    "categoriesMap": {
+      "all": "All",
+      "fashion": "Fashion",
+      "food": "Dining",
+      "beauty": "Beauty",
+      "services": "Services",
+      "supermarket": "Supermarket",
+      "electronics": "Multimedia",
+      "bigBox": "Big Box",
+      "jewelry": "Jewelry"
+    },
+    "viewStore": "View store",
+    "rating": "Rating",
+    "hours": "Hours",
+    "contactLabel": "Contact",
+    "storesInZone": "stores",
+    "cta": {
+      "title": "Need help finding your way?",
+      "subtitle": "Our team is here to help you during your visit",
+      "arNavigation": "AR Navigation"
+    }
+  },
+
+  "arNavigation": {
+    "hero": {
+      "title": "AR Navigation",
+      "subtitle": "Explore Cosmos Angre with augmented reality"
+    },
+    "intro": {
+      "title": "An innovative navigation experience",
+      "description": "Discover a new way to explore our shopping center using augmented reality technology.",
+      "description2": "Navigate easily, find your favorite stores and discover real-time offers directly from your smartphone.",
+      "downloadTitle": "Download the app",
+      "downloadSubtitle": "Scan the QR code to access AR navigation"
+    },
+    "plans": {
+      "title": "Center Maps",
+      "subtitle": "Discover the complete layout of Cosmos Angre",
+      "aerialView": "3D Aerial View",
+      "floorPlan": "Floor Plan"
+    },
+    "features": {
+      "title": "Features",
+      "subtitle": "Everything you need for a successful visit",
+      "realTimeGuide": {
+        "title": "Real-time guidance",
+        "desc": "Optimized routes to your destinations"
+      },
+      "storeLocation": { "title": "Store location", "desc": "Instantly find your favorite stores" },
+      "poi": { "title": "Points of interest", "desc": "Services, restrooms, emergency exits" },
+      "geoPromos": {
+        "title": "Geo-targeted promotions",
+        "desc": "Receive offers based on your location"
+      }
+    },
+    "browseCategories": {
+      "title": "Find what you're looking for",
+      "subtitle": "Browse by category",
+      "shopsMode": "Shops & Fashion",
+      "restaurantsCafes": "Restaurants & Cafes",
+      "cinemaLeisure": "Cinema & Leisure",
+      "artisanMarket": "Artisan Market",
+      "servicesLabel": "Services",
+      "parkingLabel": "Parking",
+      "galleryZone": "Commercial Gallery",
+      "restaurantsZone": "Restaurants Zone",
+      "bigBoxZone": "Big Boxes",
+      "gardenZone": "Garden & Market",
+      "allZones": "All zones",
+      "undergroundOutdoor": "Underground & Outdoor"
+    },
+    "cta": {
+      "title": "Ready to explore?",
+      "subtitle": "Download the AR navigation app and enjoy a unique experience",
+      "downloadApp": "Download the app"
+    }
+  },
+
+  "auth": {
+    "login": {
+      "brandingTitle": "A world\napart",
+      "brandingDesc": "Log in to access your personal space, manage your favorites and enjoy your Cosmos Club benefits.",
+      "brandingTagline": "The best of everyday life, here.",
+      "title": "Login",
+      "subtitle": "Access your Cosmos Angre space.",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember me",
+      "submit": "Log in",
+      "continueGoogle": "Continue with Google",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create an account"
+    },
+    "register": {
+      "brandingTitle": "Join the\nCosmos Club",
+      "brandingDesc": "Create your account and get immediate access to Silver loyalty program benefits.",
+      "brandingTagline": "The best of everyday life, here.",
+      "benefits": [
+        "Points on every purchase",
+        "Exclusive private sales",
+        "Priority event access",
+        "Premium parking and concierge"
+      ],
+      "title": "Create an account",
+      "subtitle": "Sign up for free to the Cosmos Club.",
+      "firstName": "First name",
+      "firstNamePlaceholder": "First name",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Last name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+225 XX XX XX XX",
+      "password": "Password",
+      "passwordPlaceholder": "Minimum 8 characters",
+      "confirmPassword": "Confirm",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "acceptTerms": "I accept the <1>terms and conditions</1> and the <2>privacy policy</2>.",
+      "acceptTermsText": "I accept the terms and conditions and the privacy policy.",
+      "newsletter": "Receive news and exclusive offers by email.",
+      "submit": "Create my account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Log in"
+    }
+  },
+
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "stores": "Stores",
+      "events": "Events",
+      "moderation": "Moderation",
+      "billing": "Billing",
+      "content": "Site Content",
+      "newsletter": "Newsletter",
+      "contacts": "Messages",
+      "blog": "Blog",
+      "users": "Users",
+      "media": "Media",
+      "settings": "Settings",
+      "backToSite": "Back to site",
+      "logout": "Logout"
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "subtitle": "Overview of shopping center activity",
+      "welcome": "Welcome, {{name}}",
+      "pendingModeration": "Pending moderation",
+      "recentActivity": "Recent Activity",
+      "viewAllModerations": "View all moderations",
+      "stats": {
+        "stores": "Stores",
+        "events": "Events",
+        "users": "Users",
+        "visitors": "Visitors",
+        "activeStores": "Active Stores",
+        "upcomingEvents": "Upcoming Events",
+        "pendingPublications": "Pending Publications"
+      },
+      "types": {
+        "store": "Store",
+        "event": "Event",
+        "publication": "Publication"
+      },
+      "moderation": {
+        "untitled": "Untitled",
+        "unknownStore": "Unknown store",
+        "item1": "Nike Store - New promotion",
+        "item2": "Fashion Week 2025",
+        "item3": "Spring sales",
+        "item4": "Catalog update"
+      },
+      "time": {
+        "minutesAgo": "{{count}} min ago",
+        "hoursAgo": "{{count}}h ago",
+        "recently": "Recently"
+      },
+      "activity": {
+        "storeApproved": "New store approved",
+        "eventPublished": "Event published",
+        "publicationRejected": "Publication rejected",
+        "nonCompliant": "Non-compliant content",
+        "commentFlagged": "Comment flagged",
+        "flaggedByUsers": "By {{count}} users",
+        "newStore": "New store",
+        "newEvent": "New event",
+        "newPublication": "New publication pending",
+        "pendingReview": "Pending review"
+      },
+      "charts": {
+        "trafficLast7Days": "Traffic over last 7 days",
+        "toImplement": "Chart to implement",
+        "storesByCategory": "Stores by category",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun",
+        "fashion": "Fashion",
+        "food": "Dining",
+        "electronics": "Electronics",
+        "beauty": "Beauty",
+        "services": "Services",
+        "other": "Other"
+      }
+    },
+    "stores": {
+      "title": "Store Management",
+      "subtitle": "Manage all stores in the shopping center",
+      "addStore": "Add store",
+      "editStore": "Edit store",
+      "deleteStore": "Delete store",
+      "confirmDelete": "Are you sure you want to delete this store?",
+      "newStore": "New Store",
+      "searchPlaceholder": "Search for a store...",
+      "views": "views",
+      "storeDetails": "Store Details",
+      "filter": {
+        "allStatuses": "All statuses",
+        "allPlans": "All plans"
+      },
+      "table": {
+        "store": "Store",
+        "owner": "Owner",
+        "location": "Location",
+        "plan": "Plan",
+        "status": "Status",
+        "stats": "Stats"
+      },
+      "status": {
+        "active": "Active",
+        "pending": "Pending",
+        "suspended": "Suspended",
+        "rejected": "Rejected"
+      },
+      "stats": {
+        "total": "Total Stores",
+        "active": "Active",
+        "pending": "Pending",
+        "suspended": "Suspended"
+      },
+      "detail": {
+        "description": "Description",
+        "basicInfo": "Basic Information",
+        "owner": "Owner",
+        "joinedDate": "Registration date",
+        "openingHours": "Opening hours",
+        "contact": "Contact",
+        "phone": "Phone",
+        "location": "Location",
+        "socialMedia": "Social Media",
+        "businessInfo": "Business Information",
+        "employees": "Employees",
+        "products": "Products",
+        "lastSale": "Last Sale",
+        "performanceStats": "Performance Statistics",
+        "viewsLabel": "Views",
+        "rating": "Rating /5",
+        "revenue": "Revenue FCFA"
+      },
+      "form": {
+        "editTitle": "Edit Store",
+        "createTitle": "New Store",
+        "name": "Name",
+        "namePlaceholder": "Store name",
+        "slug": "Slug",
+        "slugPlaceholder": "auto-generated-from-name",
+        "description": "Description",
+        "descriptionPlaceholder": "Store description",
+        "category": "Category",
+        "categoryPlaceholder": "E.g.: Fashion, Dining...",
+        "zone": "Zone",
+        "zonePlaceholder": "E.g.: Ground floor, Floor 1...",
+        "locationCode": "Location code",
+        "locationCodePlaceholder": "E.g.: A-12",
+        "hours": "Hours",
+        "hoursPlaceholder": "E.g.: 9am-9pm",
+        "phone": "Phone",
+        "phonePlaceholder": "+225 XX XX XX XX",
+        "email": "Email",
+        "emailPlaceholder": "store@email.com",
+        "website": "Website",
+        "websitePlaceholder": "https://www.example.com",
+        "plan": "Plan",
+        "status": "Status",
+        "save": "Save",
+        "create": "Create",
+        "nameRequired": "Name is required.",
+        "updateSuccess": "Store updated successfully.",
+        "createSuccess": "Store created successfully.",
+        "saveError": "Error saving store."
+      },
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "suspend": "Suspend"
+      },
+      "noStores": "No stores",
+      "noStoresMessage": "No stores match your search criteria",
+      "deleteIrreversible": "This action is irreversible",
+      "deleteSuccess": "Store deleted successfully.",
+      "deleteError": "Error deleting store.",
+      "statusUpdated": "Status updated.",
+      "statusUpdateError": "Error updating status."
+    },
+    "events": {
+      "title": "Event Management",
+      "subtitle": "Create and manage all events for the shopping center",
+      "addEvent": "New Event",
+      "editEvent": "Edit event",
+      "deleteEvent": "Delete event",
+      "confirmDelete": "Are you sure you want to delete the event \"{{title}}\"? All registered participants will be notified of the cancellation.",
+      "searchPlaceholder": "Search for an event...",
+      "participants": "participants",
+      "noEvents": "No events",
+      "noEventsMessage": "No events match your search criteria",
+      "eventDetails": "Event Details",
+      "deleteIrreversible": "This action is irreversible",
+      "filter": {
+        "allStatuses": "All statuses"
+      },
+      "status": {
+        "upcoming": "Upcoming",
+        "ongoing": "Ongoing",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "stats": {
+        "totalEvents": "Total Events",
+        "upcoming": "Upcoming",
+        "ongoing": "Ongoing",
+        "completed": "Completed"
+      },
+      "detail": {
+        "description": "Description",
+        "startDate": "Start date",
+        "at": "at",
+        "endDate": "End date",
+        "location": "Venue",
+        "organizer": "Organizer",
+        "registeredParticipants": "Registered participants",
+        "availableSpots": "Available spots"
+      },
+      "form": {
+        "createTitle": "New Event",
+        "title": "Title",
+        "slug": "Slug",
+        "slugPlaceholder": "auto-generated-from-title",
+        "description": "Description",
+        "category": "Category",
+        "categoryPlaceholder": "E.g.: Concert, Exhibition...",
+        "location": "Venue",
+        "locationPlaceholder": "E.g.: Main hall",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "startTime": "Start time",
+        "endTime": "End time",
+        "organizer": "Organizer",
+        "maxParticipants": "Max participants",
+        "status": "Status",
+        "visibility": "Visibility",
+        "visibilityPublic": "Public",
+        "visibilityPrivate": "Private",
+        "save": "Save",
+        "create": "Create",
+        "titleRequired": "Title is required.",
+        "updateSuccess": "Event updated successfully.",
+        "createSuccess": "Event created successfully.",
+        "saveError": "Error saving event."
+      },
+      "statusUpdated": "Status updated.",
+      "statusUpdateError": "Error updating status.",
+      "deleteSuccess": "Event deleted successfully.",
+      "actions": {
+        "reactivate": "Reactivate",
+        "cancel": "Cancel"
+      }
+    },
+    "moderation": {
+      "title": "Moderation",
+      "subtitle": "Manage publications and content submitted by stores",
+      "pending": "Pending",
+      "approved": "Approved",
+      "approvedToday": "Approved today",
+      "rejected": "Rejected",
+      "rejectedToday": "Rejected today",
+      "avgProcessingTime": "Average processing time",
+      "priority": "Priority",
+      "submittedBy": "Submitted by",
+      "approve": "Approve",
+      "reject": "Reject",
+      "filter": {
+        "allTypes": "All types"
+      },
+      "draft": "Draft",
+      "totalPublications": "Total publications",
+      "noItems": "No publications to display",
+      "publication": "Publication",
+      "noContent": "No content",
+      "storeId": "Store",
+      "views": "views",
+      "likes": "likes",
+      "approvedSuccess": "Publication approved",
+      "approveError": "Failed to approve",
+      "rejectedSuccess": "Publication rejected",
+      "rejectError": "Failed to reject",
+      "publicationDetails": "Publication Details",
+      "createdAt": "Created",
+      "lastUpdated": "Last updated",
+      "content": "Content"
+    },
+    "billing": {
+      "title": "Billing Management",
+      "subtitle": "Manage store subscriptions and invoices",
+      "export": "Export",
+      "planPricing": "Plan Pricing",
+      "perMonth": "month",
+      "searchPlaceholder": "Search for an invoice...",
+      "free": "Free",
+      "viewDetails": "View details",
+      "downloadPdf": "Download PDF",
+      "sendReminder": "Send reminder",
+      "invoiceDetails": "Invoice Details",
+      "invoiceFor": "Invoice for {{period}}",
+      "filter": {
+        "allStatuses": "All statuses",
+        "allPlans": "All plans"
+      },
+      "table": {
+        "invoiceNumber": "Invoice No.",
+        "store": "Store",
+        "plan": "Plan",
+        "period": "Period",
+        "amount": "Amount",
+        "dueDate": "Due Date",
+        "status": "Status"
+      },
+      "status": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "overdue": "Overdue",
+        "cancelled": "Cancelled"
+      },
+      "stats": {
+        "totalRevenue": "Total Revenue",
+        "pending": "Pending",
+        "overdue": "Overdue",
+        "totalInvoices": "Total Invoices"
+      },
+      "detail": {
+        "store": "Store",
+        "owner": "Owner",
+        "issueDate": "Issue date",
+        "paymentDueDate": "Payment due date",
+        "paymentDate": "Payment date",
+        "paymentMethod": "Payment method",
+        "totalAmount": "Total Amount"
+      },
+      "noInvoices": "No invoices found",
+      "statusUpdated": "Status updated successfully",
+      "reminderSent": "Reminder sent",
+      "changeStatus": "Change Status",
+      "markAsPaid": "Mark as paid",
+      "markAsPending": "Mark as pending",
+      "markAsOverdue": "Mark as overdue",
+      "markAsCancelled": "Mark as cancelled"
+    },
+    "blog": {
+      "title": "Blog Management",
+      "subtitle": "Create and manage your blog articles",
+      "newArticle": "New Article",
+      "categories": "Categories",
+      "articles": "articles",
+      "searchPlaceholder": "Search for an article...",
+      "noArticles": "No articles",
+      "noArticlesDescription": "No articles match your search criteria",
+      "articlePreview": "Article Preview",
+      "views": "Views",
+      "likes": "Likes",
+      "comments": "Comments",
+      "editArticle": "Edit Article",
+      "filter": {
+        "allStatuses": "All statuses",
+        "allCategories": "All categories"
+      },
+      "status": {
+        "published": "Published",
+        "draft": "Draft",
+        "scheduled": "Scheduled"
+      },
+      "stats": {
+        "totalArticles": "Total Articles",
+        "published": "Published",
+        "totalViews": "Total Views",
+        "totalLikes": "Total Likes"
+      },
+      "form": {
+        "title": "Title",
+        "titlePlaceholder": "Article title",
+        "slug": "Slug (URL)",
+        "slugHint": "Leave empty to auto-generate from title",
+        "category": "Category",
+        "status": "Status",
+        "excerpt": "Excerpt",
+        "excerptPlaceholder": "Short article summary...",
+        "content": "Content",
+        "contentPlaceholder": "Full article content...",
+        "featuredImage": "Featured Image",
+        "tags": "Tags (comma separated)",
+        "imagePreview": "Preview",
+        "publishDate": "Publish date"
+      },
+      "confirmDelete": "Are you sure you want to delete this article?",
+      "feedback": {
+        "deleted": "Article deleted successfully",
+        "titleRequired": "Title is required",
+        "updated": "Article updated successfully",
+        "created": "Article created successfully"
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "subtitle": "Manage all platform users",
+      "newUser": "New User",
+      "searchPlaceholder": "Search for a user...",
+      "userDetails": "User Details",
+      "editUser": "Edit User",
+      "role": {
+        "superAdmin": "Super Admin",
+        "admin": "Administrator",
+        "storeOwner": "Store Owner",
+        "customer": "Customer",
+        "moderator": "Moderator",
+        "storeAdmin": "Store Admin",
+        "storeEmployee": "Store Employee",
+        "visitor": "Visitor"
+      },
+      "status": {
+        "active": "Active",
+        "pending": "Pending",
+        "suspended": "Suspended"
+      },
+      "stats": {
+        "total": "Total Users",
+        "storeOwners": "Store Owners",
+        "customers": "Customers",
+        "pending": "Pending",
+        "admins": "Administrators",
+        "visitors": "Visitors"
+      },
+      "filter": {
+        "allRoles": "All roles",
+        "allStatuses": "All statuses"
+      },
+      "table": {
+        "user": "User",
+        "contact": "Contact",
+        "role": "Role",
+        "status": "Status",
+        "lastLogin": "Last Login",
+        "registered": "Registered"
+      },
+      "detail": {
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "store": "Store",
+        "registeredDate": "Registration date",
+        "lastLogin": "Last login",
+        "customerStats": "Customer Statistics",
+        "orders": "Orders",
+        "totalSpent": "Total Spent"
+      },
+      "form": {
+        "fullName": "Full Name",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone",
+        "role": "Role",
+        "address": "Address",
+        "status": "Status",
+        "storeName": "Store Name (optional)",
+        "password": "Password"
+      },
+      "actions": {
+        "promote": "Promote",
+        "demote": "Demote to visitor",
+        "confirmDelete": "Confirm deletion"
+      },
+      "feedback": {
+        "deleted": "User deleted successfully",
+        "roleChanged": "Role updated successfully",
+        "roleError": "Error updating role",
+        "nameRequired": "Name is required",
+        "updated": "User updated successfully"
+      }
+    },
+    "media": {
+      "title": "Media Management",
+      "subtitle": "Manage logos, banners and other website media",
+      "uploadTitle": "Upload a {{type}}",
+      "dragDropMessage": "Drag and drop a file here or click to select",
+      "uploading": "Uploading...",
+      "selectFile": "Select a file",
+      "fileFormats": "PNG, JPG, SVG up to 5 MB",
+      "activeLogo": "Active Logo",
+      "activeLogoDescription": "This logo is currently displayed in the website header",
+      "availableMedia": "Available {{type}}",
+      "noMediaFound": "No media of type \"{{type}}\" found",
+      "setAsActive": "Set as active",
+      "confirmDelete": "Are you sure you want to delete this media?",
+      "recommendations": "Recommendations",
+      "types": {
+        "logos": "Logos",
+        "logosDesc": "Main shopping center logo",
+        "banners": "Banners",
+        "bannersDesc": "Website banner images",
+        "favicon": "Favicon",
+        "faviconDesc": "Site icon (16x16, 32x32)",
+        "partners": "Partners",
+        "partnersDesc": "Partner logos",
+        "other": "Other",
+        "otherDesc": "Other media"
+      },
+      "validation": {
+        "invalidImage": "Please select a valid image (PNG, JPG, SVG, etc.)",
+        "fileTooLarge": "File is too large. Maximum size: 5 MB"
+      },
+      "errors": {
+        "uploadFailed": "Error uploading file",
+        "deleteFailed": "Error deleting media",
+        "setActiveLogoFailed": "Error setting active logo"
+      },
+      "rec": {
+        "logo": "• Logo: Transparent PNG format, recommended size 500x150px",
+        "favicon": "• Favicon: ICO or PNG format, size 32x32px or 64x64px",
+        "banners": "• Banners: JPG or PNG format, minimum width 1920px",
+        "optimize": "• Optimize your images before upload for better performance"
+      }
+    },
+    "newsletter": {
+      "title": "Newsletter Management",
+      "subtitle": "Manage your subscribers and create email campaigns",
+      "newCampaign": "New Campaign",
+      "searchSubscriber": "Search for a subscriber...",
+      "error": "Error loading subscribers",
+      "confirmDelete": "Are you sure you want to delete this subscriber?",
+      "status": {
+        "active": "Active",
+        "unsubscribed": "Unsubscribed",
+        "sent": "Sent",
+        "scheduled": "Scheduled",
+        "draft": "Draft"
+      },
+      "stats": {
+        "activeSubscribers": "Active Subscribers",
+        "sentCampaigns": "Sent Campaigns",
+        "emailsSent": "Emails Sent",
+        "avgOpenRate": "Average Open Rate"
+      },
+      "tabs": {
+        "subscribers": "Subscribers",
+        "campaigns": "Campaigns",
+        "templates": "Templates",
+        "segments": "Segments",
+        "analytics": "Analytics"
+      },
+      "filter": {
+        "allStatuses": "All statuses",
+        "active": "Active",
+        "unsubscribed": "Unsubscribed"
+      },
+      "table": {
+        "email": "Email",
+        "name": "Name",
+        "source": "Source",
+        "subscribedDate": "Subscription date",
+        "status": "Status"
+      },
+      "campaigns": {
+        "sent": "Sent",
+        "openRate": "Open rate",
+        "clickRate": "Click rate",
+        "sentOn": "Sent on",
+        "scheduledFor": "Scheduled for",
+        "send": "Send",
+        "detail": "Campaign Details",
+        "content": "Content",
+        "recipients": "Recipients",
+        "opens": "Opens",
+        "clicks": "Clicks",
+        "emailSubject": "Email subject",
+        "enterSubject": "Enter subject...",
+        "writeMessage": "Write your message...",
+        "allActive": "All active subscribers",
+        "newSubscribers": "New subscribers (30 days)",
+        "customList": "Custom list",
+        "saveAsDraft": "Save as draft",
+        "sendNow": "Send Now",
+        "sentSuccess": "Campaign sent successfully!",
+        "draftSaved": "Draft saved successfully!"
+      },
+      "templates": {
+        "library": "Template Library",
+        "listView": "List view",
+        "gridView": "Grid view",
+        "newTemplate": "New Template",
+        "name": "Name",
+        "category": "Category",
+        "usages": "Usages",
+        "lastUsed": "Last used",
+        "promotional": "Promotional",
+        "newsletterCat": "Newsletter",
+        "event": "Event",
+        "transactional": "Transactional",
+        "use": "Use",
+        "detail": "Template Details",
+        "subject": "Subject",
+        "never": "Never",
+        "editTemplate": "Edit Template",
+        "generalInfo": "General information",
+        "templateName": "Template name",
+        "language": "Language",
+        "french": "French",
+        "english": "English",
+        "previewText": "Preview text (short)",
+        "header": "Header",
+        "headerImage": "Logo / Header image",
+        "clickToAddImage": "Click to add an image",
+        "imageFormats": "PNG, JPG up to 2MB",
+        "mainTitle": "Main title",
+        "messageBody": "Message body",
+        "introMessage": "Introduction message",
+        "mainContent": "Main content",
+        "contentImage": "Content image (optional)",
+        "addImage": "Add image",
+        "ctaButton": "Call-to-action button (CTA)",
+        "buttonText": "Button text",
+        "linkUrl": "Link URL",
+        "buttonColor": "Button color",
+        "style": "Style",
+        "solid": "Solid",
+        "outline": "Outline",
+        "additionalSections": "Additional sections",
+        "addSection": "Add section",
+        "footer": "Footer",
+        "contactInfo": "Contact information",
+        "socialLinks": "Social media links",
+        "legalNotice": "Legal notice",
+        "availableVariables": "Available variables",
+        "tips": "Tips",
+        "tip1": "• Short and catchy subject",
+        "tip2": "• Personalize with variables",
+        "tip3": "• One clear CTA per email",
+        "tip4": "• Optimized images (max 500KB)",
+        "tip5": "• Test on mobile",
+        "preview": "Preview",
+        "saveSuccess": "Template saved successfully!",
+        "newTemplateName": "New Template",
+        "confirmDelete": "Are you sure you want to delete this template?",
+        "previewTextPlaceholder": "Text displayed before opening the email...",
+        "buttonTextPlaceholder": "E.g.: Discover the offers",
+        "contactInfoPlaceholder": "Address, phone, email...",
+        "legalNoticePlaceholder": "You are receiving this email because...",
+        "sectionContentPlaceholder": "Section content...",
+        "section1News": "Section 1: News",
+        "varFirstName": "First name",
+        "varLastName": "Last name",
+        "varEmail": "Email",
+        "varDate": "Date",
+        "varTime": "Time",
+        "varLocation": "Location",
+        "varPrice": "Price"
+      },
+      "segments": {
+        "title": "Subscriber Segmentation",
+        "newSegment": "New Segment",
+        "subscribers": "subscribers",
+        "criteria": "Criteria",
+        "createdOn": "Created on",
+        "sendCampaign": "Send Campaign"
+      },
+      "analytics": {
+        "title": "Campaign Performance",
+        "avgOpenRate": "Average open rate",
+        "vsLastMonth": "+2.3% vs last month",
+        "avgClickRate": "Average click rate",
+        "clickVsLastMonth": "+1.8% vs last month",
+        "unsubscribeRate": "Unsubscribe rate",
+        "unsubVsLastMonth": "+0.5% vs last month",
+        "performanceByCampaign": "Performance by Campaign",
+        "campaign": "Campaign",
+        "date": "Date",
+        "bestCampaigns": "Best Campaigns"
+      },
+      "mockCampaigns": {
+        "springSale": "Spring Sale 2025 - Up to -70%",
+        "springSaleContent": "Discover our exceptional offers for the spring sales! Over 200 stores are participating with discounts up to -70% on a wide selection of items. Fashion, electronics, home decor... it's all here! From March 15 to 31, 2025.",
+        "autumnCollection": "New Autumn/Winter 2024 Collection",
+        "autumnCollectionContent": "Top brands unveil their autumn/winter collections! Discover the latest fashion trends, new styles, and must-have pieces of the season. Visit our partner stores: Zara, H&M, Nike, Adidas and many more.",
+        "fashionWeek": "Abidjan Fashion Week - Exceptional Show",
+        "fashionWeekContent": "Cosmos Angre hosts Abidjan Fashion Week! Attend an exceptional fashion show on November 10 from 6pm to 10pm. Discover creations from local and international designers. Free admission upon registration.",
+        "newRestaurants": "5 New Restaurants Opening",
+        "newRestaurantsContent": "We are delighted to announce the opening of 5 new restaurants at the Food Court! Ivorian, Italian, Asian, Lebanese and American cuisine. Come discover these new flavors and enjoy -20% for the opening.",
+        "kidsDay": "Kids Day - Free Activities",
+        "kidsDayContent": "On Saturday October 5, Cosmos Angre is organizing a special day for children! Creative workshops, shows, games, face painting and much more. All activities are free. From 10am to 6pm.",
+        "electronicsPromo": "Electronics Promotion - Up to -40%",
+        "electronicsPromoContent": "Your favorite electronics stores offer exceptional discounts! Smartphones, computers, accessories... Enjoy discounts up to -40% throughout October.",
+        "blackFriday": "Black Friday 2024 - Hourly Flash Deals",
+        "blackFridayContent": "Don't miss our exceptional Black Friday event! On November 29 from 6am to 11pm, enjoy hourly flash deals in all our stores. Prepare your list and be ready!",
+        "decemberNewsletter": "December Newsletter - Holiday Season",
+        "decemberNewsletterContent": "Prepare for the holiday season with our partner stores! Gift ideas, decorations, evening outfits... Find all our tips and deals for a successful celebration. Plus exclusive offers for our subscribers.",
+        "winterSale": "Winter Sale - Final Markdown",
+        "winterSaleContent": "Now or never! Final markdown on winter sales with discounts up to -80%. Limited stock, don't delay!",
+        "loyaltyProgram": "Loyalty Program - Earn Points",
+        "loyaltyProgramContent": "Discover our new loyalty program! Earn points with every purchase and enjoy exclusive benefits: discounts, priority access to private sales, birthday gifts and much more."
+      },
+      "mockTemplates": {
+        "storePromotion": "Store Promotion",
+        "storePromotionSubject": "[Store Name] - Exclusive Offers Not to Miss!",
+        "storePromotionContent": "Hello [First Name],\n\nWe are delighted to present our exceptional current offers! Enjoy discounts up to [Percentage]% on [Product Category].\n\nValid until [Date].\n\nSee you soon at Cosmos Angre shopping center!",
+        "eventAnnouncement": "Event Announcement",
+        "eventAnnouncementSubject": "Special Event - [Event Name]",
+        "eventAnnouncementContent": "Dear subscribers,\n\nWe are pleased to invite you to our next event: [Event Name].\n\nDate: [Date]\nTime: [Time]\nLocation: [Location]\n\nJoin us! [Free/Paid] admission.\n\nBest regards,\nThe Cosmos Angre Team",
+        "monthlyNewsletter": "Monthly Newsletter",
+        "monthlyNewsletterSubject": "Cosmos Angre - [Month] Newsletter",
+        "monthlyNewsletterContent": "Hello,\n\nDiscover all the shopping center news this month:\n\n- New stores\n- Upcoming events\n- Monthly promotions\n- Shopping tips\n\nEnjoy your read!",
+        "welcomeNewSubscriber": "Welcome New Subscriber",
+        "welcomeNewSubscriberSubject": "Welcome to Cosmos Angre!",
+        "welcomeNewSubscriberContent": "Hello [First Name],\n\nThank you for subscribing to our newsletter! You will now receive all our news, exclusive offers and event invitations.\n\nAs a welcome gift, enjoy -10% at our partner stores with code: WELCOME10\n\nSee you very soon!",
+        "salesMarkdowns": "Sales & Markdowns",
+        "salesMarkdownsSubject": "[Season] Sales - Up to -[%]%!",
+        "salesMarkdownsContent": "This is the moment you've been waiting for!\n\nThe [Season] sales have started with exceptional discounts:\n\nUp to -[Percentage]% in all our stores\nDaily flash sales\nGifts for any purchase over [Amount] FCFA\n\nDon't delay, stock is limited!",
+        "eventReminder": "Event Reminder",
+        "eventReminderSubject": "It's tomorrow! [Event Name]",
+        "eventReminderContent": "Hello,\n\nJust a reminder: our event [Name] takes place TOMORROW!\n\nMeet at [Time] at [Location].\n\nDon't forget to confirm your attendance.\n\nSee you tomorrow!"
+      },
+      "mockSegments": {
+        "activeSubscribers": "Active Subscribers",
+        "activeSubscribersDesc": "All active subscribers who opened at least one email in the last 3 months",
+        "activeSubscribersCriteria": "Status: Active, Last opened: -90 days",
+        "newSubscribers": "New Subscribers",
+        "newSubscribersDesc": "Subscribers registered in the last 30 days",
+        "newSubscribersCriteria": "Registration date: -30 days",
+        "inactiveSubscribers": "Inactive Subscribers",
+        "inactiveSubscribersDesc": "Subscribers who haven't opened an email in 6 months",
+        "inactiveSubscribersCriteria": "Last opened: > 180 days",
+        "eventFans": "Event Fans",
+        "eventFansDesc": "Subscribers from events with open rate > 70%",
+        "eventFansCriteria": "Source: Event, Open rate: > 70%",
+        "vipShopping": "VIP Shopping",
+        "vipShoppingDesc": "Subscribers with high interaction (clicks on promotions)",
+        "vipShoppingCriteria": "Total clicks: > 10, Subject: Promotion"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Configure platform settings",
+      "saved": "Settings saved successfully",
+      "contactSaved": "Contact information saved",
+      "socialSaved": "Social media saved",
+      "paymentsSaved": "Payment settings saved",
+      "notificationsSaved": "Notification preferences saved",
+      "securitySaved": "Security settings saved",
+      "tabs": {
+        "general": "General",
+        "contact": "Contact",
+        "social": "Social Media",
+        "payments": "Payments",
+        "notifications": "Notifications",
+        "security": "Security"
+      },
+      "general": {
+        "title": "General Information",
+        "mallName": "Shopping Center Name",
+        "slogan": "Slogan",
+        "description": "Description",
+        "logo": "Logo",
+        "uploadLogo": "Upload a Logo",
+        "defaultLanguage": "Default Language",
+        "currency": "Currency",
+        "openingHours": "Opening Hours",
+        "to": "to"
+      },
+      "days": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      },
+      "contact": {
+        "title": "Contact Information",
+        "address": "Address",
+        "mainPhone": "Main Phone",
+        "secondaryPhone": "Secondary Phone",
+        "mainEmail": "Main Email",
+        "supportEmail": "Support Email",
+        "gpsCoordinates": "GPS Coordinates",
+        "googleMapsLink": "Google Maps Link"
+      },
+      "social": {
+        "title": "Social Media"
+      },
+      "payments": {
+        "title": "Payment Methods",
+        "mobilePayment": "Mobile payment",
+        "merchantNumber": "Merchant number",
+        "creditCards": "Credit Cards",
+        "planPricing": "Plan Pricing"
+      },
+      "notifications": {
+        "title": "Notification Preferences",
+        "newRegistrations": "New Registrations",
+        "newRegistrationsDesc": "Receive an email when a new user signs up",
+        "newStores": "New Stores",
+        "newStoresDesc": "Receive an email when a store is created",
+        "newPayments": "New Payments",
+        "newPaymentsDesc": "Receive an email for each payment received",
+        "contentModeration": "Content to Moderate",
+        "contentModerationDesc": "Receive an email when content needs moderation",
+        "weeklyReports": "Weekly Reports",
+        "weeklyReportsDesc": "Receive a weekly activity report",
+        "systemAlerts": "System Alerts",
+        "systemAlertsDesc": "Receive alerts for system issues"
+      },
+      "security": {
+        "title": "Security",
+        "twoFactor": "Two-Factor Authentication (2FA)",
+        "twoFactorDesc": "Add an extra layer of security",
+        "forceHttps": "Force HTTPS",
+        "forceHttpsDesc": "Automatically redirect to HTTPS",
+        "logConnections": "Log Connections",
+        "logConnectionsDesc": "Keep a connection history",
+        "changePassword": "Change Password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm new password",
+        "backupData": "Backup and Data",
+        "backupDatabase": "Backup Database",
+        "lastBackup": "Last backup: Nov 10, 2024",
+        "exportData": "Export All Data",
+        "exportDataDesc": "Download a full JSON export",
+        "minLengthHint": "Minimum 8 characters",
+        "mismatchHint": "Passwords do not match",
+        "updatePassword": "Update password",
+        "errorCurrentRequired": "Please enter your current password",
+        "errorMinLength": "New password must be at least 8 characters",
+        "errorMismatch": "Passwords do not match",
+        "passwordChanged": "Password changed successfully",
+        "backupSuccess": "Backup downloaded successfully"
+      }
+    },
+    "content": {
+      "title": "Content Management",
+      "subtitle": "Edit content for all website pages",
+      "savedSuccess": "Changes saved successfully",
+      "sectionSaved": "Section \"{{name}}\" saved",
+      "preview": "Preview",
+      "saveAll": "Save All",
+      "selectPage": "Select a Page",
+      "expandAll": "Expand all",
+      "collapseAll": "Collapse all",
+      "openVisualEditor": "Open visual editor",
+      "upload": "Upload",
+      "uploadVideo": "Upload video",
+      "visualEditor": "Visual Editor",
+      "saveSection": "Save this section",
+      "pageOverview": "Page overview",
+      "livePreview": "Live preview",
+      "openInNewTab": "Open in new tab",
+      "previewNote": "The preview shows the current page. Save to see your changes.",
+      "editor": "Editor",
+      "unsavedChanges": "{{count}} unsaved change(s)",
+      "stats": {
+        "pages": "pages",
+        "editableFields": "editable fields",
+        "sections": "Sections",
+        "fields": "Fields",
+        "modified": "Modified"
+      }
+    },
+    "contacts": {
+      "title": "Message Management",
+      "subtitle": "View and manage contact form messages",
+      "error": "Error loading messages",
+      "searchPlaceholder": "Search by name, email or subject...",
+      "filter": {
+        "all": "All",
+        "unread": "Unread",
+        "read": "Read"
+      },
+      "stats": {
+        "total": "Total Messages",
+        "unread": "Unread",
+        "read": "Read",
+        "thisWeek": "This Week"
+      },
+      "table": {
+        "status": "Status",
+        "sender": "Sender",
+        "subject": "Subject",
+        "date": "Date"
+      },
+      "status": {
+        "read": "Read",
+        "unread": "Unread"
+      },
+      "noSubject": "(No subject)",
+      "markAsRead": "Mark as read",
+      "noMessages": "No messages",
+      "noMessagesDescription": "No messages match your search criteria",
+      "detail": {
+        "title": "Message Details",
+        "email": "Email",
+        "phone": "Phone",
+        "noPhone": "Not provided",
+        "date": "Date received",
+        "name": "Full name",
+        "subject": "Subject",
+        "message": "Message"
+      },
+      "deleteConfirm": {
+        "title": "Confirm deletion",
+        "message": "Are you sure you want to delete this message? This action is irreversible."
+      }
+    }
+  },
+
+  "store": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Overview of your store performance",
+      "analytics": "Analytics",
+      "showcase": "My Showcase",
+      "publications": "Publications",
+      "promotions": "Promotions",
+      "viewsThisWeek": "Views this week",
+      "likes": "Likes",
+      "messages": "Messages",
+      "conversion": "Conversion",
+      "recentPublications": "Recent Publications",
+      "statusApproved": "Approved",
+      "statusPending": "Pending",
+      "statusRejected": "Rejected",
+      "viewAllPublications": "View all publications",
+      "upcomingEvents": "Upcoming Events",
+      "participants": "participants",
+      "viewAllEvents": "View all events",
+      "recentComments": "Recent Comments",
+      "reply": "Reply",
+      "viewsLast30Days": "Views over last 30 days",
+      "chartPlaceholder": "Chart to implement",
+      "engagementByContentType": "Engagement by content type"
+    },
+    "showcase": {
+      "title": "My Showcase",
+      "edit": "Edit",
+      "preview": "Preview",
+      "publish": "Publish",
+      "mainInfo": "Main Information",
+      "storeName": "Store name",
+      "tagline": "Tagline",
+      "description": "Description",
+      "category": "Category",
+      "categoryFashion": "Fashion & Accessories",
+      "categoryElectronics": "Electronics",
+      "categoryBeauty": "Beauty & Cosmetics",
+      "categoryHome": "Home & Decor",
+      "categorySports": "Sports & Leisure",
+      "categoryFood": "Food & Beverages",
+      "location": "Location",
+      "contactInfo": "Contact Details",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "mondayToSaturday": "Monday - Saturday",
+      "sunday": "Sunday",
+      "socialNetworks": "Social Networks",
+      "photoGallery": "Photo Gallery",
+      "addPhotos": "Add photos",
+      "showcasePreview": "Showcase Preview",
+      "about": "About",
+      "contactUs": "Contact Us",
+      "followUs": "Follow Us",
+      "mondayToFriday": "Monday - Friday",
+      "saturdaySunday": "Saturday - Sunday"
+    },
+    "analytics": {
+      "title": "Analytics",
+      "subtitle": "Analyze your store performance",
+      "views": "Views",
+      "clicks": "Clicks",
+      "engagement": "Engagement",
+      "totalViews": "Total views",
+      "uniqueVisitors": "Unique visitors",
+      "conversionRate": "Conversion rate",
+      "women": "Women",
+      "men": "Men",
+      "other": "Other",
+      "internalSearch": "Internal search",
+      "socialNetworks": "Social networks",
+      "direct": "Direct",
+      "others": "Others",
+      "activityAverage": "Average",
+      "activityHigh": "High",
+      "activityVeryHigh": "Very high",
+      "last7days": "Last 7 days",
+      "last30days": "Last 30 days",
+      "last90days": "Last 90 days",
+      "thisYear": "This year",
+      "export": "Export",
+      "viewsEvolution": "Views Evolution",
+      "chartPlaceholder": "Chart to implement (Chart.js or Recharts)",
+      "topPublications": "Top Performing Publications",
+      "trafficSources": "Traffic Sources",
+      "ageDistribution": "Age Distribution",
+      "years": "years",
+      "genderDistribution": "Gender Distribution",
+      "peakHours": "Peak Hours",
+      "periodComparison": "Comparison with Previous Period",
+      "conversion": "Conversion"
+    },
+    "publications": {
+      "title": "Publications",
+      "subtitle": "Create and manage your publications to promote your store",
+      "newPublication": "New Publication",
+      "createPublication": "Create a Publication",
+      "titleLabel": "Title",
+      "titlePlaceholder": "E.g.: New Spring 2025 collection",
+      "content": "Content",
+      "contentPlaceholder": "Describe your publication...",
+      "imageOptional": "Image (optional)",
+      "uploadImage": "Click to upload or drag an image here",
+      "saveDraft": "Save draft",
+      "publish": "Publish",
+      "filterBy": "Filter by",
+      "filterAll": "All",
+      "filterApproved": "Approved",
+      "filterPending": "Pending",
+      "filterDraft": "Drafts",
+      "filterRejected": "Rejected",
+      "views": "views",
+      "likes": "likes",
+      "view": "View",
+      "noPublications": "No publications",
+      "createFirstPublication": "Create my first publication",
+      "publicationPreview": "Publication Preview",
+      "deletePublication": "Delete publication",
+      "irreversibleAction": "This action is irreversible",
+      "editPublication": "Edit Publication",
+      "statusApproved": "Approved",
+      "statusPending": "Pending",
+      "statusRejected": "Rejected",
+      "statusDraft": "Draft"
+    },
+    "promotions": {
+      "title": "Promotions",
+      "subtitle": "Create and manage your promo codes and discounts",
+      "newPromotion": "New Promotion",
+      "activePromotions": "Active promotions",
+      "totalUses": "Total uses",
+      "upcoming": "Upcoming",
+      "expired": "Expired",
+      "createPromotion": "Create a Promotion",
+      "promotionTitle": "Promotion title",
+      "promoCode": "Promo code",
+      "generate": "Generate",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your promotion...",
+      "discountType": "Discount type",
+      "percentage": "Percentage (%)",
+      "fixedAmount": "Fixed amount (FCFA)",
+      "value": "Value",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "maxUsesPlaceholder": "Leave empty for unlimited",
+      "createThePromotion": "Create the promotion",
+      "uses": "uses",
+      "active": "Promotion active",
+      "inactive": "Promotion inactive",
+      "deletePromotion": "Delete promotion",
+      "editPromotion": "Edit Promotion"
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your account and store settings",
+      "accountInfo": "Account Information",
+      "managerName": "Manager name",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Role",
+      "security": "Security",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "passwordRequirements": "Password requirements",
+      "passwordMinChars": "- At least 8 characters",
+      "passwordUppercase": "- At least one uppercase letter",
+      "passwordNumber": "- At least one number",
+      "passwordSpecial": "- At least one special character",
+      "changePassword": "Change password",
+      "notifications": "Notifications",
+      "newMessages": "New messages",
+      "newMessagesDesc": "Receive a notification for each new message",
+      "newComments": "New comments",
+      "newCommentsDesc": "Be notified of comments on your publications",
+      "newFollowers": "New followers",
+      "newFollowersDesc": "Notification when someone follows your store",
+      "promotionsAndOffers": "Promotions and offers",
+      "promotionsAndOffersDesc": "Receive information about new features",
+      "weeklyReport": "Weekly report",
+      "weeklyReportDesc": "Receive a summary of your stats every week",
+      "subscription": "Subscription",
+      "planGold": "Gold Plan",
+      "planDescription": "Access to Cosmos Angre premium features",
+      "nextRenewal": "Next renewal: November 15, 2024",
+      "perMonth": "per month",
+      "changePlan": "Change plan",
+      "privacyAndData": "Privacy and Data",
+      "downloadData": "Download my data",
+      "downloadDataDesc": "Receive a copy of all your data",
+      "deleteAccount": "Delete my account",
+      "deleteAccountWarning": "This action is irreversible"
+    }
+  },
+
+  "storeDirectory": {
+    "zones": {
+      "gallery": "Commercial Gallery",
+      "foodCourt": "Food Court",
+      "restaurants": "Restaurants",
+      "bigBox": "Big Boxes",
+      "craftMarket": "Artisan Market",
+      "supermarket": "Supermarket"
+    },
+    "allZones": "All zones",
+    "sortAZ": "Sort A-Z",
+    "sortCategory": "By category",
+    "sortZone": "By zone",
+    "sortRating": "By rating",
+    "resultsCount": "{{count}} store(s) of {{total}}",
+    "resetFilters": "Reset filters",
+    "hasOffers": "Promo",
+    "modal": {
+      "location": "Location",
+      "hours": "Hours",
+      "phone": "Phone",
+      "rating": "Rating",
+      "currentOffers": "Current offers",
+      "viewFullPage": "View full page",
+      "viewOnMap": "View on map"
+    },
+    "stores": {
+      "nike": {
+        "description": "Official Nike store — premium footwear, apparel and sports accessories.",
+        "offer1": "-20% on the new Air Max collection"
+      },
+      "zara": {
+        "description": "Trendy fashion for women and men. New collections every week.",
+        "offer1": "2nd item at -50% on the spring selection"
+      },
+      "techParadise": {
+        "description": "Smartphones, computers and high-tech accessories from top brands."
+      },
+      "beautyCorner": {
+        "description": "Beauty products and cosmetics. International and local brands.",
+        "offer1": "Free discovery set with 25,000 FCFA purchase"
+      },
+      "bijouteriePrestige": {
+        "description": "Gold, silver and precious stone jewelry. Luxury watches and bespoke creations."
+      },
+      "sportsArena": {
+        "description": "Premium sports equipment for all sports. Exclusive brands."
+      },
+      "pharmacie": {
+        "description": "Full pharmacy, parapharmacy and health products. Pharmaceutical advice."
+      },
+      "optiqueVision": {
+        "description": "Prescription glasses, sunglasses and lenses. Prestigious frames and eye exams.",
+        "offer1": "Free eye exam this month"
+      },
+      "carrefour": {
+        "description": "Your reference hypermarket. Groceries, fresh produce, household goods and more."
+      },
+      "mango": {
+        "description": "Premium women's and men's fashion. Elegant and contemporary collections."
+      },
+      "adidas": {
+        "description": "Sports shoes, apparel and accessories. Performance and style for everyday."
+      },
+      "lcWaikiki": {
+        "description": "Fashion for the whole family at affordable prices. Wide range of clothing and accessories."
+      },
+      "kiabi": {
+        "description": "Budget-friendly fashion for men, women and children. Everyday clothing at great prices."
+      },
+      "celio": {
+        "description": "Casual and elegant menswear. Basics and trendy pieces for men."
+      },
+      "iStore": {
+        "description": "Authorized Apple reseller. iPhone, Mac, iPad and accessories. Specialized tech support."
+      },
+      "sephora": {
+        "description": "Perfumes, makeup and skincare. The biggest international beauty brands."
+      },
+      "orDiamant": {
+        "description": "Gold and diamond creations. Fine jewelry and prestigious watches."
+      },
+      "leCosmos": {
+        "description": "Contemporary African gastronomy in a refined and elegant setting."
+      },
+      "laBrasserie": {
+        "description": "Parisian brasserie revisited with fresh, seasonal local products."
+      },
+      "sakura": {
+        "description": "Authentic sushi, ramen and Japanese specialties prepared by a chef."
+      },
+      "trattoriaBella": {
+        "description": "Wood-fired pizzas, fresh pasta and antipasti in an Italian atmosphere."
+      },
+      "grilladesAfrique": {
+        "description": "Authentic African grills and flavors. Braises, attieke and alloco."
+      },
+      "asiaBowl": {
+        "description": "Bowls, noodles and fresh Asian dishes made to order."
+      }
+    }
+  },
+
+  "errors": {
+    "404": {
+      "title": "404",
+      "message": "Page not found",
+      "backHome": "Back to home"
+    },
+    "500": {
+      "title": "500",
+      "message": "Server error",
+      "retry": "Retry"
+    },
+    "network": {
+      "title": "Network error",
+      "message": "Unable to connect to server"
+    }
+  }
+}

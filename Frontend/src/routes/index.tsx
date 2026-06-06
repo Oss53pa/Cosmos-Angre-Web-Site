@@ -1,0 +1,266 @@
+import React, { Suspense, lazy } from 'react';
+import { createBrowserRouter, RouterProvider, Navigate, type RouteObject } from 'react-router-dom';
+
+// Auth
+import ProtectedRoute from '../components/auth/ProtectedRoute';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
+import LanguageGate from '../lib/i18n/LanguageGate';
+
+// Layouts (chargés tout de suite — partagés)
+import PublicLayout from '../layouts/PublicLayout';
+
+// Lazy layouts (chargés à la demande)
+const AdminLayout = lazy(() => import('../layouts/AdminLayout'));
+const StoreLayout = lazy(() => import('../layouts/StoreLayout'));
+const SuperAdminLayout = lazy(() => import('../layouts/SuperAdminLayout'));
+
+// Public Pages — bundle public (premier paint)
+import HomePage from '../pages/public/HomePage';
+import NotFoundPage from '../pages/public/NotFoundPage';
+
+// Lazy public pages (moins critiques que la home)
+const AboutPage = lazy(() => import('../pages/public/AboutPage'));
+const SpacesPage = lazy(() => import('../pages/public/SpacesPage'));
+const StoresPage = lazy(() => import('../pages/public/StoresPage'));
+const StoreDetailPage = lazy(() => import('../pages/public/StoreDetailPage'));
+const EventsPage = lazy(() => import('../pages/public/EventsPage'));
+const EventDetailPage = lazy(() => import('../pages/public/EventDetailPage'));
+const ServicesPage = lazy(() => import('../pages/public/ServicesPage'));
+const BlogPage = lazy(() => import('../pages/public/BlogPage'));
+const BlogPostPage = lazy(() => import('../pages/public/BlogPostPage'));
+const ContactPage = lazy(() => import('../pages/public/ContactPage'));
+const ARNavigationPage = lazy(() => import('../pages/public/ARNavigationPage'));
+const PremiumServicesPage = lazy(() => import('../pages/public/PremiumServicesPage'));
+const InteractiveMapPage = lazy(() => import('../pages/public/InteractiveMapPage'));
+const GastronomiePage = lazy(() => import('../pages/public/GastronomiePage'));
+const LoisirsPage = lazy(() => import('../pages/public/LoisirsPage'));
+const HotelPage = lazy(() => import('../pages/public/HotelPage'));
+const RetailParkPage = lazy(() => import('../pages/public/RetailParkPage'));
+const PreparerVisitePage = lazy(() => import('../pages/public/PreparerVisitePage'));
+const FidelitePage = lazy(() => import('../pages/public/FidelitePage'));
+const MentionsLegalesPage = lazy(() => import('../pages/public/MentionsLegalesPage'));
+const ConfidentialitePage = lazy(() => import('../pages/public/ConfidentialitePage'));
+const CGUPage = lazy(() => import('../pages/public/CGUPage'));
+const DevenirEnseignePage = lazy(() => import('../pages/public/pro/DevenirEnseignePage'));
+const AnnonceursPage = lazy(() => import('../pages/public/pro/AnnonceursPage'));
+const InvestisseursPage = lazy(() => import('../pages/public/pro/InvestisseursPage'));
+const PressePage = lazy(() => import('../pages/public/pro/PressePage'));
+const MupiPage = lazy(() => import('../pages/public/MupiPage'));
+const PreLaunchPage = lazy(() => import('../pages/public/PreLaunchPage'));
+const MockupsPage = lazy(() => import('../pages/public/MockupsPage'));
+const SupportsCommunicationPage = lazy(
+  () => import('../pages/public/SupportsCommunicationPage')
+);
+
+// Auth Pages
+const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'));
+
+// Admin Pages
+const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
+const StoresManagement = lazy(() => import('../pages/admin/StoresManagement'));
+const EventsManagement = lazy(() => import('../pages/admin/EventsManagement'));
+const ModerationPage = lazy(() => import('../pages/admin/ModerationPage'));
+const BillingManagement = lazy(() => import('../pages/admin/BillingManagement'));
+const ContentManagement = lazy(() => import('../pages/admin/ContentManagement'));
+const NewsletterManagement = lazy(() => import('../pages/admin/NewsletterManagement'));
+const ContactsManagement = lazy(() => import('../pages/admin/ContactsManagement'));
+const BlogManagement = lazy(() => import('../pages/admin/BlogManagement'));
+const LifeCalendarManagement = lazy(() => import('../pages/admin/LifeCalendarManagement'));
+const UsersManagement = lazy(() => import('../pages/admin/UsersManagement'));
+const SettingsPage = lazy(() => import('../pages/admin/SettingsPage'));
+const MediaManagement = lazy(() => import('../pages/admin/MediaManagement'));
+
+// Store Pages
+const StoreDashboard = lazy(() => import('../pages/store/StoreDashboard'));
+const StoreShowcase = lazy(() => import('../pages/store/StoreShowcase'));
+const StoreAnalytics = lazy(() => import('../pages/store/StoreAnalytics'));
+const StorePublications = lazy(() => import('../pages/store/StorePublications'));
+const StorePromotions = lazy(() => import('../pages/store/StorePromotions'));
+const StoreSettings = lazy(() => import('../pages/store/StoreSettings'));
+
+// Super Admin Pages
+const SuperAdminDashboard = lazy(() => import('../pages/superadmin/SuperAdminDashboard'));
+const SubscriptionsManagement = lazy(() => import('../pages/superadmin/SubscriptionsManagement'));
+const AdminsManagement = lazy(() => import('../pages/superadmin/AdminsManagement'));
+const SystemSettings = lazy(() => import('../pages/superadmin/SystemSettings'));
+const AuditLogs = lazy(() => import('../pages/superadmin/AuditLogs'));
+
+// Demo (uniquement en dev)
+const ComponentsDemo = lazy(() => import('../pages/ComponentsDemo'));
+const ReduxDemo = lazy(() => import('../pages/ReduxDemo'));
+
+const RouteFallback: React.FC = () => (
+  <div className="min-h-[50vh] flex items-center justify-center">
+    <div
+      role="status"
+      aria-label="Chargement"
+      className="w-8 h-8 border-2 border-cosmos-gold border-t-transparent rounded-full animate-spin"
+    />
+  </div>
+);
+
+const wrap = (node: React.ReactNode, scope: 'public' | 'admin' = 'public') => (
+  <ErrorBoundary scope={scope}>
+    <Suspense fallback={<RouteFallback />}>{node}</Suspense>
+  </ErrorBoundary>
+);
+
+const isDev = import.meta.env.DEV;
+
+// Routes publiques (FR), réutilisées telles quelles pour /en/* via alias.
+const publicChildren: RouteObject[] = [
+  { index: true, element: <HomePage /> },
+  { path: 'a-propos', element: wrap(<AboutPage />) },
+  { path: 'nos-espaces', element: wrap(<SpacesPage />) },
+  { path: 'boutiques', element: wrap(<StoresPage />) },
+  { path: 'boutiques/:id', element: wrap(<StoreDetailPage />) },
+  { path: 'evenements', element: wrap(<EventsPage />) },
+  { path: 'evenements/:id', element: wrap(<EventDetailPage />) },
+  { path: 'services', element: wrap(<ServicesPage />) },
+  { path: 'blog', element: wrap(<BlogPage />) },
+  { path: 'blog/:slug', element: wrap(<BlogPostPage />) },
+  { path: 'contact', element: wrap(<ContactPage />) },
+  { path: 'navigation-ar', element: wrap(<ARNavigationPage />) },
+  { path: 'services-premium', element: wrap(<PremiumServicesPage />) },
+  { path: 'plan-interactif', element: wrap(<InteractiveMapPage />) },
+  { path: 'gastronomie', element: wrap(<GastronomiePage />) },
+  { path: 'loisirs', element: wrap(<LoisirsPage />) },
+  { path: 'hotel', element: wrap(<HotelPage />) },
+  { path: 'retail-park', element: wrap(<RetailParkPage />) },
+  { path: 'preparer-visite', element: wrap(<PreparerVisitePage />) },
+  { path: 'fidelite', element: wrap(<FidelitePage />) },
+  { path: 'mentions-legales', element: wrap(<MentionsLegalesPage />) },
+  { path: 'confidentialite', element: wrap(<ConfidentialitePage />) },
+  { path: 'cgu', element: wrap(<CGUPage />) },
+  { path: 'professionnels/devenir-enseigne', element: wrap(<DevenirEnseignePage />) },
+  { path: 'professionnels/annonceurs', element: wrap(<AnnonceursPage />) },
+  { path: 'professionnels/investisseurs', element: wrap(<InvestisseursPage />) },
+  { path: 'professionnels/presse', element: wrap(<PressePage />) },
+  ...(isDev
+    ? [
+        { path: 'design-system', element: wrap(<ComponentsDemo />) },
+        { path: 'redux-demo', element: wrap(<ReduxDemo />) },
+      ]
+    : []),
+];
+
+const router = createBrowserRouter([
+  // FR (langue par défaut, pas de préfixe)
+  {
+    path: '/',
+    element: (
+      <LanguageGate>
+        <PublicLayout />
+      </LanguageGate>
+    ),
+    children: publicChildren,
+  },
+
+  // EN (alias /en/* avec mêmes children)
+  {
+    path: '/en',
+    element: (
+      <LanguageGate>
+        <PublicLayout />
+      </LanguageGate>
+    ),
+    children: publicChildren,
+  },
+
+  // Page de pré-lancement / teasing (standalone, immersive)
+  { path: '/pre-lancement', element: wrap(<PreLaunchPage />) },
+
+  // Affiche MUPI (standalone, sans layout public)
+  { path: '/mupi', element: wrap(<MupiPage />) },
+  // Mockups multi-supports
+  { path: '/mockups', element: wrap(<MockupsPage />) },
+  // Charte A9 · Supports de communication
+  { path: '/supports-communication', element: wrap(<SupportsCommunicationPage />) },
+
+  // Auth
+  {
+    path: '/auth',
+    children: [
+      { path: 'login', element: wrap(<LoginPage />) },
+      { path: 'register', element: wrap(<RegisterPage />) },
+    ],
+  },
+
+  // Admin
+  {
+    path: '/admin',
+    element: <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'MALL_ADMIN', 'MALL_MODERATOR']} />,
+    children: [
+      {
+        element: wrap(<AdminLayout />, 'admin'),
+        children: [
+          { index: true, element: wrap(<AdminDashboard />, 'admin') },
+          { path: 'boutiques', element: wrap(<StoresManagement />, 'admin') },
+          { path: 'evenements', element: wrap(<EventsManagement />, 'admin') },
+          { path: 'calendrier-vie', element: wrap(<LifeCalendarManagement />, 'admin') },
+          { path: 'moderation', element: wrap(<ModerationPage />, 'admin') },
+          { path: 'facturation', element: wrap(<BillingManagement />, 'admin') },
+          { path: 'contenu', element: wrap(<ContentManagement />, 'admin') },
+          { path: 'newsletter', element: wrap(<NewsletterManagement />, 'admin') },
+          { path: 'messages', element: wrap(<ContactsManagement />, 'admin') },
+          { path: 'blog', element: wrap(<BlogManagement />, 'admin') },
+          { path: 'utilisateurs', element: wrap(<UsersManagement />, 'admin') },
+          { path: 'medias', element: wrap(<MediaManagement />, 'admin') },
+          { path: 'parametres', element: wrap(<SettingsPage />, 'admin') },
+        ],
+      },
+    ],
+  },
+
+  // Mon compte → Enseigne
+  { path: '/mon-compte', element: <Navigate to="/enseigne" replace /> },
+
+  // Enseigne (Store)
+  {
+    path: '/enseigne',
+    element: (
+      <ProtectedRoute
+        allowedRoles={['SUPER_ADMIN', 'MALL_ADMIN', 'STORE_ADMIN', 'STORE_EMPLOYEE']}
+      />
+    ),
+    children: [
+      {
+        element: wrap(<StoreLayout />, 'admin'),
+        children: [
+          { index: true, element: wrap(<StoreDashboard />, 'admin') },
+          { path: 'vitrine', element: wrap(<StoreShowcase />, 'admin') },
+          { path: 'publications', element: wrap(<StorePublications />, 'admin') },
+          { path: 'promotions', element: wrap(<StorePromotions />, 'admin') },
+          { path: 'analytics', element: wrap(<StoreAnalytics />, 'admin') },
+          { path: 'parametres', element: wrap(<StoreSettings />, 'admin') },
+        ],
+      },
+    ],
+  },
+
+  // Super Admin
+  {
+    path: '/superadmin',
+    element: <ProtectedRoute allowedRoles={['SUPER_ADMIN']} />,
+    children: [
+      {
+        element: wrap(<SuperAdminLayout />, 'admin'),
+        children: [
+          { index: true, element: wrap(<SuperAdminDashboard />, 'admin') },
+          { path: 'abonnements', element: wrap(<SubscriptionsManagement />, 'admin') },
+          { path: 'administrateurs', element: wrap(<AdminsManagement />, 'admin') },
+          { path: 'parametres', element: wrap(<SystemSettings />, 'admin') },
+          { path: 'logs', element: wrap(<AuditLogs />, 'admin') },
+        ],
+      },
+    ],
+  },
+
+  // 404
+  { path: '*', element: <NotFoundPage /> },
+]);
+
+const AppRouter: React.FC = () => <RouterProvider router={router} />;
+
+export default AppRouter;

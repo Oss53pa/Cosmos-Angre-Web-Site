@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.cosmos-angre.com/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/a-propos</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/a-propos"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/nos-espaces</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/nos-espaces"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/nos-espaces"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/nos-espaces"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/boutiques</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/boutiques"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/boutiques"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/boutiques"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/evenements</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/evenements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/evenements"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/evenements"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/services</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/services"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/blog</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/blog"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/contact</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/contact"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/services-premium</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/services-premium"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/services-premium"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/services-premium"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/plan-interactif</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/plan-interactif"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/plan-interactif"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/plan-interactif"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/gastronomie</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/gastronomie"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/gastronomie"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/gastronomie"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/loisirs</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/loisirs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/loisirs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/loisirs"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/hotel</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/hotel"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/hotel"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/hotel"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/retail-park</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/retail-park"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/retail-park"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/retail-park"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/preparer-visite</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/preparer-visite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/preparer-visite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/preparer-visite"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/fidelite</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/fidelite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/fidelite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/fidelite"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/navigation-ar</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/navigation-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/navigation-ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/navigation-ar"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/mentions-legales</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/mentions-legales"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/confidentialite</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/confidentialite"/>
+  </url>
+  <url>
+    <loc>https://www.cosmos-angre.com/cgu</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.cosmos-angre.com/cgu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cosmos-angre.com/en/cgu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cosmos-angre.com/cgu"/>
+  </url>
+</urlset>
