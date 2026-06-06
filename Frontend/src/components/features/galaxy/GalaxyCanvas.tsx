@@ -203,18 +203,19 @@ const GalaxyCanvas: React.FC<GalaxyCanvasProps> = ({
       ctx.fillRect(0, 0, w, h);
 
       ctx.globalCompositeOperation = 'lighter';
-      // Halo forêt LOCALISÉ autour du cœur (la teinte verte ne couvre plus tout l'écran)
+      // Halo forêt LOCALISÉ autour du cœur — son intensité suit coreIntensity
+      // (sections calmes → fond quasi noir minéral, l'or reste l'unique accent)
       const green = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.5);
-      green.addColorStop(0, `rgba(${night[0]}, ${night[1]}, ${night[2]}, 0.5)`);
-      green.addColorStop(0.55, `rgba(${night[0]}, ${night[1]}, ${night[2]}, 0.1)`);
+      green.addColorStop(0, `rgba(${night[0]}, ${night[1]}, ${night[2]}, ${0.5 * coreIntensity})`);
+      green.addColorStop(0.55, `rgba(${night[0]}, ${night[1]}, ${night[2]}, ${0.1 * coreIntensity})`);
       green.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = green;
       ctx.fillRect(0, 0, w, h);
 
-      // Nébuleuse dorée (additif)
+      // Nébuleuse dorée (additif) — son intensité suit coreIntensity
       const neb = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.6);
-      neb.addColorStop(0, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, 0.26)`);
-      neb.addColorStop(0.5, `rgba(${copper[0]}, ${copper[1]}, ${copper[2]}, 0.08)`);
+      neb.addColorStop(0, `rgba(${gold[0]}, ${gold[1]}, ${gold[2]}, ${0.26 * coreIntensity})`);
+      neb.addColorStop(0.5, `rgba(${copper[0]}, ${copper[1]}, ${copper[2]}, ${0.08 * coreIntensity})`);
       neb.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = neb;
       ctx.fillRect(0, 0, w, h);

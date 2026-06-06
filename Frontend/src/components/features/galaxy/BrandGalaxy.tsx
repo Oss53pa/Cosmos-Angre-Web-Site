@@ -65,7 +65,19 @@ const BrandGalaxy: React.FC = () => {
   const pausedRef = useRef(false);
   const angleRef = useRef(0);
   const rafRef = useRef(0);
+  const hoveredRef = useRef<number | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
+
+  const enter = (i: number) => {
+    pausedRef.current = true;
+    hoveredRef.current = i;
+    setHovered(i);
+  };
+  const leave = () => {
+    pausedRef.current = false;
+    hoveredRef.current = null;
+    setHovered(null);
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -113,6 +125,8 @@ const BrandGalaxy: React.FC = () => {
         if (line) {
           line.setAttribute('x2', x.toFixed(1));
           line.setAttribute('y2', y.toFixed(1));
+          // La connexion ne s'allume que pour la planète survolée (sinon : schéma)
+          line.setAttribute('stroke-opacity', hoveredRef.current === i ? '0.5' : '0');
         }
         // profondeur : les planètes « devant » (y>0) passent au-dessus
         node.style.zIndex = String(10 + Math.round((y / radius + 1) * 10));
@@ -127,7 +141,7 @@ const BrandGalaxy: React.FC = () => {
     };
 
     const tick = () => {
-      if (!pausedRef.current) angleRef.current += 0.18;
+      if (!pausedRef.current) angleRef.current += 0.12;
       place();
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -151,19 +165,29 @@ const BrandGalaxy: React.FC = () => {
       id="galaxie-enseignes"
       className="section bg-cosmos-night-deep relative overflow-hidden"
     >
-      {/* Fond galaxie discret (cœur centré) */}
-      <div className="absolute inset-0 opacity-70">
+      {/* Fond galaxie — noyau retenu, ambiance profonde */}
+      <div className="absolute inset-0 opacity-80">
         <GalaxyCanvas
           density="med"
           interactive={false}
-          speed={0.6}
-          opacity={0.8}
+          speed={0.5}
+          opacity={0.85}
           centerX={0.5}
           centerY={0.5}
+          coreIntensity={0.4}
+          coreScale={0.68}
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night-deep via-transparent to-cosmos-night-deep pointer-events-none" />
-      <GrainOverlay opacity={0.07} />
+      {/* Vignette : assombrit les bords, focalise sur les orbes */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(70% 65% at 50% 48%, transparent 35%, rgb(var(--cosmos-night-deep) / 0.78) 100%)',
+        }}
+      />
+      <GrainOverlay opacity={0.08} />
 
       <div className="container-cosmos relative z-10">
         {/* En-tête */}
@@ -187,7 +211,10 @@ const BrandGalaxy: React.FC = () => {
               key={i}
               ref={(el) => (orbitRef.current[i] = el)}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none"
-              style={{ border: '1px solid rgb(var(--cosmos-gold) / 0.28)' }}
+              style={{
+                border: '1px solid rgb(var(--cosmos-gold) / 0.22)',
+                boxShadow: '0 0 40px rgb(var(--cosmos-gold) / 0.05), inset 0 0 60px rgb(var(--cosmos-gold) / 0.03)',
+              }}
             />
           ))}
 
@@ -199,7 +226,7 @@ const BrandGalaxy: React.FC = () => {
           >
             <g
               ref={linesGroupRef}
-              style={{ stroke: 'rgb(var(--cosmos-gold))', strokeOpacity: 0.18, strokeWidth: 1 }}
+              style={{ stroke: 'rgb(var(--cosmos-gold-light))', strokeWidth: 1.5 }}
             >
               {PLANETS.map((p, i) => (
                 <line
@@ -217,10 +244,10 @@ const BrandGalaxy: React.FC = () => {
           {/* Cœur Cosmos */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 text-center pointer-events-none w-60">
             <div
-              className="absolute -inset-14 rounded-full"
+              className="absolute -inset-8 rounded-full"
               style={{
                 background:
-                  'radial-gradient(circle, rgb(var(--cosmos-gold) / 0.22), transparent 70%)',
+                  'radial-gradient(circle, rgb(var(--cosmos-gold) / 0.12), transparent 72%)',
               }}
             />
             <div className="relative">
@@ -250,9 +277,8 @@ const BrandGalaxy: React.FC = () => {
             </div>
           </div>
 
-          {/* Planètes */}
+          {/* Planètes (points lumineux nommés — carte de constellation) */}
           {PLANETS.map((p, i) => {
-            const Icon = p.icon;
             const active = hovered === i;
             return (
               <div
@@ -263,50 +289,51 @@ const BrandGalaxy: React.FC = () => {
               >
                 <Link
                   to={p.path}
-                  onMouseEnter={() => {
-                    pausedRef.current = true;
-                    setHovered(i);
-                  }}
-                  onMouseLeave={() => {
-                    pausedRef.current = false;
-                    setHovered(null);
-                  }}
-                  onFocus={() => {
-                    pausedRef.current = true;
-                    setHovered(i);
-                  }}
-                  onBlur={() => {
-                    pausedRef.current = false;
-                    setHovered(null);
-                  }}
-                  className="group flex flex-col items-center gap-2 outline-none"
+                  onMouseEnter={() => enter(i)}
+                  onMouseLeave={leave}
+                  onFocus={() => enter(i)}
+                  onBlur={leave}
+                  className="group flex flex-col items-center gap-2.5 outline-none"
                   style={{
                     transform: 'scale(var(--depth, 1))',
-                    transition: 'transform 0.4s var(--ease-premium, ease)',
+                    transition: 'transform 0.5s var(--ease-premium, ease)',
                   }}
                   aria-label={`${p.label}. ${p.desc}`}
                 >
-                  <span
-                    className={`relative flex items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                      active
-                        ? 'w-24 h-24 border-cosmos-gold bg-cosmos-gold/20 shadow-gold-glow'
-                        : 'w-[76px] h-[76px] border-cosmos-gold/40 bg-cosmos-night/70 backdrop-blur-md group-hover:border-cosmos-gold/70 group-hover:bg-cosmos-night/80'
-                    }`}
-                  >
-                    <Icon
-                      className={`transition-colors duration-300 ${
-                        active ? 'text-cosmos-gold-light' : 'text-cosmos-cream group-hover:text-cosmos-gold'
-                      }`}
-                      style={{ width: active ? 34 : 30, height: active ? 34 : 30 }}
-                      strokeWidth={1.5}
+                  {/* Étoile lumineuse */}
+                  <span className="relative flex items-center justify-center" style={{ width: 24, height: 24 }}>
+                    <span
+                      className="absolute rounded-full transition-all duration-500"
+                      style={{
+                        width: active ? 48 : 24,
+                        height: active ? 48 : 24,
+                        background:
+                          'radial-gradient(circle, rgb(var(--cosmos-gold-light) / 0.5), transparent 70%)',
+                        opacity: active ? 1 : 0.65,
+                      }}
+                    />
+                    <span
+                      className="relative rounded-full transition-all duration-500"
+                      style={{
+                        width: active ? 12 : 7,
+                        height: active ? 12 : 7,
+                        background: active
+                          ? 'rgb(var(--cosmos-gold-bright))'
+                          : 'rgb(var(--cosmos-gold-light))',
+                        boxShadow: active
+                          ? '0 0 20px rgb(var(--cosmos-gold) / 0.9), 0 0 5px rgb(var(--cosmos-cream))'
+                          : '0 0 10px rgb(var(--cosmos-gold) / 0.6)',
+                      }}
                     />
                   </span>
+                  {/* Nom de l'univers */}
                   <span
-                    className={`whitespace-nowrap rounded-full px-3 py-1 text-[13px] md:text-sm font-inter font-medium uppercase tracking-[0.1em] transition-all duration-300 backdrop-blur-sm ${
+                    className={`whitespace-nowrap font-inter uppercase transition-all duration-300 ${
                       active
-                        ? 'text-cosmos-night bg-cosmos-gold'
-                        : 'text-cosmos-cream bg-cosmos-night/55 group-hover:bg-cosmos-night/75'
+                        ? 'text-cosmos-gold-light text-xs md:text-[13px] tracking-[0.32em]'
+                        : 'text-cosmos-cream/80 text-[11px] md:text-xs tracking-[0.26em] group-hover:text-cosmos-cream'
                     }`}
+                    style={{ textShadow: '0 1px 12px rgba(0,0,0,0.9)' }}
                   >
                     {p.short}
                   </span>

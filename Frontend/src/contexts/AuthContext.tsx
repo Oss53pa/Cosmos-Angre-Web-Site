@@ -15,6 +15,17 @@ import type { Profile, UserRole } from '../types/database';
 // ============================================================
 const DEV_BYPASS_KEY = 'cosmos_dev_admin';
 
+// ============================================================
+// ⚠️ LIBRE ACCÈS TEMPORAIRE (pré-lancement)
+// ------------------------------------------------------------
+// Quand `true`, un profil SUPER_ADMIN factice est injecté sans connexion :
+// tous les espaces (admin, enseigne, superadmin) sont accessibles librement,
+// en DEV **et** en PROD. Aucun mot de passe requis.
+//
+// 🔒 À REPASSER À `false` AVANT LA VRAIE MISE EN LIGNE.
+// ============================================================
+const OPEN_ACCESS = true;
+
 const isDevBypassActive = (): boolean => {
   if (!import.meta.env.DEV) return false;
   if (typeof window === 'undefined') return false;
@@ -121,9 +132,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // === DEV BYPASS ===
     // Si actif (dev local + flag localStorage), on injecte un profil SUPER_ADMIN
     // factice et on n'écoute PAS Supabase Auth. Bloc compilé hors prod.
-    if (isDevBypassActive()) {
+    if (OPEN_ACCESS || isDevBypassActive()) {
       console.warn(
-        '[Cosmos] DEV BYPASS ACTIF — connecté en SUPER_ADMIN factice. Pour désactiver, exécute dans la console : localStorage.removeItem("cosmos_dev_admin")'
+        '[Cosmos] LIBRE ACCÈS ACTIF — connecté en SUPER_ADMIN factice, sans login. Pour le désactiver : OPEN_ACCESS = false dans AuthContext.tsx.'
       );
       setState({
         session: DEV_SESSION,
