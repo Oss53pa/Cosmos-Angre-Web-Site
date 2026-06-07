@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../supabase';
 
 /**
@@ -33,6 +34,10 @@ export const useContent = () => useContext(SiteContentContext);
 export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { i18n } = useTranslation();
+  // Les surcharges CMS s'appliquent en français (langue par défaut). En anglais,
+  // on garde les traductions i18n (fallback) pour ne pas casser la localisation.
+  const isFr = !(i18n.language || 'fr').toLowerCase().startsWith('en');
   const [map, setMap] = useState<ContentMap>({});
   const [ready, setReady] = useState(false);
 
@@ -69,8 +74,8 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [load]);
 
   const c = useCallback(
-    (key: string, fallback = '') => map[key] ?? fallback,
-    [map]
+    (key: string, fallback = '') => (isFr ? map[key] ?? fallback : fallback),
+    [map, isFr]
   );
 
   return (

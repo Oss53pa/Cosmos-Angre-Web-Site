@@ -8,11 +8,15 @@ import sushiJapanese from '../../assets/images/branding/sushi-japanese.jpg';
 import italianRestaurant from '../../assets/images/branding/italian-restaurant.jpg';
 import fineDiningFood from '../../assets/images/branding/fine-dining-food.jpg';
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 
 const GastronomiePage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const restaurants = [
     { id: 1, name: 'Le Cosmos', cuisineKey: 'leCosmos', price: 3, rating: 4.8, terrace: true, image: luxuryRestaurant },
@@ -32,35 +36,29 @@ const GastronomiePage: React.FC = () => {
           { name: 'Restaurants & Cafés', url: '/gastronomie' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage
-            src={fineDiningFood}
-            alt="Restaurants & cafés Cosmos Angré"
-            containerClassName="w-full h-full"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/50 to-cosmos-night/85" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('gastronomy.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('gastronomy.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('gastronomy.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+
+      <PageHero
+        image={c('gastronomy.hero.image') || fineDiningFood}
+        alt="Restaurants & cafés Cosmos Angré"
+        overline={c('gastronomy.hero.overline', t('gastronomy.hero.overline'))}
+        title={c('gastronomy.hero.title', t('gastronomy.hero.title'))}
+        subtitle={c('gastronomy.hero.subtitle', t('gastronomy.hero.subtitle'))}
+      />
 
       {/* Restaurants */}
       <section id="reservation" className="section bg-cosmos-warm scroll-mt-24">
         <div className="container-cosmos">
-          <div className="text-center mb-16">
-            <span className="overline mb-4 block">{t('gastronomy.restaurants.overline')}</span>
-            <h2 className="section-title">{t('gastronomy.restaurants.title')}</h2>
-          </div>
+          <Reveal className="text-center mb-16">
+            <span className="overline mb-4 block">
+              {c('gastronomy.restaurants.overline', t('gastronomy.restaurants.overline'))}
+            </span>
+            <h2 className="section-title">
+              {c('gastronomy.restaurants.title', t('gastronomy.restaurants.title'))}
+            </h2>
+          </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-            {restaurants.map((r) => (
-              <div key={r.id} className="card group">
+            {restaurants.map((r, index) => (
+              <Reveal key={r.id} delay={index * 90} className="card group h-full">
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <OptimizedImage
                     src={r.image}
@@ -86,27 +84,38 @@ const GastronomiePage: React.FC = () => {
                     {t(`gastronomy.restaurants.${r.cuisineKey}.desc`)}
                   </p>
                   <div className="flex items-center justify-between">
-                    {r.terrace && <span className="text-[10px] uppercase tracking-[0.1em] text-text-secondary font-inter">{t('gastronomy.restaurants.terraceAvailable')}</span>}
+                    {r.terrace && (
+                      <span className="text-[10px] uppercase tracking-[0.1em] text-text-secondary font-inter">
+                        {t('gastronomy.restaurants.terraceAvailable')}
+                      </span>
+                    )}
                     <button className="btn-secondary text-xs px-4 py-2">{t('common.reserve')}</button>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Food Court */}
-      <section id="food-court" className="section bg-cosmos-night scroll-mt-24">
+      <section id="food-court" className="section-dark scroll-mt-24">
         <div className="container-cosmos text-center">
-          <span className="overline mb-4 block">{t('gastronomy.foodCourt.overline')}</span>
-          <h2 className="section-title-light mb-4">{t('gastronomy.foodCourt.title')}</h2>
-          <p className="section-subtitle-light max-w-2xl mx-auto">
-            {t('gastronomy.foodCourt.description')}
-          </p>
-          <Link to="/preparer-visite" className="btn-primary mt-4">
-            {t('gastronomy.foodCourt.viewPlan')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-          </Link>
+          <Reveal>
+            <span className="overline mb-4 block">
+              {c('gastronomy.foodCourt.overline', t('gastronomy.foodCourt.overline'))}
+            </span>
+            <h2 className="section-title-light mb-4">
+              {c('gastronomy.foodCourt.title', t('gastronomy.foodCourt.title'))}
+            </h2>
+            <p className="section-subtitle-light max-w-2xl mx-auto">
+              {c('gastronomy.foodCourt.description', t('gastronomy.foodCourt.description'))}
+            </p>
+            <Link to="/preparer-visite" className="btn-primary mt-4">
+              {c('gastronomy.foodCourt.viewPlan', t('gastronomy.foodCourt.viewPlan'))}{' '}
+              <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </div>
