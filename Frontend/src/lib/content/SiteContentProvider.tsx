@@ -13,18 +13,30 @@ import { supabase } from '../supabase';
  * Charge une fois toutes les paires clé→valeur de cosmos.site_content et
  * expose `c(key, fallback)`. Si la base est vide / injoignable, on retombe
  * sur le texte par défaut passé en fallback (le site reste toujours affichable).
+ *
+ * Deux conventions de clés cohabitent dans la même table :
+ *  - clés « plates »     : ex. `home.hero.title` (gérées via /admin/contenu-site)
+ *  - clés « composites » : ex. `pro-devenir-enseigne.hero.overline`
+ *    (page.section.field, gérées via /admin/contenu — éditeur structuré)
+ *
+ * `getByPage(pageValue, fieldKey, fallback)` résout une valeur pour une page
+ * donnée, qu'elle soit stockée en `page.field` ou `page.section.field`.
  */
 
 type ContentMap = Record<string, string>;
 
 interface SiteContentCtx {
   c: (key: string, fallback?: string) => string;
+  getByPage: (pageValue: string, fieldKey: string, fallback?: string) => string;
+  map: ContentMap;
   ready: boolean;
   reload: () => void;
 }
 
 const SiteContentContext = createContext<SiteContentCtx>({
   c: (_key, fallback = '') => fallback,
+  getByPage: (_p, _k, fallback = '') => fallback,
+  map: {},
   ready: false,
   reload: () => {},
 });
@@ -78,8 +90,28 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
     [map, isFr]
   );
 
+  const getByPage = useCallback(
+    (pageValue: string, fieldKey: string, fallback = '') => {
+      if (!isFr) return fallback;
+      // 1) clé plate page.field
+      const direct = map[`${pageValue}.${fieldKey}`];
+      if (direct != null && direct !== '') return direct;
+      // 2) clé composite page.section.field (on prend la première qui matche)
+      const prefix = `${pageValue}.`;
+      const suffix = `.${fieldKey}`;
+      for (const k of Object.keys(map)) {
+        if (k.startsWith(prefix) && k.endsWith(suffix)) {
+          const v = map[k];
+          if (v != null && v !== '') return v;
+        }
+      }
+      return fallback;
+    },
+    [map, isFr]
+  );
+
   return (
-    <SiteContentContext.Provider value={{ c, ready, reload: load }}>
+    <SiteContentContext.Provider value={{ c, getByPage, map, ready, reload: load }}>
       {children}
     </SiteContentContext.Provider>
   );

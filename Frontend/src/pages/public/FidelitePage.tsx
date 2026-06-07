@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Star, Crown, Award, Gift, ArrowRight, Percent, Calendar, Car } from 'lucide-react';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
 import { useContent } from '../../lib/content/SiteContentProvider';
+import { supabase } from '../../lib/supabase';
+
+interface TierView {
+  name: string;
+  icon: React.ElementType;
+  price: string;
+  featured?: boolean;
+  benefits: string[];
+}
+
+interface ClubTierRow {
+  name: string;
+  price: string | null;
+  tagline: string | null;
+  benefits: string[] | null;
+  is_featured: boolean | null;
+  is_published: boolean | null;
+  sort: number | null;
+  level: number | null;
+}
+
+// Icône attribuée par rang (les niveaux supérieurs prennent les plus prestigieuses)
+const TIER_ICONS = [Star, Crown, Award];
 
 const FidelitePage: React.FC = () => {
   const { t } = useTranslation();
   const { c } = useContent();
   const navigate = useNavigate();
 
-  const tiers = [
+  // Valeurs par défaut (i18n) — utilisées tant que la base n'a pas répondu.
+  const fallbackTiers: TierView[] = [
     {
       name: t('fidelity.tiers.silver.name'),
       icon: Star,
@@ -32,6 +56,49 @@ const FidelitePage: React.FC = () => {
       benefits: t('fidelity.tiers.platinum.benefits', { returnObjects: true }) as string[],
     },
   ];
+
+  const [tiers, setTiers] = useState<TierView[]>(fallbackTiers);
+
+  // Source de vérité : cosmos.club_tiers (gérée par /admin/cosmos-club).
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const { data, error } = await (
+          supabase as unknown as {
+            from: (t: string) => {
+              select: (c: string) => {
+                order: (
+                  col: string,
+                  o: { ascending: boolean }
+                ) => Promise<{ data: ClubTierRow[] | null; error: unknown }>;
+              };
+            };
+          }
+        )
+          .from('club_tiers')
+          .select('name,price,tagline,benefits,is_featured,is_published,sort,level')
+          .order('sort', { ascending: true });
+
+        if (!active || error || !data) return;
+        const published = data.filter((r) => r.is_published !== false);
+        if (published.length === 0) return; // garde le fallback i18n
+        const mapped: TierView[] = published.map((r, i) => ({
+          name: r.name,
+          price: r.price || r.tagline || '',
+          featured: !!r.is_featured,
+          benefits: Array.isArray(r.benefits) ? r.benefits : [],
+          icon: TIER_ICONS[Math.min(i, TIER_ICONS.length - 1)],
+        }));
+        setTiers(mapped);
+      } catch {
+        // garde le fallback
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="bg-cosmos-warm">
@@ -63,7 +130,11 @@ const FidelitePage: React.FC = () => {
             <span className="overline mb-4 block">{t('fidelity.tiers.overline')}</span>
             <h2 className="section-title">{t('fidelity.tiers.title')}</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${
+              tiers.length >= 4 ? 'lg:grid-cols-4' : 'md:grid-cols-3'
+            }`}
+          >
             {tiers.map((tier, index) => (
               <div
                 key={index}

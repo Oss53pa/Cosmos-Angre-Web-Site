@@ -36,8 +36,11 @@ import {
   Megaphone,
   TrendingUp,
   Newspaper,
+  Upload,
 } from 'lucide-react';
 import PageEditor from '../../components/admin/PageEditor';
+import { supabase } from '../../lib/supabase';
+import { useContent } from '../../lib/content/SiteContentProvider';
 
 // ========================================
 // Types
@@ -2018,8 +2021,44 @@ function savePageContent(pageValue: string, data: Record<string, string>) {
   localStorage.setItem(CONTENT_STORAGE_PREFIX + pageValue, JSON.stringify(data));
 }
 
+// ----------------------------------------------------------------------------
+// Persistance Supabase (cosmos.site_content)
+// Clé composite stable : `<page>.<section>.<field>`. Lue côté public par
+// SiteContentProvider / useEditableContent. localStorage reste un cache offline.
+// ----------------------------------------------------------------------------
+interface ContentRow {
+  key: string;
+  value: string;
+  type: string;
+  group_label: string;
+  label: string;
+}
+
+async function upsertContentRows(rows: ContentRow[]): Promise<boolean> {
+  if (rows.length === 0) return true;
+  try {
+    const { error } = await (
+      supabase as unknown as {
+        from: (t: string) => {
+          upsert: (
+            values: ContentRow[],
+            opts: { onConflict: string }
+          ) => Promise<{ error: unknown }>;
+        };
+      }
+    )
+      .from('site_content')
+      .upsert(rows, { onConflict: 'key' });
+    return !error;
+  } catch {
+    // silencieux — la valeur reste dans localStorage
+    return false;
+  }
+}
+
 const ContentManagement: React.FC = () => {
   const { t } = useTranslation();
+  const { reload: reloadContent } = useContent();
   const [pageDefinitions] = useState<PageDefinition[]>(createPageDefinitions);
   const [selectedPageValue, setSelectedPageValue] = useState('homepage');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -2146,17 +2185,53 @@ const ContentManagement: React.FC = () => {
     [editedFields, pageDefinitions]
   );
 
-  const handleSave = () => {
-    // Save all pages to localStorage
+  // Construit les lignes Supabase à partir des champs édités (clé composite).
+  const buildRows = useCallback(
+    (filter?: { pageValue?: string; sectionId?: string }): ContentRow[] => {
+      const rows: ContentRow[] = [];
+      pageDefinitions.forEach((page) => {
+        if (filter?.pageValue && page.value !== filter.pageValue) return;
+        page.sections.forEach((section) => {
+          if (filter?.sectionId && section.id !== filter.sectionId) return;
+          section.fields.forEach((field) => {
+            const key = `${page.value}.${section.id}.${field.key}`;
+            if (key in editedFields) {
+              rows.push({
+                key,
+                value: editedFields[key] ?? '',
+                type: field.type,
+                group_label: `${page.label} — ${section.name}`,
+                label: field.label,
+              });
+            }
+          });
+        });
+      });
+      return rows;
+    },
+    [editedFields, pageDefinitions]
+  );
+
+  const handleSave = async () => {
+    // 1) localStorage (cache offline, feedback instantané)
     pageDefinitions.forEach((page) => {
       persistPageToStorage(page.value);
     });
-    // Mark all current edited fields as saved
     setSavedFields({ ...editedFields });
-    showSuccessBanner(t('admin.content.savedSuccess', 'Modifications enregistrees avec succes'));
+    // 2) Supabase (source de vérité lue par le site public)
+    const ok = await upsertContentRows(buildRows());
+    reloadContent();
+    showSuccessBanner(
+      ok
+        ? t('admin.content.savedSuccess', 'Modifications enregistrees avec succes')
+        : t(
+            'admin.content.savedLocalOnly',
+            'Enregistre localement (base injoignable, reessayez plus tard)'
+          )
+    );
   };
 
-  const handleSectionSave = (section: ContentSection) => {
+  const handleSectionSave = async (section: ContentSection) => {
     // Persist the current page to localStorage
     const pageData: Record<string, string> = {};
     const page = pageDefinitions.find((p) => p.value === selectedPageValue);
@@ -2186,8 +2261,20 @@ const ContentManagement: React.FC = () => {
     });
     setSavedFields(updatedSaved);
 
+    // Supabase : on pousse uniquement les champs de cette section.
+    const ok = await upsertContentRows(
+      buildRows({ pageValue: selectedPageValue, sectionId: section.id })
+    );
+    reloadContent();
+
     showSuccessBanner(
-      t('admin.content.sectionSaved', 'Section "{{name}}" enregistree', { name: section.name })
+      ok
+        ? t('admin.content.sectionSaved', 'Section "{{name}}" enregistree', { name: section.name })
+        : t(
+            'admin.content.sectionSavedLocal',
+            'Section "{{name}}" enregistree localement (base injoignable)',
+            { name: section.name }
+          )
     );
   };
 
