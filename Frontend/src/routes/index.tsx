@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Navigate, type RouteObject } from 
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import { ErrorBoundary } from '../components/common/ErrorBoundary';
 import LanguageGate from '../lib/i18n/LanguageGate';
+import PageVisibilityGate from '../components/common/PageVisibilityGate';
 
 // Layouts (chargés tout de suite — partagés)
 import PublicLayout from '../layouts/PublicLayout';
@@ -38,6 +39,7 @@ const HotelPage = lazy(() => import('../pages/public/HotelPage'));
 const RetailParkPage = lazy(() => import('../pages/public/RetailParkPage'));
 const PreparerVisitePage = lazy(() => import('../pages/public/PreparerVisitePage'));
 const FidelitePage = lazy(() => import('../pages/public/FidelitePage'));
+const CustomPage = lazy(() => import('../pages/public/CustomPage'));
 const MentionsLegalesPage = lazy(() => import('../pages/public/MentionsLegalesPage'));
 const ConfidentialitePage = lazy(() => import('../pages/public/ConfidentialitePage'));
 const CGUPage = lazy(() => import('../pages/public/CGUPage'));
@@ -73,6 +75,7 @@ const MediaManagement = lazy(() => import('../pages/admin/MediaManagement'));
 const SiteContentManagement = lazy(() => import('../pages/admin/SiteContentManagement'));
 const ClubManagement = lazy(() => import('../pages/admin/ClubManagement'));
 const WayfindingManagement = lazy(() => import('../pages/admin/WayfindingManagement'));
+const PagesManagement = lazy(() => import('../pages/admin/PagesManagement'));
 
 // Store Pages
 const StoreDashboard = lazy(() => import('../pages/store/StoreDashboard'));
@@ -109,30 +112,35 @@ const wrap = (node: React.ReactNode, scope: 'public' | 'admin' = 'public') => (
   </ErrorBoundary>
 );
 
+// Enveloppe une page publique avec le contrôle de visibilité (admin show/hide).
+const gate = (path: string, node: React.ReactNode) => (
+  <PageVisibilityGate path={path}>{node}</PageVisibilityGate>
+);
+
 const isDev = import.meta.env.DEV;
 
 // Routes publiques (FR), réutilisées telles quelles pour /en/* via alias.
 const publicChildren: RouteObject[] = [
   { index: true, element: <HomePage /> },
-  { path: 'a-propos', element: wrap(<AboutPage />) },
+  { path: 'a-propos', element: gate('/a-propos', wrap(<AboutPage />)) },
   { path: 'nos-espaces', element: wrap(<SpacesPage />) },
-  { path: 'boutiques', element: wrap(<StoresPage />) },
+  { path: 'boutiques', element: gate('/boutiques', wrap(<StoresPage />)) },
   { path: 'boutiques/:id', element: wrap(<StoreDetailPage />) },
-  { path: 'evenements', element: wrap(<EventsPage />) },
+  { path: 'evenements', element: gate('/evenements', wrap(<EventsPage />)) },
   { path: 'evenements/:id', element: wrap(<EventDetailPage />) },
-  { path: 'services', element: wrap(<ServicesPage />) },
-  { path: 'blog', element: wrap(<BlogPage />) },
+  { path: 'services', element: gate('/services', wrap(<ServicesPage />)) },
+  { path: 'blog', element: gate('/blog', wrap(<BlogPage />)) },
   { path: 'blog/:slug', element: wrap(<BlogPostPage />) },
-  { path: 'contact', element: wrap(<ContactPage />) },
+  { path: 'contact', element: gate('/contact', wrap(<ContactPage />)) },
   { path: 'navigation-ar', element: wrap(<ARNavigationPage />) },
   { path: 'services-premium', element: wrap(<PremiumServicesPage />) },
   { path: 'plan-interactif', element: wrap(<InteractiveMapPage />) },
-  { path: 'gastronomie', element: wrap(<GastronomiePage />) },
-  { path: 'loisirs', element: wrap(<LoisirsPage />) },
-  { path: 'hotel', element: wrap(<HotelPage />) },
+  { path: 'gastronomie', element: gate('/gastronomie', wrap(<GastronomiePage />)) },
+  { path: 'loisirs', element: gate('/loisirs', wrap(<LoisirsPage />)) },
+  { path: 'hotel', element: gate('/hotel', wrap(<HotelPage />)) },
   { path: 'retail-park', element: wrap(<RetailParkPage />) },
-  { path: 'preparer-visite', element: wrap(<PreparerVisitePage />) },
-  { path: 'fidelite', element: wrap(<FidelitePage />) },
+  { path: 'preparer-visite', element: gate('/preparer-visite', wrap(<PreparerVisitePage />)) },
+  { path: 'fidelite', element: gate('/fidelite', wrap(<FidelitePage />)) },
   { path: 'mentions-legales', element: wrap(<MentionsLegalesPage />) },
   { path: 'confidentialite', element: wrap(<ConfidentialitePage />) },
   { path: 'cgu', element: wrap(<CGUPage />) },
@@ -146,6 +154,9 @@ const publicChildren: RouteObject[] = [
         { path: 'redux-demo', element: wrap(<ReduxDemo />) },
       ]
     : []),
+  // Pages personnalisées créées via l'admin (slug à un segment). Doit rester en
+  // dernier : les routes statiques ci-dessus ont priorité.
+  { path: ':customSlug', element: wrap(<CustomPage />) },
 ];
 
 const router = createBrowserRouter([
@@ -208,6 +219,7 @@ const router = createBrowserRouter([
           { path: 'contenu-site', element: wrap(<SiteContentManagement />, 'admin') },
           { path: 'cosmos-club', element: wrap(<ClubManagement />, 'admin') },
           { path: 'wayfinding', element: wrap(<WayfindingManagement />, 'admin') },
+          { path: 'pages', element: wrap(<PagesManagement />, 'admin') },
           { path: 'newsletter', element: wrap(<NewsletterManagement />, 'admin') },
           { path: 'messages', element: wrap(<ContactsManagement />, 'admin') },
           { path: 'blog', element: wrap(<BlogManagement />, 'admin') },

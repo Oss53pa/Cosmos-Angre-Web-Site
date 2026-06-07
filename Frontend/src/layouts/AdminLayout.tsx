@@ -23,6 +23,8 @@ import {
   MessageSquare,
   Pencil,
   Crown,
+  MapPin,
+  Files,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -80,6 +82,7 @@ const AdminLayout: React.FC = () => {
     { icon: Users, label: t('admin.sidebar.users', 'Utilisateurs'), path: '/admin/utilisateurs' },
     { icon: Image, label: t('admin.sidebar.media', 'Medias'), path: '/admin/medias' },
     { icon: MapPin, label: t('admin.sidebar.wayfinding', 'Plan / Wayfinding'), path: '/admin/wayfinding' },
+    { icon: Files, label: t('admin.sidebar.pages', 'Pages du site'), path: '/admin/pages' },
     { icon: Settings, label: t('admin.sidebar.settings', 'Parametres'), path: '/admin/parametres' },
   ];
 

@@ -25,10 +25,25 @@ import { supabase } from '../supabase';
 
 type ContentMap = Record<string, string>;
 
+export interface SitePage {
+  key: string;
+  label: string;
+  path: string;
+  nav_group: string;
+  is_visible: boolean;
+  is_custom: boolean;
+  body: string | null;
+  seo_description: string | null;
+  sort: number;
+}
+
 interface SiteContentCtx {
   c: (key: string, fallback?: string) => string;
   getByPage: (pageValue: string, fieldKey: string, fallback?: string) => string;
   map: ContentMap;
+  pages: SitePage[];
+  /** true si la page (par path) est visible OU inconnue (par défaut visible). */
+  isPathVisible: (path: string) => boolean;
   ready: boolean;
   reload: () => void;
 }
@@ -37,6 +52,8 @@ const SiteContentContext = createContext<SiteContentCtx>({
   c: (_key, fallback = '') => fallback,
   getByPage: (_p, _k, fallback = '') => fallback,
   map: {},
+  pages: [],
+  isPathVisible: () => true,
   ready: false,
   reload: () => {},
 });
@@ -51,34 +68,42 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   // on garde les traductions i18n (fallback) pour ne pas casser la localisation.
   const isFr = !(i18n.language || 'fr').toLowerCase().startsWith('en');
   const [map, setMap] = useState<ContentMap>({});
+  const [pages, setPages] = useState<SitePage[]>([]);
   const [ready, setReady] = useState(false);
 
   const load = useCallback(async () => {
+    const anyDb = supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => Promise<{ data: unknown[] | null; error: unknown }>;
+      };
+    };
     try {
-      // site_content vit dans le schéma cosmos (hors typage Database public)
-      const { data, error } = await (supabase as unknown as {
-        from: (t: string) => {
-          select: (c: string) => Promise<{
-            data: { key: string; value: string | null }[] | null;
-            error: unknown;
-          }>;
-        };
-      })
-        .from('site_content')
-        .select('key,value');
-
+      const { data, error } = await anyDb.from('site_content').select('key,value');
       if (!error && data) {
         const next: ContentMap = {};
-        for (const row of data) {
+        for (const row of data as { key: string; value: string | null }[]) {
           if (row.value != null && row.value !== '') next[row.key] = row.value;
         }
         setMap(next);
       }
     } catch {
       // silencieux — on garde les valeurs par défaut
-    } finally {
-      setReady(true);
     }
+    try {
+      const { data, error } = await anyDb
+        .from('site_pages')
+        .select('key,label,path,nav_group,is_visible,is_custom,body,seo_description,sort');
+      if (!error && data) {
+        setPages(
+          (data as SitePage[])
+            .slice()
+            .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0))
+        );
+      }
+    } catch {
+      // silencieux — site_pages optionnelle
+    }
+    setReady(true);
   }, []);
 
   useEffect(() => {
@@ -110,8 +135,19 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
     [map, isFr]
   );
 
+  const isPathVisible = useCallback(
+    (path: string) => {
+      const p = pages.find((x) => x.path === path);
+      // Page inconnue de la table => visible par défaut (ne casse rien).
+      return p ? p.is_visible : true;
+    },
+    [pages]
+  );
+
   return (
-    <SiteContentContext.Provider value={{ c, getByPage, map, ready, reload: load }}>
+    <SiteContentContext.Provider
+      value={{ c, getByPage, map, pages, isPathVisible, ready, reload: load }}
+    >
       {children}
     </SiteContentContext.Provider>
   );

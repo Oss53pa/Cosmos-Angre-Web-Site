@@ -4,6 +4,7 @@ import { Menu, X, Search, User, Globe, LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useMedia } from '../../hooks/useMedia';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import CosmosLogo from '../ui/CosmosLogo';
 
 const Header: React.FC = () => {
@@ -32,7 +33,9 @@ const Header: React.FC = () => {
     setIsSearchOpen(false);
   }, [location.pathname]);
 
-  const navigationLinks = [
+  const { pages, isPathVisible } = useContent();
+
+  const baseNavLinks = [
     { label: t('nav.enseignes', 'Les Enseignes'), path: '/boutiques' },
     { label: t('nav.restaurants', 'Restaurants & Cafés'), path: '/gastronomie' },
     { label: t('nav.leisure'), path: '/loisirs' },
@@ -40,6 +43,16 @@ const Header: React.FC = () => {
     { label: t('nav.club', 'Cosmos Club'), path: '/fidelite' },
     { label: t('nav.infosPratiques', 'Infos pratiques'), path: '/preparer-visite' },
   ];
+
+  // Pages personnalisées visibles à placer dans la nav principale
+  const customPrimary = pages
+    .filter((p) => p.is_custom && p.is_visible && p.nav_group === 'primary')
+    .map((p) => ({ label: p.label, path: p.path }));
+
+  // Masque les pages désactivées depuis l'admin (visibilité par path)
+  const navigationLinks = [...baseNavLinks, ...customPrimary].filter((l) =>
+    isPathVisible(l.path)
+  );
 
   const handleLanguageToggle = () => {
     const newLang = i18n.language === 'fr' ? 'en' : 'fr';
@@ -239,27 +252,46 @@ const Header: React.FC = () => {
 
             {/* Secondary Links */}
             <div className="flex flex-col items-center gap-4">
-              <Link
-                to="/a-propos"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
-              >
-                {t('nav.about')}
-              </Link>
-              <Link
-                to="/blog"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
-              >
-                {t('nav.journal')}
-              </Link>
-              <Link
-                to="/contact"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
-              >
-                {t('nav.contact')}
-              </Link>
+              {isPathVisible('/a-propos') && (
+                <Link
+                  to="/a-propos"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
+                >
+                  {t('nav.about')}
+                </Link>
+              )}
+              {isPathVisible('/blog') && (
+                <Link
+                  to="/blog"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
+                >
+                  {t('nav.journal')}
+                </Link>
+              )}
+              {isPathVisible('/contact') && (
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
+                >
+                  {t('nav.contact')}
+                </Link>
+              )}
+              {/* Pages personnalisées (groupe secondaire) */}
+              {pages
+                .filter((p) => p.is_custom && p.is_visible && p.nav_group === 'secondary')
+                .map((p) => (
+                  <Link
+                    key={p.key}
+                    to={p.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-xs uppercase tracking-[0.2em] font-inter font-light text-cosmos-cream/60 hover:text-cosmos-gold transition-colors"
+                  >
+                    {p.label}
+                  </Link>
+                ))}
             </div>
 
             {/* Bottom: Language + Account */}
