@@ -4,10 +4,9 @@
   "installCommand": "cd Frontend && npm install",
   "buildCommand": "cd Frontend && npm run build",
   "outputDirectory": "Frontend/dist",
-  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/((?!api/.*|.*\\..*).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|assets/|.*\\.).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
