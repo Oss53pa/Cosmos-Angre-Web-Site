@@ -36,22 +36,22 @@ const PageHero: React.FC<PageHeroProps> = ({
         <img src={image} alt={alt} className="w-full h-full object-cover" loading="eager" decoding="async" />
       </div>
 
-      {/* Voiles premium */}
+      {/* Voiles premium — lisibilité renforcée du titre sur fond clair */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'linear-gradient(180deg, rgb(var(--cosmos-night-deep) / 0.55) 0%, rgb(var(--cosmos-night-deep) / 0.3) 42%, rgb(var(--cosmos-night-deep) / 0.85) 100%)',
+            'linear-gradient(180deg, rgb(var(--cosmos-night-deep) / 0.62) 0%, rgb(var(--cosmos-night-deep) / 0.5) 50%, rgb(var(--cosmos-night-deep) / 0.92) 100%)',
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(120% 90% at 50% 50%, transparent 45%, rgb(var(--cosmos-night-deep) / 0.55) 100%)',
+            'radial-gradient(110% 80% at 50% 45%, rgb(var(--cosmos-night-deep) / 0.15) 0%, transparent 38%, rgb(var(--cosmos-night-deep) / 0.6) 100%)',
         }}
       />
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-b from-transparent to-cosmos-warm pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-cosmos-warm/40 to-cosmos-warm pointer-events-none" />
 
       {/* Contenu */}
       <div

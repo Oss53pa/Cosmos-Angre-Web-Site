@@ -163,55 +163,54 @@ const StoresPage: React.FC = () => {
         titleAccent={c('stores.hero.accent', 'réunies.')}
         subtitle={c(
           'stores.hero.subtitle',
-          `${brands.length} enseignes signées — mode, beauté, restaurants, high-tech et plus. Cliquez pour découvrir chacune.`
+          `${brands.length} enseignes signées : mode, beauté, restaurants, high-tech et bien plus.`
         )}
       />
 
-      {/* Filtres épurés */}
-      <section className="sticky top-0 z-20 bg-cosmos-warm/90 backdrop-blur border-b border-cosmos-night/5">
-        <div className="container-cosmos py-4">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-            <div className="relative lg:w-72">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
+      {/* Barre de filtres */}
+      <section className="sticky top-16 md:top-20 z-20 bg-cosmos-warm/95 backdrop-blur-md border-b border-cosmos-night/10 shadow-[0_8px_24px_-20px_rgb(var(--cosmos-night)/0.4)]">
+        <div className="container-cosmos py-4 space-y-3">
+          {/* Ligne 1 : recherche + compteur */}
+          <div className="flex items-center gap-4">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
               <input
                 type="search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Rechercher une enseigne…"
-                className="input w-full pl-9"
+                className="w-full pl-11 pr-4 py-2.5 rounded-full bg-white border border-cosmos-night/10 focus:outline-none focus:border-cosmos-gold/50 focus:ring-2 focus:ring-cosmos-gold/15 font-inter font-light text-sm transition"
               />
             </div>
-            <div className="flex flex-wrap gap-2 -mb-1 overflow-x-auto">
-              <FilterPill active={selectedCategory === 'all'} onClick={() => setSelectedCategory('all')}>
-                Toutes
+            <span className="hidden sm:block text-xs uppercase tracking-[0.18em] text-cosmos-night/45 font-inter whitespace-nowrap">
+              {filtered.length} {filtered.length > 1 ? 'enseignes' : 'enseigne'}
+            </span>
+          </div>
+
+          {/* Ligne 2 : catégories sur une seule ligne défilante */}
+          <div
+            className="flex items-center gap-2 overflow-x-auto flex-nowrap -mx-1 px-1 pb-0.5 [&::-webkit-scrollbar]:hidden"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            <FilterPill active={selectedCategory === 'all'} onClick={() => setSelectedCategory('all')}>
+              Toutes
+            </FilterPill>
+            {categories.map((cat) => (
+              <FilterPill
+                key={cat.key}
+                active={selectedCategory === cat.key}
+                onClick={() => setSelectedCategory(cat.key)}
+              >
+                {cat.label}
               </FilterPill>
-              {categories.map((cat) => (
-                <FilterPill
-                  key={cat.key}
-                  active={selectedCategory === cat.key}
-                  onClick={() => setSelectedCategory(cat.key)}
-                >
-                  {cat.label}
-                </FilterPill>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Annuaire des enseignes */}
-      <section className="section bg-cosmos-warm">
+      <section className="section bg-cosmos-warm pt-10">
         <div className="container-cosmos">
-          {/* Compteur de résultats */}
-          <div className="flex items-baseline justify-between mb-10">
-            <p className="text-xs uppercase tracking-[0.2em] text-cosmos-night/45 font-inter">
-              {filtered.length} {filtered.length > 1 ? 'enseignes' : 'enseigne'}
-              {selectedCategory !== 'all' && (
-                <span className="text-cosmos-night/30"> · {categories.find((c2) => c2.key === selectedCategory)?.label}</span>
-              )}
-            </p>
-          </div>
-
           {filtered.length === 0 ? (
             <p className="text-center text-cosmos-night/50 font-inter font-light py-20">
               Aucune enseigne pour ce filtre.
@@ -333,7 +332,7 @@ const FilterPill: React.FC<{
   <button
     type="button"
     onClick={onClick}
-    className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.12em] font-inter whitespace-nowrap transition-all ${
+    className={`flex-shrink-0 px-4 py-2 rounded-full text-xs uppercase tracking-[0.12em] font-inter whitespace-nowrap transition-all ${
       active
         ? 'bg-cosmos-night text-cosmos-cream'
         : 'bg-white text-cosmos-night/60 border border-cosmos-night/10 hover:border-cosmos-gold/40 hover:text-cosmos-night'
