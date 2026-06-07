@@ -26,7 +26,9 @@ import OptimizedImage from '../../components/common/OptimizedImage';
 import Reveal from '../../components/common/Reveal';
 import { useContent } from '../../lib/content/SiteContentProvider';
 import FeaturedBrands from '../../components/features/home/FeaturedBrands';
+import BrandMarquee from '../../components/features/home/BrandMarquee';
 import ServicesStrip from '../../components/features/home/ServicesStrip';
+import { useEvents } from '../../hooks/useEvents';
 import ProximityAccess from '../../components/features/home/ProximityAccess';
 import InstagramUGC from '../../components/features/home/InstagramUGC';
 import HeroPhoto from '../../components/features/HeroPhoto';
@@ -105,6 +107,30 @@ const HomePage: React.FC = () => {
   const bentoReveal = useScrollReveal();
   const edgeReveal = useScrollReveal();
   const clubReveal = useScrollReveal();
+
+  // Agenda : vrais événements (cosmos.events), repli sur exemples i18n si vide
+  const { events: dbEvents } = useEvents();
+  const MONTHS_ABBR = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+  const realEvents = dbEvents
+    .filter((e) => (e.status ?? 'published') !== 'draft')
+    .slice(0, 3)
+    .map((e) => {
+      const d = e.start_date ? new Date(e.start_date) : null;
+      return {
+        date: { day: d ? String(d.getDate()).padStart(2, '0') : '', month: d ? MONTHS_ABBR[d.getMonth()] : '' },
+        title: e.title,
+        location: e.location || '',
+        desc: e.description || '',
+        image: e.image || galleryInterior,
+        to: `/evenements/${e.slug ?? e.id}`,
+      };
+    });
+  const fallbackEvents = [
+    { date: { day: '15', month: 'Oct' }, title: t('home.upcomingEvents.softOpening.title'), location: t('home.upcomingEvents.softOpening.location'), desc: t('home.upcomingEvents.softOpening.desc'), image: galleryInterior, to: '/evenements' },
+    { date: { day: '01', month: 'Nov' }, title: t('home.upcomingEvents.grandInauguration.title'), location: t('home.upcomingEvents.grandInauguration.location'), desc: t('home.upcomingEvents.grandInauguration.desc'), image: galaEvent, to: '/evenements' },
+    { date: { day: '20', month: 'Déc' }, title: t('home.upcomingEvents.christmasMarket.title'), location: t('home.upcomingEvents.christmasMarket.location'), desc: t('home.upcomingEvents.christmasMarket.desc'), image: christmasMarket, to: '/evenements' },
+  ];
+  const homeEvents = realEvents.length > 0 ? realEvents : fallbackEvents;
 
   return (
     <div className="bg-cosmos-warm">
@@ -231,6 +257,9 @@ const HomePage: React.FC = () => {
 
       {/* ════════ MAISONS À LA UNE (curation) ════════ */}
       <FeaturedBrands />
+
+      {/* ════════ ENSEIGNES EN MOUVEMENT (carrousel) ════════ */}
+      <BrandMarquee />
 
       {/* ════════ EN CHIFFRES ════════ */}
       <section className="py-20 md:py-28 bg-cosmos-night relative overflow-hidden">
@@ -438,51 +467,37 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            {[
-              {
-                date: { day: '15', month: 'Oct' },
-                title: t('home.upcomingEvents.softOpening.title'),
-                location: t('home.upcomingEvents.softOpening.location'),
-                desc: t('home.upcomingEvents.softOpening.desc'),
-                image: galleryInterior,
-              },
-              {
-                date: { day: '01', month: 'Nov' },
-                title: t('home.upcomingEvents.grandInauguration.title'),
-                location: t('home.upcomingEvents.grandInauguration.location'),
-                desc: t('home.upcomingEvents.grandInauguration.desc'),
-                image: galaEvent,
-              },
-              {
-                date: { day: '20', month: 'Déc' },
-                title: t('home.upcomingEvents.christmasMarket.title'),
-                location: t('home.upcomingEvents.christmasMarket.location'),
-                desc: t('home.upcomingEvents.christmasMarket.desc'),
-                image: christmasMarket,
-              },
-            ].map((event, index) => (
-              <Reveal key={index} delay={index * 110} className="card group h-full">
-                <div className="relative overflow-hidden aspect-[16/10]">
-                  <OptimizedImage
-                    src={event.image}
-                    alt={event.title}
-                    containerClassName="absolute inset-0"
-                    hoverZoom
-                    overlay="gradient-bottom"
-                  />
-                  <div className="absolute top-4 left-4 bg-cosmos-night/90 backdrop-blur-sm text-cosmos-cream px-3 py-2 rounded-md text-center border border-white/10">
-                    <div className="font-cormorant text-xl font-semibold leading-none">{event.date.day}</div>
-                    <div className="text-[10px] uppercase tracking-wider font-inter text-cosmos-cream/80">{event.date.month}</div>
+            {homeEvents.map((event, index) => (
+              <Reveal key={index} delay={index * 110} className="h-full">
+                <Link to={event.to} className="card group h-full block">
+                  <div className="relative overflow-hidden aspect-[16/10]">
+                    <OptimizedImage
+                      src={event.image}
+                      alt={event.title}
+                      containerClassName="absolute inset-0"
+                      hoverZoom
+                      overlay="gradient-bottom"
+                    />
+                    {event.date.day && (
+                      <div className="absolute top-4 left-4 bg-cosmos-night/90 backdrop-blur-sm text-cosmos-cream px-3 py-2 rounded-md text-center border border-white/10">
+                        <div className="font-cormorant text-xl font-semibold leading-none">{event.date.day}</div>
+                        <div className="text-[10px] uppercase tracking-wider font-inter text-cosmos-cream/80">{event.date.month}</div>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="w-3 h-3 text-cosmos-night/40" strokeWidth={1.5} />
-                    <span className="text-[11px] text-text-secondary font-inter font-light uppercase tracking-wider">{event.location}</span>
+                  <div className="p-6">
+                    {event.location && (
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin className="w-3 h-3 text-cosmos-night/40" strokeWidth={1.5} />
+                        <span className="text-[11px] text-text-secondary font-inter font-light uppercase tracking-wider">{event.location}</span>
+                      </div>
+                    )}
+                    <h4 className="font-cormorant text-xl text-cosmos-night font-light mb-2">{event.title}</h4>
+                    {event.desc && (
+                      <p className="text-sm text-text-secondary font-inter font-light line-clamp-2">{event.desc}</p>
+                    )}
                   </div>
-                  <h4 className="font-cormorant text-xl text-cosmos-night font-light mb-2">{event.title}</h4>
-                  <p className="text-sm text-text-secondary font-inter font-light">{event.desc}</p>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
