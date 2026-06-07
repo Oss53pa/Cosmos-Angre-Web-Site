@@ -665,7 +665,7 @@
       "title": "Comment venir",
       "byCar": {
         "title": "En voiture",
-        "desc": "Acces direct depuis le Boulevard des Martyrs. Parking de 400 places disponible."
+        "desc": "Acces direct depuis le Boulevard des Martyrs. Parking gratuit de plus de 400 places."
       },
       "byBus": {
         "title": "Transport en commun",
@@ -678,13 +678,9 @@
     },
     "parking": {
       "title": "Parking",
-      "description": "400 places dont places PMR et bornes de recharge pour vehicules electriques.",
-      "first2Hours": "2 premieres heures",
-      "first2HoursValue": "Gratuites",
-      "hourlyRate": "Tarif horaire",
-      "hourlyRateValue": "500 FCFA/h",
-      "dailyPass": "Forfait journee",
-      "dailyPassValue": "3 000 FCFA"
+      "description": "Plus de 400 places gratuites, a deux pas des entrees.",
+      "free": "Gratuit pour tous les visiteurs",
+      "amenities": "Places PMR · Bornes de recharge electrique · Video-surveillance 24/7"
     },
     "openingHours": {
       "title": "Horaires",
@@ -727,7 +723,7 @@
       "q1": "Quels sont les horaires du centre ?",
       "a1": "Du lundi au samedi de 9h a 21h, dimanche de 10h a 20h.",
       "q2": "Le parking est-il gratuit ?",
-      "a2": "Les 2 premieres heures sont gratuites. Au-dela, le tarif est de 500 FCFA/heure.",
+      "a2": "Oui, le parking est entierement gratuit pour tous les visiteurs.",
       "q3": "Y a-t-il un service de conciergerie ?",
       "a3": "Oui, notre conciergerie est situee a l'entree principale et offre orientation, consigne et assistance.",
       "q4": "Le centre est-il accessible aux PMR ?",

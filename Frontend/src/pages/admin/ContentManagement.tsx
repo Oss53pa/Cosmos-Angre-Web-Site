@@ -1178,7 +1178,7 @@ const createPageDefinitions = (): PageDefinition[] => [
             key: 'tarifs',
             label: 'Tarifs (un par ligne)',
             type: 'textarea',
-            value: '1ere heure : Gratuit\n2h-4h : 500 FCFA/h\nAbonnement mensuel : 25 000 FCFA',
+            value: 'Gratuit pour tous les visiteurs\nPlaces PMR\nBornes de recharge electrique',
             placeholder: 'Tarif par ligne',
           },
           {
@@ -1229,7 +1229,7 @@ const createPageDefinitions = (): PageDefinition[] => [
             label: 'Questions/Reponses (format: Q|R, une par ligne)',
             type: 'textarea',
             value:
-              'Le parking est-il gratuit ?|La premiere heure est gratuite. Au-dela, 500 FCFA/h.\nY a-t-il un service de conciergerie ?|Oui, notre conciergerie est a votre disposition au rez-de-chaussee.\nPuis-je organiser un evenement ?|Oui, contactez notre equipe evenementielle via le formulaire de contact.',
+              'Le parking est-il gratuit ?|Oui, le parking est entierement gratuit pour tous les visiteurs.\nY a-t-il un service de conciergerie ?|Oui, notre conciergerie est a votre disposition au rez-de-chaussee.\nPuis-je organiser un evenement ?|Oui, contactez notre equipe evenementielle via le formulaire de contact.',
             placeholder: 'Question|Reponse',
           },
         ],

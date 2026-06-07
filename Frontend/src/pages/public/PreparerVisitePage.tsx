@@ -80,10 +80,13 @@ const PreparerVisitePage: React.FC = () => {
               <p className="text-sm text-cosmos-cream/60 font-inter font-light mb-4">
                 {t('visit.parking.description')}
               </p>
-              <div className="space-y-2 text-xs text-cosmos-cream/60 font-inter font-light">
-                <p>{t('visit.parking.first2Hours')} : <span className="text-cosmos-cream">{t('visit.parking.first2HoursValue')}</span></p>
-                <p>{t('visit.parking.hourlyRate')} : <span className="text-cosmos-cream">{t('visit.parking.hourlyRateValue')}</span></p>
-                <p>{t('visit.parking.dailyPass')} : <span className="text-cosmos-cream">{t('visit.parking.dailyPassValue')}</span></p>
+              <div className="space-y-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cosmos-gold/15 border border-cosmos-gold/30 text-cosmos-gold text-xs font-inter font-medium uppercase tracking-[0.15em]">
+                  {t('visit.parking.free', 'Gratuit pour tous les visiteurs')}
+                </span>
+                <p className="text-xs text-cosmos-cream/60 font-inter font-light">
+                  {t('visit.parking.amenities', 'Places PMR · Bornes de recharge électrique · Vidéo-surveillance 24/7')}
+                </p>
               </div>
             </div>
             <div id="horaires" className="p-8 bg-white/5 border border-white/5 rounded-lg scroll-mt-24">

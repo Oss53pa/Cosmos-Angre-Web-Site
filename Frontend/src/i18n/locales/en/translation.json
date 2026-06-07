@@ -675,13 +675,9 @@
     },
     "parking": {
       "title": "Parking",
-      "description": "400 spaces (100 underground + 300 outdoor) including disabled spaces and EV charging stations.",
-      "first2Hours": "First 2 hours",
-      "first2HoursValue": "Free",
-      "hourlyRate": "Hourly rate",
-      "hourlyRateValue": "500 FCFA/h",
-      "dailyPass": "Day pass",
-      "dailyPassValue": "3,000 FCFA"
+      "description": "Over 400 free spaces, right by the entrances.",
+      "free": "Free for all visitors",
+      "amenities": "Accessible bays · EV charging · 24/7 CCTV"
     },
     "openingHours": {
       "title": "Opening Hours",
@@ -718,7 +714,7 @@
       "q1": "What are the center's opening hours?",
       "a1": "Monday to Saturday 9am to 9pm, Sunday 10am to 8pm.",
       "q2": "Is parking free?",
-      "a2": "The first 2 hours are free. After that, the rate is 500 FCFA/hour.",
+      "a2": "Yes, parking is completely free for all visitors.",
       "q3": "Is there a concierge service?",
       "a3": "Yes, our concierge is located at the main entrance and offers guidance, luggage storage and assistance.",
       "q4": "Is the center accessible for disabled visitors?",
