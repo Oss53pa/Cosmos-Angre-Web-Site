@@ -85,15 +85,76 @@ const GastronomiePage: React.FC = () => {
         subtitle={c('gastronomy.hero.subtitle', t('gastronomy.hero.subtitle'))}
       />
 
+      {/* Deux halles gourmandes */}
+      <section className="section bg-cosmos-warm">
+        <div className="container-cosmos">
+          <Reveal className="text-center mb-12">
+            <span className="overline mb-4 block">
+              {c('gastronomy.halls.overline', 'Deux univers gourmands')}
+            </span>
+            <h2 className="section-title">
+              {c('gastronomy.halls.title', 'La Halle Gourmande & le Comptoir des Douceurs')}
+            </h2>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {[
+              {
+                k: 'savory',
+                name: c('gastronomy.halls.savory.name', 'La Halle Gourmande'),
+                tag: c('gastronomy.halls.savory.tag', 'Le salé'),
+                desc: c(
+                  'gastronomy.halls.savory.desc',
+                  'Burgers, pizzas, cuisines du monde et street-food premium réunis dans une grande halle conviviale.'
+                ),
+                image: luxuryRestaurant,
+              },
+              {
+                k: 'sweet',
+                name: c('gastronomy.halls.sweet.name', 'Le Comptoir des Douceurs'),
+                tag: c('gastronomy.halls.sweet.tag', 'Le sucré'),
+                desc: c(
+                  'gastronomy.halls.sweet.desc',
+                  'Pâtisseries, glaces, smoothies et douceurs artisanales pour une pause gourmande à toute heure.'
+                ),
+                image: restaurantInterior,
+              },
+            ].map((hall, i) => (
+              <Reveal key={hall.k} delay={i * 100} className="card group overflow-hidden">
+                <div className="relative aspect-[16/10]">
+                  <OptimizedImage
+                    src={hall.image}
+                    alt={hall.name}
+                    containerClassName="absolute inset-0"
+                    hoverZoom
+                    overlay="gradient-bottom"
+                  />
+                  <span className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] bg-cosmos-gold text-cosmos-night font-inter font-medium px-3 py-1 rounded-full">
+                    {hall.tag}
+                  </span>
+                </div>
+                <div className="p-7">
+                  <h3 className="font-cormorant text-3xl text-cosmos-night font-light mb-3">
+                    {hall.name}
+                  </h3>
+                  <p className="text-sm text-text-secondary font-inter font-light leading-relaxed">
+                    {hall.desc}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Restaurants */}
-      <section id="reservation" className="section bg-cosmos-warm scroll-mt-24">
+      <section id="reservation" className="section bg-cosmos-cream scroll-mt-24">
         <div className="container-cosmos">
           <Reveal className="text-center mb-16">
             <span className="overline mb-4 block">
               {c('gastronomy.restaurants.overline', t('gastronomy.restaurants.overline'))}
             </span>
             <h2 className="section-title">
-              {c('gastronomy.restaurants.title', t('gastronomy.restaurants.title'))}
+              {c('gastronomy.restaurants.title', 'Les enseignes gourmandes')}
             </h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">

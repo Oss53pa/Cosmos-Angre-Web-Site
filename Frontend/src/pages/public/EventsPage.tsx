@@ -8,6 +8,7 @@ import PageHero from '../../components/common/PageHero';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
 import { useContent } from '../../lib/content/SiteContentProvider';
+import { useEvents } from '../../hooks/useEvents';
 import LifeCalendarSection from '../../components/features/events/LifeCalendarSection';
 import galaEvent from '../../assets/images/branding/gala-event.jpg';
 import eventHall from '../../assets/images/branding/event-hall.jpg';
@@ -15,16 +16,25 @@ import expoConvention from '../../assets/images/branding/expo-convention.jpg';
 
 type EventsTab = 'agenda' | 'calendar';
 
+function formatEventDate(start?: string | null, end?: string | null): string {
+  if (!start) return '';
+  const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  const s = new Date(start).toLocaleDateString('fr-FR', opts);
+  if (end && end !== start) {
+    const e = new Date(end).toLocaleDateString('fr-FR', opts);
+    return `${s} – ${e}`;
+  }
+  return s;
+}
+
 const EventsPage: React.FC = () => {
   const { t } = useTranslation();
   const { c } = useContent();
   const [activeTab, setActiveTab] = useState<EventsTab>('agenda');
 
-  const upcomingEvents = [
-    { id: 1, key: 'event1' },
-    { id: 2, key: 'event2' },
-    { id: 3, key: 'event3' },
-  ];
+  // Vrais événements depuis cosmos.events (les plus récents d'abord)
+  const { events: dbEvents, isLoading: eventsLoading } = useEvents();
+  const agendaEvents = dbEvents.filter((e) => (e.status ?? 'published') !== 'draft');
 
   const eventSpaces = [
     { key: 'grandeSalle', image: eventHall },
@@ -108,53 +118,61 @@ const EventsPage: React.FC = () => {
                 <h2 className="section-title">{t('events.upcoming.title')}</h2>
               </div>
 
-              <div className="space-y-5">
-                {upcomingEvents.map((event) => (
-                  <div key={event.id} className="card group p-8 hover-lift">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                      <div className="flex-1">
-                        <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium mb-2 block">
-                          {t(`events.upcoming.${event.key}.category`)}
-                        </span>
-                        <h3 className="font-cormorant text-2xl text-cosmos-night font-light mb-4">
-                          {t(`events.upcoming.${event.key}.title`)}
-                        </h3>
-                        <div className="flex flex-wrap gap-5 text-xs text-text-secondary font-inter font-light">
-                          <span className="flex items-center gap-2">
-                            <Calendar
-                              className="w-4 h-4 text-cosmos-night/40"
-                              strokeWidth={1.5}
-                            />
-                            {t(`events.upcoming.${event.key}.date`)}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
-                            {t(`events.upcoming.${event.key}.time`)}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <MapPin
-                              className="w-4 h-4 text-cosmos-night/40"
-                              strokeWidth={1.5}
-                            />
-                            {t(`events.upcoming.${event.key}.location`)}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <Users className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
-                            {t(`events.upcoming.${event.key}.attendees`)}
-                          </span>
+              {!eventsLoading && agendaEvents.length === 0 ? (
+                <p className="text-center text-text-secondary font-inter font-light py-12">
+                  {t('events.upcoming.empty', 'Aucun événement programmé pour le moment.')}
+                </p>
+              ) : (
+                <div className="space-y-5">
+                  {agendaEvents.map((event) => (
+                    <div key={event.id} className="card group p-8 hover-lift">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                        <div className="flex-1">
+                          {event.category && (
+                            <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium mb-2 block">
+                              {event.category}
+                            </span>
+                          )}
+                          <h3 className="font-cormorant text-2xl text-cosmos-night font-light mb-4">
+                            {event.title}
+                          </h3>
+                          <div className="flex flex-wrap gap-5 text-xs text-text-secondary font-inter font-light">
+                            <span className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
+                              {formatEventDate(event.start_date, event.end_date)}
+                            </span>
+                            {event.start_time && (
+                              <span className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
+                                {event.start_time}
+                                {event.end_time ? ` - ${event.end_time}` : ''}
+                              </span>
+                            )}
+                            {event.location && (
+                              <span className="flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
+                                {event.location}
+                              </span>
+                            )}
+                            {typeof event.max_participants === 'number' && event.max_participants > 0 && (
+                              <span className="flex items-center gap-2">
+                                <Users className="w-4 h-4 text-cosmos-night/40" strokeWidth={1.5} />
+                                {event.max_participants} places
+                              </span>
+                            )}
+                          </div>
                         </div>
+                        <Link
+                          to={`/evenements/${event.slug ?? event.id}`}
+                          className="btn-secondary text-xs px-6 py-3 self-start sm:self-center"
+                        >
+                          {t('common.learnMore')} <ArrowRight className="w-3 h-3" strokeWidth={1.5} />
+                        </Link>
                       </div>
-                      <Link
-                        to={`/evenements/${event.id}`}
-                        className="btn-secondary text-xs px-6 py-3 self-start sm:self-center"
-                      >
-                        {t('common.learnMore')}{' '}
-                        <ArrowRight className="w-3 h-3" strokeWidth={1.5} />
-                      </Link>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 
