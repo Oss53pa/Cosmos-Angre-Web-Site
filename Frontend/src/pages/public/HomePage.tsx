@@ -23,6 +23,7 @@ import {
 import AmbientMusic from '../../components/features/AmbientMusic';
 import TestimonialsSection from '../../components/features/TestimonialsSection';
 import OptimizedImage from '../../components/common/OptimizedImage';
+import Reveal from '../../components/common/Reveal';
 import ConstellationHero from '../../components/features/galaxy/ConstellationHero';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
 import GrainOverlay from '../../components/features/galaxy/GrainOverlay';
@@ -440,7 +441,7 @@ const HomePage: React.FC = () => {
                 image: christmasMarket,
               },
             ].map((event, index) => (
-              <div key={index} className="card group">
+              <Reveal key={index} delay={index * 110} className="card group h-full">
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <OptimizedImage
                     src={event.image}
@@ -462,7 +463,7 @@ const HomePage: React.FC = () => {
                   <h4 className="font-cormorant text-xl text-cosmos-night font-light mb-2">{event.title}</h4>
                   <p className="text-sm text-text-secondary font-inter font-light">{event.desc}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
 

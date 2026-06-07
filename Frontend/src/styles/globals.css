@@ -376,25 +376,29 @@
 
   /* ---- Cards ---- */
   .card {
-    @apply bg-white rounded-lg relative overflow-hidden;
-    box-shadow: 0 1px 2px rgb(var(--cosmos-night) / 0.05);
-    transition: all 0.5s var(--ease-premium);
+    @apply bg-white rounded-xl relative overflow-hidden;
+    box-shadow:
+      0 1px 2px rgb(var(--cosmos-night) / 0.04),
+      0 12px 32px -16px rgb(var(--cosmos-night) / 0.16);
+    transition: all 0.55s var(--ease-premium);
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgb(var(--cosmos-night) / 0.12);
+    transform: translateY(-6px);
+    box-shadow:
+      0 1px 2px rgb(var(--cosmos-night) / 0.04),
+      0 22px 48px -20px rgb(var(--cosmos-night) / 0.28);
   }
 
   .card-dark {
-    @apply bg-cosmos-night-light rounded-lg relative overflow-hidden border border-white/5;
-    transition: all 0.5s var(--ease-premium);
+    @apply bg-cosmos-night-light rounded-xl relative overflow-hidden border border-white/5;
+    transition: all 0.55s var(--ease-premium);
   }
 
   .card-dark:hover {
-    transform: translateY(-4px);
-    border-color: rgb(var(--cosmos-gold) / 0.2);
-    box-shadow: 0 8px 24px rgb(var(--cosmos-gold) / 0.1);
+    transform: translateY(-6px);
+    border-color: rgb(var(--cosmos-gold) / 0.25);
+    box-shadow: 0 22px 48px -20px rgb(var(--cosmos-gold) / 0.12);
   }
 
   .card-header {
@@ -448,12 +452,13 @@
   }
 
   /* ---- Sections ---- */
+  /* Rythme premium : davantage de respiration verticale */
   .section {
-    @apply py-16 sm:py-20 md:py-24 lg:py-28 relative;
+    @apply py-20 sm:py-24 md:py-32 lg:py-36 relative;
   }
 
   .section-dark {
-    @apply py-16 sm:py-20 md:py-24 lg:py-28 relative;
+    @apply py-20 sm:py-24 md:py-32 lg:py-36 relative;
     background: var(--color-night);
   }
 
@@ -461,14 +466,16 @@
     font-family: var(--font-serif);
     color: var(--color-night);
     font-weight: 400;
-    @apply text-3xl md:text-5xl mb-4;
+    text-wrap: balance;
+    @apply text-4xl md:text-5xl lg:text-6xl mb-5;
   }
 
   .section-title-light {
     font-family: var(--font-serif);
     color: var(--color-cream);
     font-weight: 300;
-    @apply text-3xl md:text-5xl mb-4;
+    text-wrap: balance;
+    @apply text-4xl md:text-5xl lg:text-6xl mb-5;
   }
 
   .section-subtitle {
@@ -485,7 +492,7 @@
 
   /* ---- Overline (small caps label) ---- */
   .overline {
-    @apply text-xs uppercase tracking-[0.2em] font-medium;
+    @apply text-[11px] uppercase tracking-[0.28em] font-medium;
     font-family: var(--font-sans);
     color: var(--color-gold);
   }
@@ -584,6 +591,22 @@
 
   .shadow-gold-glow {
     box-shadow: 0 0 30px rgb(var(--cosmos-gold) / 0.4);
+  }
+
+  /* Cadre image premium : coins doux + ombre portée profonde */
+  .img-premium {
+    @apply rounded-xl overflow-hidden;
+    box-shadow: 0 24px 56px -28px rgb(var(--cosmos-night) / 0.45);
+  }
+
+  /* Filet or subtil (overlay 1px à l'intérieur) */
+  .ring-gold-soft {
+    box-shadow: inset 0 0 0 1px rgb(var(--cosmos-gold) / 0.2);
+  }
+
+  /* Équilibrage typographique des titres */
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
