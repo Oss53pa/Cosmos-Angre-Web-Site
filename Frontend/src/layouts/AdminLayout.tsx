@@ -79,6 +79,7 @@ const AdminLayout: React.FC = () => {
     { icon: BookOpen, label: t('admin.sidebar.blog', 'Blog'), path: '/admin/blog' },
     { icon: Users, label: t('admin.sidebar.users', 'Utilisateurs'), path: '/admin/utilisateurs' },
     { icon: Image, label: t('admin.sidebar.media', 'Medias'), path: '/admin/medias' },
+    { icon: MapPin, label: t('admin.sidebar.wayfinding', 'Plan / Wayfinding'), path: '/admin/wayfinding' },
     { icon: Settings, label: t('admin.sidebar.settings', 'Parametres'), path: '/admin/parametres' },
   ];
 

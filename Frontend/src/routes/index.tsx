@@ -72,6 +72,7 @@ const SettingsPage = lazy(() => import('../pages/admin/SettingsPage'));
 const MediaManagement = lazy(() => import('../pages/admin/MediaManagement'));
 const SiteContentManagement = lazy(() => import('../pages/admin/SiteContentManagement'));
 const ClubManagement = lazy(() => import('../pages/admin/ClubManagement'));
+const WayfindingManagement = lazy(() => import('../pages/admin/WayfindingManagement'));
 
 // Store Pages
 const StoreDashboard = lazy(() => import('../pages/store/StoreDashboard'));
@@ -206,6 +207,7 @@ const router = createBrowserRouter([
           { path: 'contenu', element: wrap(<ContentManagement />, 'admin') },
           { path: 'contenu-site', element: wrap(<SiteContentManagement />, 'admin') },
           { path: 'cosmos-club', element: wrap(<ClubManagement />, 'admin') },
+          { path: 'wayfinding', element: wrap(<WayfindingManagement />, 'admin') },
           { path: 'newsletter', element: wrap(<NewsletterManagement />, 'admin') },
           { path: 'messages', element: wrap(<ContactsManagement />, 'admin') },
           { path: 'blog', element: wrap(<BlogManagement />, 'admin') },
