@@ -39,9 +39,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 toastOptions={{
                   className: 'font-inter',
                   style: {
-                    background: '#0B1929',
-                    color: '#FAF7F2',
-                    border: '1px solid rgba(201, 169, 97, 0.3)',
+                    background: '#24412C',
+                    color: '#F2EBDD',
+                    border: '1px solid rgba(201, 148, 58, 0.3)',
                   },
                 }}
               />

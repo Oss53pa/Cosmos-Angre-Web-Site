@@ -335,7 +335,7 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
 
       {/* ── En-tête (mode "section navigation") — au CENTRE de la galaxie ── */}
       {!showSignature && (
-        <div className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-5 pointer-events-none">
+        <div className="relative z-20 min-h-screen hidden lg:flex flex-col items-center justify-center text-center px-5 pointer-events-none">
           {/* Voile de lisibilité au cœur */}
           <div
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] max-w-[90vw] h-[320px] pointer-events-none"
@@ -361,7 +361,23 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
       )}
 
       {/* ── Repli univers (mobile / tablette) ── */}
-      <div className="relative z-20 lg:hidden container-cosmos pb-20 -mt-10">
+      <div
+        className={`relative z-20 lg:hidden container-cosmos pb-20 ${
+          showSignature ? '-mt-10' : 'pt-24'
+        }`}
+      >
+        {!showSignature && (
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-3">
+              <span className="w-5 h-px bg-cosmos-gold/60" />
+              <span className="overline text-cosmos-gold">{overline}</span>
+              <span className="w-5 h-px bg-cosmos-gold/60" />
+            </div>
+            <h2 className="font-cormorant text-3xl text-cosmos-cream font-light text-balance">
+              {heading}
+            </h2>
+          </div>
+        )}
         <div className="grid grid-cols-2 gap-3">
           {PLANETS.map((p) => {
             const Icon = p.icon;
