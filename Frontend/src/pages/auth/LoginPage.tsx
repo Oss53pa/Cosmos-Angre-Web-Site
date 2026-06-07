@@ -184,15 +184,12 @@ const LoginPage: React.FC = () => {
             {t('auth.login.continueGoogle')}
           </button>
 
-          {/* Register link */}
-          <p className="text-center mt-8 text-xs text-cosmos-cream/60 font-inter font-light">
-            {t('auth.login.noAccount')}{' '}
-            <Link
-              to="/auth/register"
-              className="text-cosmos-gold hover:text-cosmos-gold-light transition-colors"
-            >
-              {t('auth.login.createAccount')}
-            </Link>
+          {/* Accès sur invitation uniquement — pas d'auto-inscription publique */}
+          <p className="text-center mt-8 text-xs text-cosmos-cream/40 font-inter font-light">
+            {t(
+              'auth.login.inviteOnly',
+              "L'accès aux espaces enseigne et centre se fait sur invitation."
+            )}
           </p>
 
           {/* Back to site */}

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUsers } from '../../hooks/useUsers';
+import { supabase } from '../../lib/supabase';
 import type { UserRole } from '../../types/database';
 import {
   Users,
   Search,
-  Plus,
   Edit,
   Eye,
   Trash2,
@@ -14,7 +14,23 @@ import {
   Store,
   CheckCircle,
   Ban,
+  Mail,
+  Send,
+  Loader2,
 } from 'lucide-react';
+
+interface StoreOption {
+  id: string;
+  name: string;
+}
+
+// Rôles invitables (l'auto-inscription publique est désactivée)
+const INVITE_ROLES: { value: UserRole; label: string; hint: string }[] = [
+  { value: 'STORE_ADMIN', label: 'Enseigne — Administrateur', hint: 'Gère sa boutique' },
+  { value: 'STORE_EMPLOYEE', label: 'Enseigne — Employé', hint: 'Accès limité à sa boutique' },
+  { value: 'MALL_MODERATOR', label: 'Centre — Modérateur', hint: 'Modération de contenu' },
+  { value: 'MALL_ADMIN', label: 'Centre — Administrateur', hint: 'Gère tout le centre' },
+];
 
 interface User {
   id: string;
@@ -61,6 +77,92 @@ const UsersManagement: React.FC = () => {
   );
   const [isSaving, setIsSaving] = useState(false);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+
+  // Invitation
+  const [showInvite, setShowInvite] = useState(false);
+  const [inviting, setInviting] = useState(false);
+  const [storeOptions, setStoreOptions] = useState<StoreOption[]>([]);
+  const [invite, setInvite] = useState<{
+    email: string;
+    first_name: string;
+    last_name: string;
+    role: UserRole;
+    store_id: string;
+  }>({ email: '', first_name: '', last_name: '', role: 'STORE_ADMIN', store_id: '' });
+
+  // Liste des boutiques pour rattacher une enseigne invitée
+  const loadStoreOptions = useCallback(async () => {
+    try {
+      const { data } = await (
+        supabase as unknown as {
+          from: (t: string) => {
+            select: (c: string) => {
+              order: (
+                col: string,
+                o: { ascending: boolean }
+              ) => Promise<{ data: StoreOption[] | null }>;
+            };
+          };
+        }
+      )
+        .from('stores')
+        .select('id,name')
+        .order('name', { ascending: true });
+      if (data) setStoreOptions(data);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    void loadStoreOptions();
+  }, [loadStoreOptions]);
+
+  const isStoreRole = invite.role === 'STORE_ADMIN' || invite.role === 'STORE_EMPLOYEE';
+
+  const handleInvite = async () => {
+    const email = invite.email.trim().toLowerCase();
+    if (!email || !email.includes('@')) {
+      setFeedback({ type: 'error', message: 'Email invalide.' });
+      return;
+    }
+    if (isStoreRole && !invite.store_id) {
+      setFeedback({ type: 'error', message: 'Sélectionnez la boutique de cette enseigne.' });
+      return;
+    }
+    setInviting(true);
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke('cosmos-invite-user', {
+        body: {
+          email,
+          first_name: invite.first_name.trim() || null,
+          last_name: invite.last_name.trim() || null,
+          role: invite.role,
+          store_id: isStoreRole ? invite.store_id : null,
+          redirectTo: `${window.location.origin}/auth/login`,
+        },
+      });
+      const res = data as { ok?: boolean; error?: string; message?: string } | null;
+      if (fnError || res?.error) {
+        setFeedback({
+          type: 'error',
+          message: res?.error || fnError?.message || "Échec de l'invitation.",
+        });
+      } else {
+        setFeedback({
+          type: 'success',
+          message: res?.message || `Invitation envoyée à ${email}.`,
+        });
+        setShowInvite(false);
+        setInvite({ email: '', first_name: '', last_name: '', role: 'STORE_ADMIN', store_id: '' });
+        await fetchUsers();
+      }
+    } catch (e) {
+      setFeedback({ type: 'error', message: String((e as Error)?.message || e) });
+    } finally {
+      setInviting(false);
+    }
+  };
 
   // Form refs
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -314,11 +416,11 @@ const UsersManagement: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={() => setIsCreating(true)}
+          onClick={() => setShowInvite(true)}
           className="flex items-center gap-2 px-6 py-2 bg-cosmos-night text-white font-light hover:bg-opacity-90 transition-colors"
         >
-          <Plus className="w-4 h-4" strokeWidth={1.5} />
-          {t('admin.users.newUser', 'Nouvel Utilisateur')}
+          <Mail className="w-4 h-4" strokeWidth={1.5} />
+          {t('admin.users.invite', 'Inviter un utilisateur')}
         </button>
       </div>
 
@@ -762,6 +864,128 @@ const UsersManagement: React.FC = () => {
                         : t('common.save', 'Enregistrer')}
                     </button>
                   )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Invite User Modal */}
+      {showInvite && (
+        <>
+          <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setShowInvite(false)} />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="bg-white border border-cosmos-cream max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-cosmos-cream flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-cosmos-gold" strokeWidth={1.5} />
+                  <h2 className="text-xl font-light text-cosmos-night tracking-tight">
+                    Inviter un utilisateur
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setShowInvite(false)}
+                  className="text-text-secondary hover:text-cosmos-night"
+                >
+                  <XCircle className="w-6 h-6" strokeWidth={1.5} />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-5">
+                <p className="text-sm text-text-secondary font-light">
+                  L'utilisateur reçoit un email d'invitation. Il définit son mot de passe et accède à
+                  son espace selon le rôle choisi.
+                </p>
+
+                <div>
+                  <label className="block text-sm text-cosmos-night font-light mb-2">Email *</label>
+                  <input
+                    type="email"
+                    value={invite.email}
+                    onChange={(e) => setInvite((p) => ({ ...p, email: e.target.value }))}
+                    placeholder="personne@exemple.com"
+                    className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-cosmos-night font-light mb-2">Prénom</label>
+                    <input
+                      type="text"
+                      value={invite.first_name}
+                      onChange={(e) => setInvite((p) => ({ ...p, first_name: e.target.value }))}
+                      className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-cosmos-night font-light mb-2">Nom</label>
+                    <input
+                      type="text"
+                      value={invite.last_name}
+                      onChange={(e) => setInvite((p) => ({ ...p, last_name: e.target.value }))}
+                      className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm text-cosmos-night font-light mb-2">Rôle *</label>
+                  <select
+                    value={invite.role}
+                    onChange={(e) =>
+                      setInvite((p) => ({ ...p, role: e.target.value as UserRole }))
+                    }
+                    className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                  >
+                    {INVITE_ROLES.map((r) => (
+                      <option key={r.value} value={r.value}>
+                        {r.label} — {r.hint}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {isStoreRole && (
+                  <div>
+                    <label className="block text-sm text-cosmos-night font-light mb-2">
+                      Boutique rattachée *
+                    </label>
+                    <select
+                      value={invite.store_id}
+                      onChange={(e) => setInvite((p) => ({ ...p, store_id: e.target.value }))}
+                      className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    >
+                      <option value="">— Choisir une boutique —</option>
+                      {storeOptions.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-cosmos-cream">
+                  <button
+                    onClick={() => setShowInvite(false)}
+                    className="px-6 py-2 border border-cosmos-cream hover:border-gray-900 text-cosmos-night font-light transition-colors"
+                  >
+                    {t('common.cancel', 'Annuler')}
+                  </button>
+                  <button
+                    onClick={handleInvite}
+                    disabled={inviting}
+                    className="flex items-center gap-2 px-6 py-2 bg-cosmos-night text-white font-light hover:bg-opacity-90 transition-colors disabled:opacity-60"
+                  >
+                    {inviting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Send className="w-4 h-4" strokeWidth={1.5} />
+                    )}
+                    Envoyer l'invitation
+                  </button>
                 </div>
               </div>
             </div>

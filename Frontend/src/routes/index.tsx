@@ -56,7 +56,6 @@ const SupportsCommunicationPage = lazy(
 
 // Auth Pages
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
-const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'));
 
 // Admin Pages
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
@@ -197,7 +196,8 @@ const router = createBrowserRouter([
     path: '/auth',
     children: [
       { path: 'login', element: wrap(<LoginPage />) },
-      { path: 'register', element: wrap(<RegisterPage />) },
+      // Auto-inscription désactivée : l'accès se fait sur invitation (admin).
+      { path: 'register', element: <Navigate to="/auth/login" replace /> },
     ],
   },
 

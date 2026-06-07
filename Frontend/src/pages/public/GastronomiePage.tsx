@@ -13,17 +13,57 @@ import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
 import { useContent } from '../../lib/content/SiteContentProvider';
+import { useStores } from '../../hooks/useStores';
+
+interface RestoCard {
+  id: string;
+  name: string;
+  caption: string;
+  desc: string;
+  rating: number;
+  image: string;
+  to?: string;
+}
+
+const FALLBACK_IMAGES = [
+  luxuryRestaurant,
+  restaurantInterior,
+  sushiJapanese,
+  italianRestaurant,
+  fineDiningFood,
+];
 
 const GastronomiePage: React.FC = () => {
   const { t } = useTranslation();
   const { c } = useContent();
+  const { stores } = useStores({ status: 'active' });
 
-  const restaurants = [
-    { id: 1, name: 'Le Cosmos', cuisineKey: 'leCosmos', price: 3, rating: 4.8, terrace: true, image: luxuryRestaurant },
-    { id: 2, name: 'La Brasserie', cuisineKey: 'laBrasserie', price: 3, rating: 4.6, terrace: true, image: restaurantInterior },
-    { id: 3, name: 'Sakura', cuisineKey: 'sakura', price: 2, rating: 4.5, terrace: false, image: sushiJapanese },
-    { id: 4, name: 'Trattoria Bella', cuisineKey: 'trattoriaBella', price: 2, rating: 4.4, terrace: true, image: italianRestaurant },
+  // Vraies enseignes restaurants depuis cosmos.stores
+  const realRestaurants: RestoCard[] = stores
+    .filter(
+      (s) =>
+        (s.category_key === 'restaurants' || /restau|caf|food|gastro/i.test(s.category ?? '')) &&
+        !!s.name
+    )
+    .map((s, i) => ({
+      id: s.slug ?? s.id,
+      name: s.name,
+      caption: s.category ?? 'Restaurant',
+      desc: s.description ?? '',
+      rating: s.rating ?? 0,
+      image: s.cover_image || s.logo || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length],
+      to: s.slug ? `/boutiques/${s.slug}` : undefined,
+    }));
+
+  // Repli (jamais de page vide) : exemples i18n si la base ne répond pas encore
+  const fallback: RestoCard[] = [
+    { id: 'leCosmos', name: 'Le Cosmos', caption: t('gastronomy.restaurants.leCosmos.cuisine'), desc: t('gastronomy.restaurants.leCosmos.desc'), rating: 4.8, image: luxuryRestaurant },
+    { id: 'laBrasserie', name: 'La Brasserie', caption: t('gastronomy.restaurants.laBrasserie.cuisine'), desc: t('gastronomy.restaurants.laBrasserie.desc'), rating: 4.6, image: restaurantInterior },
+    { id: 'sakura', name: 'Sakura', caption: t('gastronomy.restaurants.sakura.cuisine'), desc: t('gastronomy.restaurants.sakura.desc'), rating: 4.5, image: sushiJapanese },
+    { id: 'trattoriaBella', name: 'Trattoria Bella', caption: t('gastronomy.restaurants.trattoriaBella.cuisine'), desc: t('gastronomy.restaurants.trattoriaBella.desc'), rating: 4.4, image: italianRestaurant },
   ];
+
+  const restaurants = realRestaurants.length > 0 ? realRestaurants : fallback;
 
   return (
     <div className="bg-cosmos-warm">
@@ -56,9 +96,9 @@ const GastronomiePage: React.FC = () => {
               {c('gastronomy.restaurants.title', t('gastronomy.restaurants.title'))}
             </h2>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {restaurants.map((r, index) => (
-              <Reveal key={r.id} delay={index * 90} className="card group h-full">
+              <Reveal key={r.id} delay={Math.min(index, 8) * 80} className="card group h-full">
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <OptimizedImage
                     src={r.image}
@@ -67,30 +107,32 @@ const GastronomiePage: React.FC = () => {
                     hoverZoom
                     overlay="gradient-bottom"
                   />
-                  <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-sm">
-                    <Star className="w-3 h-3 text-cosmos-gold" strokeWidth={1.5} />
-                    <span className="text-[11px] font-inter font-medium text-cosmos-night">{r.rating}</span>
-                  </div>
+                  {r.rating > 0 && (
+                    <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-sm">
+                      <Star className="w-3 h-3 text-cosmos-gold" strokeWidth={1.5} />
+                      <span className="text-[11px] font-inter font-medium text-cosmos-night">{r.rating}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium">
-                      {t(`gastronomy.restaurants.${r.cuisineKey}.cuisine`)}
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium line-clamp-1">
+                      {r.caption}
                     </span>
-                    <span className="text-xs text-text-secondary font-inter">{'$'.repeat(r.price)}</span>
                   </div>
                   <h4 className="font-cormorant text-2xl text-cosmos-night font-light mb-2">{r.name}</h4>
-                  <p className="text-sm text-text-secondary font-inter font-light mb-4">
-                    {t(`gastronomy.restaurants.${r.cuisineKey}.desc`)}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    {r.terrace && (
-                      <span className="text-[10px] uppercase tracking-[0.1em] text-text-secondary font-inter">
-                        {t('gastronomy.restaurants.terraceAvailable')}
-                      </span>
-                    )}
-                    <button className="btn-secondary text-xs px-4 py-2">{t('common.reserve')}</button>
-                  </div>
+                  {r.desc && (
+                    <p className="text-sm text-text-secondary font-inter font-light mb-4 line-clamp-2">
+                      {r.desc}
+                    </p>
+                  )}
+                  {r.to && (
+                    <div className="flex items-center justify-end">
+                      <Link to={r.to} className="btn-secondary text-xs px-4 py-2">
+                        {t('common.discover', 'Découvrir')}
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
