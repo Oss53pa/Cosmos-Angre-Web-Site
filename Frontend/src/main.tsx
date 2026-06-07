@@ -41,7 +41,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                   style: {
                     background: '#24412C',
                     color: '#F2EBDD',
-                    border: '1px solid rgba(201, 148, 58, 0.3)',
+                    border: '1px solid rgba(201, 169, 97, 0.3)',
                   },
                 }}
               />

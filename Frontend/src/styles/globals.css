@@ -114,11 +114,11 @@
   --cosmos-night-light: 60 107 74; /* Forêt clair #3C6B4A — hover / surface élevée */
   --cosmos-night-deep: 36 65 44; /* Forêt Dark #24412C — fond profond / espace */
 
-  --cosmos-gold: 201 148 58; /* Or Cuivré #C9943A — accent universel */
+  --cosmos-gold: 201 169 97; /* Or Cuivré #C9943A — accent universel */
   --cosmos-gold-light: 232 201 122; /* Or Doux #E8C97A — hover */
   --cosmos-gold-bright: 242 224 168; /* Or éclairé #F2E0A8 — highlight */
 
-  --cosmos-accent: 185 130 46; /* Or Cuivré profond #B9822E — signature (CTA hero, badges) */
+  --cosmos-accent: 177 149 85; /* Or profond #B19555 — assorti à #C9A961 (gradient mat) */
 
   --cosmos-cream: 237 228 211; /* Marbre sablé #EDE4D3 — surface card */
   --cosmos-warm: 242 235 221; /* Sable #F2EBDD — fond page (le + clair) */
@@ -127,11 +127,11 @@
   /* === Tokens étendus (couleurs nommées de la palette) === */
   --cosmos-vert-profond: 47 84 57;
   --cosmos-foret-dark: 36 65 44;
-  --cosmos-or-cuivre: 201 148 58;
+  --cosmos-or-cuivre: 201 169 97;
   --cosmos-or-doux: 232 201 122;
   --cosmos-kaki: 118 118 77; /* Kaki #76764D */
   --cosmos-terracotta: 182 106 74; /* conservé (compat composants existants) */
-  --cosmos-raphia: 201 148 58;
+  --cosmos-raphia: 201 169 97;
   --cosmos-sable: 242 235 221;
   --cosmos-blanc-casse: 242 235 221;
   --cosmos-bronze: 140 115 56; /* Bronze patiné #8C7338 (partagé) */
