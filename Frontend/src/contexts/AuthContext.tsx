@@ -119,9 +119,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchProfile = useCallback(
     async (userId: string): Promise<{ profile: Profile | null; error: string | null }> => {
-      const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
-      if (error) return { profile: null, error: error.message };
-      return { profile: data, error: null };
+      // Retry court : l'exposition du schéma cosmos peut être momentanément
+      // indisponible (rechargement du cache PostgREST). On réessaie plutôt que
+      // de renvoyer l'utilisateur à l'accueil sur une erreur transitoire.
+      let lastError: string | null = null;
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
+        if (!error && data) return { profile: data, error: null };
+        lastError = error?.message ?? 'Profil introuvable';
+        // Pas de retry si le profil n'existe simplement pas (0 ligne).
+        if (error && (error as { code?: string }).code === 'PGRST116') break;
+        await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
+      }
+      return { profile: null, error: lastError };
     },
     []
   );
