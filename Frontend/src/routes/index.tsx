@@ -28,13 +28,20 @@ function lazyWithRetry<T extends React.ComponentType<unknown>>(
       }
       return mod;
     } catch (err) {
+      // On ne recharge que pour une vraie erreur de chargement de chunk
+      // (stale après déploiement). Les autres erreurs remontent à l'ErrorBoundary.
+      const msg = String((err as Error)?.message || err);
+      const isChunkError =
+        /dynamically imported module|Importing a module script failed|Failed to fetch|ChunkLoadError|error loading dynamically imported/i.test(
+          msg
+        );
       let reloaded = false;
       try {
         reloaded = sessionStorage.getItem(KEY) === '1';
       } catch {
         /* ignore */
       }
-      if (!reloaded) {
+      if (isChunkError && !reloaded) {
         try {
           sessionStorage.setItem(KEY, '1');
         } catch {

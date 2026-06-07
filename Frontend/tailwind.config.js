@@ -49,6 +49,24 @@ export default {
           'or-mat': 'rgb(var(--cosmos-or-mat, 199 169 100) / <alpha-value>)',
           'or-clair': 'rgb(var(--cosmos-or-clair, 217 201 160) / <alpha-value>)',
         },
+        // ===== Remap de la palette Tailwind `gray` sur la marque =====
+        // Le back-office (admin/enseigne) utilise massivement des classes
+        // gray-* (boutons, fonds, bordures, textes). On les aligne sur la
+        // palette Forêt / Or / Sable pour respecter le thème partout, sans
+        // réécrire chaque page. Forêt pour les surfaces sombres (800/900),
+        // taupe chaud pour les textes secondaires, sable/crème pour les fonds.
+        gray: {
+          50: 'rgb(var(--cosmos-warm) / <alpha-value>)',
+          100: 'rgb(var(--cosmos-cream) / <alpha-value>)',
+          200: '#E6DCC9',
+          300: '#D6C8AF',
+          400: '#ADA28B',
+          500: '#8A7E68',
+          600: '#6B6253',
+          700: '#4A4334',
+          800: 'rgb(var(--cosmos-night) / <alpha-value>)',
+          900: 'rgb(var(--cosmos-night-deep) / <alpha-value>)',
+        },
         // Semantic
         primary: 'rgb(var(--cosmos-night) / <alpha-value>)',
         accent: 'rgb(var(--cosmos-gold) / <alpha-value>)',
@@ -57,7 +75,7 @@ export default {
         background: 'rgb(var(--cosmos-warm) / <alpha-value>)',
         // Text
         'text-primary': 'rgb(var(--cosmos-text) / <alpha-value>)',
-        'text-secondary': '#6B7280',
+        'text-secondary': '#6B6253',
         'text-light': 'rgb(var(--cosmos-cream) / <alpha-value>)',
         // Status
         success: '#059669',
@@ -68,7 +86,7 @@ export default {
         gold: 'rgb(var(--cosmos-gold) / <alpha-value>)',
         'gold-dark': 'rgb(var(--cosmos-gold) / <alpha-value>)',
         dark: 'rgb(var(--cosmos-night) / <alpha-value>)',
-        elegant: '#6B7280',
+        elegant: '#6B6253',
       },
       fontFamily: {
         cormorant: ['"Cormorant Garamond Variable"', '"Cormorant Garamond"', 'Georgia', 'serif'],
