@@ -37,6 +37,7 @@ const StoresPage: React.FC = () => {
   const { c } = useContent();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [view, setView] = useState<'cat' | 'az'>('cat');
   const [selectedStore, setSelectedStore] = useState<StoreData | null>(null);
 
   const { stores: supabaseStores } = useStores({ status: 'active' });
@@ -100,6 +101,35 @@ const StoresPage: React.FC = () => {
     }
     return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
   }, [filtered]);
+
+  // Vue A–Z : regroupement par première lettre (chiffres/symboles → #)
+  const azGroups = useMemo(() => {
+    const map = new Map<string, Brand[]>();
+    for (const b of filtered) {
+      const ch = (b.name.trim()[0] || '#').toUpperCase();
+      const letter = /[A-Z]/.test(ch) ? ch : '#';
+      (map.get(letter) ?? map.set(letter, []).get(letter)!).push(b);
+    }
+    return Array.from(map.entries())
+      .map(([letter, items]) => ({ letter, items: items.sort((a, b) => a.name.localeCompare(b.name)) }))
+      .sort((a, b) => a.letter.localeCompare(b.letter));
+  }, [filtered]);
+
+  // « À la une » : sélection mise en avant (logos d'abord, puis note, puis nom)
+  const featured = useMemo(
+    () =>
+      [...brands]
+        .sort(
+          (a, b) =>
+            (b.logo ? 1 : 0) - (a.logo ? 1 : 0) ||
+            (b.rating ?? 0) - (a.rating ?? 0) ||
+            a.name.localeCompare(b.name)
+        )
+        .slice(0, 6),
+    [brands]
+  );
+
+  const browseMode = selectedCategory === 'all' && searchTerm.trim() === '';
 
   // Ouverture auto du modal depuis ?store=slug (liens directs / anciennes URLs /boutiques/:id)
   const [searchParams, setSearchParams] = useSearchParams();
@@ -182,9 +212,28 @@ const StoresPage: React.FC = () => {
                 className="w-full pl-11 pr-4 py-2.5 rounded-full bg-white border border-cosmos-night/10 focus:outline-none focus:border-cosmos-gold/50 focus:ring-2 focus:ring-cosmos-gold/15 font-inter font-light text-sm transition"
               />
             </div>
-            <span className="hidden sm:block text-xs uppercase tracking-[0.18em] text-cosmos-night/45 font-inter whitespace-nowrap">
+            <span className="hidden md:block text-xs uppercase tracking-[0.18em] text-cosmos-night/45 font-inter whitespace-nowrap">
               {filtered.length} {filtered.length > 1 ? 'enseignes' : 'enseigne'}
             </span>
+            {/* Bascule de vue (façon Westfield / Aventura) */}
+            <div className="flex items-center rounded-full border border-cosmos-night/10 bg-white p-0.5 flex-shrink-0">
+              <button
+                onClick={() => setView('cat')}
+                className={`px-3 py-1.5 rounded-full text-[10px] uppercase tracking-[0.12em] font-inter transition-colors ${
+                  view === 'cat' ? 'bg-cosmos-night text-cosmos-cream' : 'text-cosmos-night/55 hover:text-cosmos-night'
+                }`}
+              >
+                Catégories
+              </button>
+              <button
+                onClick={() => setView('az')}
+                className={`px-3 py-1.5 rounded-full text-[10px] uppercase tracking-[0.12em] font-inter transition-colors ${
+                  view === 'az' ? 'bg-cosmos-night text-cosmos-cream' : 'text-cosmos-night/55 hover:text-cosmos-night'
+                }`}
+              >
+                A–Z
+              </button>
+            </div>
           </div>
 
           {/* Ligne 2 : catégories sur une seule ligne défilante */}
@@ -211,11 +260,30 @@ const StoresPage: React.FC = () => {
       {/* Annuaire des enseignes */}
       <section className="section bg-cosmos-warm pt-10">
         <div className="container-cosmos">
+          {/* À la une — sélection mise en avant (façon Aventura) */}
+          {browseMode && featured.length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center gap-4 mb-6">
+                <h2 className="font-cormorant text-2xl md:text-3xl text-cosmos-night font-light whitespace-nowrap">
+                  À la une
+                </h2>
+                <span className="flex-1 h-px bg-cosmos-gold/30" />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+                {featured.map((b, i) => (
+                  <Reveal key={b.slug} delay={Math.min(i, 6) * 40}>
+                    <BrandTile brand={b} onOpen={() => openBrand(b)} />
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          )}
+
           {filtered.length === 0 ? (
             <p className="text-center text-cosmos-night/50 font-inter font-light py-20">
               Aucune enseigne pour ce filtre.
             </p>
-          ) : selectedCategory === 'all' && searchTerm.trim() === '' ? (
+          ) : browseMode && view === 'cat' ? (
             // Vue annuaire : sections par catégorie
             <div className="space-y-16">
               {groups.map((g) => (
@@ -230,6 +298,27 @@ const StoresPage: React.FC = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
                     {g.items.map((b, i) => (
                       <Reveal key={b.slug} delay={Math.min(i, 10) * 30}>
+                        <BrandTile brand={b} onOpen={() => openBrand(b)} />
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : browseMode && view === 'az' ? (
+            // Vue A–Z : sections par lettre avec en-tête sticky
+            <div className="space-y-12">
+              {azGroups.map((g) => (
+                <div key={g.letter}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="font-cormorant text-4xl md:text-5xl text-cosmos-gold/80 font-light leading-none w-12">
+                      {g.letter}
+                    </span>
+                    <span className="flex-1 h-px bg-cosmos-night/10" />
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+                    {g.items.map((b, i) => (
+                      <Reveal key={b.slug} delay={Math.min(i, 10) * 25}>
                         <BrandTile brand={b} onOpen={() => openBrand(b)} />
                       </Reveal>
                     ))}
