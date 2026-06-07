@@ -149,7 +149,8 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
     };
 
     const tick = () => {
-      if (!pausedRef.current) angleRef.current += 0.1;
+      // Dérive très lente = registre premium (au lieu d'une rotation visible)
+      if (!pausedRef.current) angleRef.current += 0.025;
       place();
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -173,12 +174,12 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
       {/* Galaxie */}
       <div className="absolute inset-0">
         <GalaxyCanvas
-          density="high"
+          density="med"
           interactive
           centerX={0.5}
           centerY={0.46}
-          coreIntensity={0.36}
-          coreScale={0.8}
+          coreIntensity={0.32}
+          coreScale={0.78}
         />
       </div>
       {/* Voile uniforme : assombrit l'ensemble du hero */}

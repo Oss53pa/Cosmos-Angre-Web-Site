@@ -94,6 +94,10 @@ const HeroPhoto: React.FC = () => {
             {c('home.hero.badge', 'Soft opening · Octobre 2026')}
           </span>
         </div>
+
+        <p className="mt-5 text-[11px] text-cosmos-cream/45 font-inter tracking-[0.14em] uppercase">
+          {c('practical.hours', 'Tous les jours · 10h – 22h')}
+        </p>
       </div>
 
       {/* Indice de scroll */}
