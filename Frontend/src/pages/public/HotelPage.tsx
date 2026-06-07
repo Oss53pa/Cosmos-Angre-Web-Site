@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Wifi, Car, UtensilsCrossed, Sparkles, ArrowRight, Check } from 'lucide-react';
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import ibisStylesImg from '../../assets/images/branding/ibis-styles-exterior.jpg';
 import adagioImg from '../../assets/images/branding/adagio-exterior.jpg';
 
 const HotelPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const services = [
     { icon: UtensilsCrossed, label: t('hotel.services.roomService') },
@@ -32,20 +36,13 @@ const HotelPage: React.FC = () => {
           { name: 'Hôtel', url: '/hotel' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage src={ibisStylesImg} alt="Ibis Styles Cosmos Angre" containerClassName="w-full h-full" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('hotel.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl sm:text-6xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('hotel.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('hotel.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('hotel.hero.image') || ibisStylesImg}
+        alt="Hôtels à Cosmos Angré"
+        overline={c('hotel.hero.overline', t('hotel.hero.overline'))}
+        title={c('hotel.hero.title', t('hotel.hero.title'))}
+        subtitle={c('hotel.hero.subtitle', t('hotel.hero.subtitle'))}
+      />
 
       {/* Two Hotels Intro */}
       <section className="section bg-cosmos-warm">
@@ -149,14 +146,16 @@ const HotelPage: React.FC = () => {
       {/* Packages CTA */}
       <section className="section bg-cosmos-cream">
         <div className="container-cosmos text-center">
-          <span className="overline mb-4 block">{t('hotel.packages.overline')}</span>
-          <h2 className="section-title mb-4">{t('hotel.packages.title')}</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            {t('hotel.packages.description')}
-          </p>
-          <Link to="/contact" className="btn-primary">
-            {t('common.requestQuote')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-          </Link>
+          <Reveal>
+            <span className="overline mb-4 block">{c('hotel.packages.overline', t('hotel.packages.overline'))}</span>
+            <h2 className="section-title mb-4">{c('hotel.packages.title', t('hotel.packages.title'))}</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              {c('hotel.packages.description', t('hotel.packages.description'))}
+            </p>
+            <Link to="/contact" className="btn-primary">
+              {t('common.requestQuote')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </div>

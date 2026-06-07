@@ -4,11 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Gamepad2, Film, HeartPulse, Briefcase, ArrowRight, Check, Ruler } from 'lucide-react';
 
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
-import GalaxyPageHeader from '../../components/features/galaxy/GalaxyPageHeader';
 import GrainOverlay from '../../components/features/galaxy/GrainOverlay';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import bowlingAlley from '../../assets/images/branding/bowling-alley.jpg';
 import cinemaExperience from '../../assets/images/branding/cinema-experience.jpg';
 import modernClinic from '../../assets/images/branding/modern-clinic.jpg';
@@ -16,6 +18,7 @@ import modernOffice from '../../assets/images/branding/modern-office.jpg';
 
 const RetailParkPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const bigBoxes = [
     {
@@ -55,12 +58,16 @@ const RetailParkPage: React.FC = () => {
           { name: 'Retail Park', url: '/retail-park' },
         ])}
       />
-      {/* Hero galaxie */}
-      <GalaxyPageHeader
-        overline="Retail Park"
-        title="Quatre géants,"
-        titleAccent="bientôt."
-        subtitle="Cinéma, salle de jeu, clinique et immeuble de bureaux. Le Retail Park prolonge Cosmos Angré bien au-delà du shopping."
+      <PageHero
+        image={c('retailpark.hero.image') || cinemaExperience}
+        alt="Retail Park — Cosmos Angré"
+        overline={c('retailpark.hero.overline', 'Retail Park')}
+        title={c('retailpark.hero.title', 'Quatre géants,')}
+        titleAccent={c('retailpark.hero.accent', 'bientôt.')}
+        subtitle={c(
+          'retailpark.hero.subtitle',
+          'Cinéma, salle de jeu, clinique et immeuble de bureaux. Le Retail Park prolonge Cosmos Angré bien au-delà du shopping.'
+        )}
       />
 
       {/* Introduction */}

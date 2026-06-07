@@ -4,10 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Wifi, Car, CreditCard, Map, ShoppingBag, Headphones, Shield, Gift, ArrowRight } from 'lucide-react';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import visitorsExperience from '../../assets/images/branding/visitors-experience.jpg';
 
 const ServicesPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const services = [
     { icon: Wifi, name: t('services.list.wifi.name'), description: t('services.list.wifi.description') },
@@ -31,50 +35,45 @@ const ServicesPage: React.FC = () => {
           { name: 'Services', url: '/services' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns" style={{ backgroundImage: `url(${visitorsExperience})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('services.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('services.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('services.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('services.hero.image') || visitorsExperience}
+        alt="Les services de Cosmos Angré"
+        overline={c('services.hero.overline', t('services.hero.overline'))}
+        title={c('services.hero.title', t('services.hero.title'))}
+        subtitle={c('services.hero.subtitle', t('services.hero.subtitle'))}
+      />
 
       {/* Services Grid */}
       <section className="section bg-cosmos-warm">
         <div className="container-cosmos">
-          <div className="text-center mb-16">
-            <span className="overline mb-4 block">{t('services.grid.overline')}</span>
-            <h2 className="section-title">{t('services.grid.title')}</h2>
-          </div>
+          <Reveal className="text-center mb-16">
+            <span className="overline mb-4 block">{c('services.grid.overline', t('services.grid.overline'))}</span>
+            <h2 className="section-title">{c('services.grid.title', t('services.grid.title'))}</h2>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {services.map((service, index) => (
-              <div key={index} className="card p-8 text-center hover-lift">
-                <service.icon className="w-8 h-8 mx-auto mb-4 text-cosmos-night" strokeWidth={1.5} />
+              <Reveal key={index} delay={Math.min(index, 8) * 60} className="card p-8 text-center">
+                <service.icon className="w-8 h-8 mx-auto mb-4 text-cosmos-gold" strokeWidth={1.5} />
                 <h3 className="font-cormorant text-lg text-cosmos-night font-light mb-2">{service.name}</h3>
                 <p className="text-xs text-text-secondary font-inter font-light">{service.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-cosmos-night">
-        <div className="container-cosmos text-center">
-          <span className="overline mb-4 block">{t('services.cta.overline')}</span>
-          <h2 className="font-cormorant text-3xl md:text-5xl text-cosmos-cream font-light mb-4">{t('services.cta.title')}</h2>
-          <p className="text-sm text-cosmos-cream/60 font-inter font-light mb-10 max-w-lg mx-auto">
-            {t('services.cta.subtitle')}
+      <section className="section-dark">
+        <Reveal className="container-cosmos text-center">
+          <span className="overline mb-4 block">{c('services.cta.overline', t('services.cta.overline'))}</span>
+          <h2 className="section-title-light">{c('services.cta.title', t('services.cta.title'))}</h2>
+          <p className="section-subtitle-light max-w-lg mx-auto">
+            {c('services.cta.subtitle', t('services.cta.subtitle'))}
           </p>
           <Link to="/contact" className="btn-primary">
-            {t('services.cta.contact')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+            {c('services.cta.contact', t('services.cta.contact'))} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
           </Link>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

@@ -15,8 +15,11 @@ import {
 } from 'lucide-react';
 import { SPACES, BRANDING } from '../../utils/brochureData';
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 
 import galleryInterior from '../../assets/images/branding/gallery-interior.jpg';
 import artisanMarket from '../../assets/images/branding/artisan-market.jpg';
@@ -26,10 +29,10 @@ import outdoorCourt from '../../assets/images/branding/outdoor-court.jpg';
 import modernOffice from '../../assets/images/branding/modern-office.jpg';
 import medicalTeam from '../../assets/images/branding/medical-team.jpg';
 import hotelsFacade from '../../assets/images/branding/hotels-facade.jpg';
-import floorPlan from '../../assets/images/branding/floor-plan.jpg';
 
 const SpacesPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const spacesList = [
     { id: 'gallery', icon: ShoppingBag, data: SPACES.gallery, image: galleryInterior },
@@ -63,27 +66,24 @@ const SpacesPage: React.FC = () => {
           { name: 'Nos espaces', url: '/espaces' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage src={floorPlan} alt="Plan Cosmos Angre" containerClassName="w-full h-full" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('spaces.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('spaces.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('spaces.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('spaces.hero.image') || galleryInterior}
+        alt="Les espaces de Cosmos Angré"
+        overline={c('spaces.hero.overline', t('spaces.hero.overline'))}
+        title={c('spaces.hero.title', t('spaces.hero.title'))}
+        subtitle={c('spaces.hero.subtitle', t('spaces.hero.subtitle'))}
+      />
 
       {/* Spaces */}
       <section className="section bg-cosmos-warm">
         <div className="container-cosmos">
           <div className="space-y-6">
             {spacesList.map((space, index) => (
-              <div key={space.id} className="card group grid md:grid-cols-2 overflow-hidden">
+              <Reveal
+                key={space.id}
+                direction={index % 2 === 1 ? 'left' : 'right'}
+                className="card group grid md:grid-cols-2 overflow-hidden"
+              >
                 <div className={`aspect-[16/10] md:aspect-auto ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                   <OptimizedImage src={space.image} alt={space.data.name} containerClassName="w-full h-full" hoverZoom />
                 </div>
@@ -117,7 +117,7 @@ const SpacesPage: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -156,9 +156,9 @@ const SpacesPage: React.FC = () => {
 
       {/* CTA */}
       <section className="section bg-cosmos-cream">
-        <div className="container-cosmos text-center">
-          <span className="overline mb-4 block">{t('spaces.cta.overline')}</span>
-          <h2 className="section-title mb-4">{t('spaces.cta.title')}</h2>
+        <Reveal className="container-cosmos text-center">
+          <span className="overline mb-4 block">{c('spaces.cta.overline', t('spaces.cta.overline'))}</span>
+          <h2 className="section-title mb-4">{c('spaces.cta.title', t('spaces.cta.title'))}</h2>
           <p className="section-subtitle max-w-lg mx-auto">{BRANDING.messages.invitation}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-primary">
@@ -168,7 +168,7 @@ const SpacesPage: React.FC = () => {
               {t('common.learnMore')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );
