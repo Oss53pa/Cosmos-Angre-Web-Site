@@ -161,15 +161,21 @@ const ConstellationHero: React.FC = () => {
           interactive
           centerX={0.5}
           centerY={0.46}
-          coreIntensity={0.5}
-          coreScale={0.85}
+          coreIntensity={0.36}
+          coreScale={0.8}
         />
       </div>
+      {/* Voile uniforme : assombrit l'ensemble du hero */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'rgb(var(--cosmos-night-deep) / 0.32)' }}
+      />
+      {/* Vignette radiale renforcée (bords plus profonds) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(75% 70% at 50% 46%, transparent 30%, rgb(var(--cosmos-night-deep) / 0.8) 100%)',
+            'radial-gradient(70% 65% at 50% 46%, transparent 22%, rgb(var(--cosmos-night-deep) / 0.94) 100%)',
         }}
       />
       <GrainOverlay opacity={0.07} />
