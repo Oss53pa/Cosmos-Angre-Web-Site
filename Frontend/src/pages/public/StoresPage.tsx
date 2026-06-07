@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Search, MapPin } from 'lucide-react';
+import { ArrowRight, Search, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
@@ -39,6 +39,9 @@ const StoresPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [view, setView] = useState<'cat' | 'az'>('cat');
   const [selectedStore, setSelectedStore] = useState<StoreData | null>(null);
+  const pillsRef = useRef<HTMLDivElement>(null);
+  const scrollPills = (dir: -1 | 1) =>
+    pillsRef.current?.scrollBy({ left: dir * 280, behavior: 'smooth' });
 
   const { stores: supabaseStores } = useStores({ status: 'active' });
 
@@ -236,23 +239,46 @@ const StoresPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Ligne 2 : catégories sur une seule ligne défilante */}
-          <div
-            className="flex items-center gap-2 overflow-x-auto flex-nowrap -mx-1 px-1 pb-0.5 [&::-webkit-scrollbar]:hidden"
-            style={{ scrollbarWidth: 'none' }}
-          >
-            <FilterPill active={selectedCategory === 'all'} onClick={() => setSelectedCategory('all')}>
-              Toutes
-            </FilterPill>
-            {categories.map((cat) => (
-              <FilterPill
-                key={cat.key}
-                active={selectedCategory === cat.key}
-                onClick={() => setSelectedCategory(cat.key)}
-              >
-                {cat.label}
+          {/* Ligne 2 : catégories — carrousel (flèches + fondus) */}
+          <div className="relative">
+            {/* fondus latéraux */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 z-10 bg-gradient-to-r from-cosmos-warm to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 z-10 bg-gradient-to-l from-cosmos-warm to-transparent" />
+            {/* flèches (desktop) */}
+            <button
+              type="button"
+              onClick={() => scrollPills(-1)}
+              aria-label="Précédent"
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 w-8 h-8 items-center justify-center rounded-full bg-white border border-cosmos-night/10 shadow-sm text-cosmos-night/60 hover:text-cosmos-night hover:border-cosmos-gold/50 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollPills(1)}
+              aria-label="Suivant"
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 w-8 h-8 items-center justify-center rounded-full bg-white border border-cosmos-night/10 shadow-sm text-cosmos-night/60 hover:text-cosmos-night hover:border-cosmos-gold/50 transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <div
+              ref={pillsRef}
+              className="flex items-center gap-2 overflow-x-auto flex-nowrap px-1 md:px-10 pb-0.5 scroll-smooth [&::-webkit-scrollbar]:hidden"
+              style={{ scrollbarWidth: 'none' }}
+            >
+              <FilterPill active={selectedCategory === 'all'} onClick={() => setSelectedCategory('all')}>
+                Toutes
               </FilterPill>
-            ))}
+              {categories.map((cat) => (
+                <FilterPill
+                  key={cat.key}
+                  active={selectedCategory === cat.key}
+                  onClick={() => setSelectedCategory(cat.key)}
+                >
+                  {cat.label}
+                </FilterPill>
+              ))}
+            </div>
           </div>
         </div>
       </section>
