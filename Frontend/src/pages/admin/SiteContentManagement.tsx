@@ -14,6 +14,9 @@ import {
   Smartphone,
   PanelRightOpen,
   PanelRightClose,
+  PanelLeftOpen,
+  PanelLeftClose,
+  X,
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
@@ -80,6 +83,7 @@ const SiteContentManagement: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showPreview, setShowPreview] = useState(true);
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop');
   const [previewNonce, setPreviewNonce] = useState(0);
@@ -197,6 +201,23 @@ const SiteContentManagement: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setSidebarOpen((s) => !s)}
+            className={`hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition-colors ${
+              sidebarOpen
+                ? 'border-cosmos-cream text-text-secondary hover:border-gray-400'
+                : 'border-cosmos-gold bg-cosmos-gold/10 text-cosmos-night'
+            }`}
+            type="button"
+            title={sidebarOpen ? 'Replier les onglets' : 'Afficher les onglets'}
+          >
+            {sidebarOpen ? (
+              <PanelLeftClose className="w-4 h-4" strokeWidth={1.5} />
+            ) : (
+              <PanelLeftOpen className="w-4 h-4" strokeWidth={1.5} />
+            )}
+            Onglets
+          </button>
+          <button
             onClick={() => setShowPreview((s) => !s)}
             className={`hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md border text-sm transition-colors ${
               showPreview
@@ -239,30 +260,40 @@ const SiteContentManagement: React.FC = () => {
         <p className="text-sm text-text-secondary p-6">Aucun contenu éditable pour l'instant.</p>
       ) : (
         <div className="flex-1 min-h-0 flex gap-0 mt-4">
-          {/* Sidebar onglets */}
-          <aside className="w-48 lg:w-56 flex-shrink-0 overflow-y-auto pr-3 border-r border-cosmos-cream">
-            <nav className="space-y-1">
-              {groupNames.map((g) => {
-                const active = g === activeGroup;
-                return (
-                  <button
-                    key={g}
-                    onClick={() => setActiveGroup(g)}
-                    className={`w-full text-left px-3 py-2 rounded-md text-sm font-inter transition-colors flex items-center justify-between gap-2 ${
-                      active
-                        ? 'bg-cosmos-night text-cosmos-cream'
-                        : 'text-cosmos-night/70 hover:bg-cosmos-cream'
-                    }`}
-                  >
-                    <span className="truncate">{g}</span>
-                    {groupDirty(g) && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-cosmos-gold flex-shrink-0" />
-                    )}
-                  </button>
-                );
-              })}
-            </nav>
-          </aside>
+          {/* Sidebar onglets (repliable) */}
+          {sidebarOpen ? (
+            <aside className="w-48 lg:w-56 flex-shrink-0 overflow-y-auto pr-3 border-r border-cosmos-cream">
+              <nav className="space-y-1">
+                {groupNames.map((g) => {
+                  const active = g === activeGroup;
+                  return (
+                    <button
+                      key={g}
+                      onClick={() => setActiveGroup(g)}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm font-inter transition-colors flex items-center justify-between gap-2 ${
+                        active
+                          ? 'bg-cosmos-night text-cosmos-cream'
+                          : 'text-cosmos-night/70 hover:bg-cosmos-cream'
+                      }`}
+                    >
+                      <span className="truncate">{g}</span>
+                      {groupDirty(g) && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-cosmos-gold flex-shrink-0" />
+                      )}
+                    </button>
+                  );
+                })}
+              </nav>
+            </aside>
+          ) : (
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="hidden md:flex flex-shrink-0 w-8 items-start justify-center pt-1 border-r border-cosmos-cream text-text-secondary hover:text-cosmos-night"
+              title="Afficher les onglets"
+            >
+              <PanelLeftOpen className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+          )}
 
           {/* Éditeur du groupe */}
           <div className="flex-1 min-w-0 overflow-y-auto px-4">
@@ -385,6 +416,13 @@ const SiteContentManagement: React.FC = () => {
                   >
                     <ExternalLink className="w-3.5 h-3.5" strokeWidth={1.5} />
                   </a>
+                  <button
+                    onClick={() => setShowPreview(false)}
+                    className="p-1.5 rounded text-text-secondary hover:bg-cosmos-cream"
+                    title="Replier l'aperçu"
+                  >
+                    <X className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  </button>
                 </div>
               </div>
               <div className="flex-1 min-h-0 bg-cosmos-cream/30 rounded-lg overflow-hidden flex items-start justify-center p-2">
