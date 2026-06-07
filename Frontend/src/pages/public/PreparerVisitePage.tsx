@@ -4,10 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Car, Bus, Smartphone, ParkingCircle, Clock, Wifi, Baby, Accessibility, CreditCard, Battery, MapPin, ArrowRight, ChevronDown } from 'lucide-react';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import PageHero from '../../components/common/PageHero';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import heroImage from '../../assets/images/branding/hero-exterior.jpg';
 
 const PreparerVisitePage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const services = [
     { icon: Wifi, label: t('visit.services.wifi.label'), desc: t('visit.services.wifi.desc') },
@@ -36,18 +39,13 @@ const PreparerVisitePage: React.FC = () => {
           { name: 'Préparer votre visite', url: '/preparer-visite' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[45vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns" style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('visit.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('visit.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('visit.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('visit.hero.image') || heroImage}
+        alt="Préparer votre visite — Cosmos Angré"
+        overline={c('visit.hero.overline', t('visit.hero.overline'))}
+        title={c('visit.hero.title', t('visit.hero.title'))}
+        subtitle={c('visit.hero.subtitle', t('visit.hero.subtitle'))}
+      />
 
       {/* How to get there */}
       <section className="section bg-cosmos-warm">

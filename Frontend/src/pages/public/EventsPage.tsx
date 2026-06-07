@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { Calendar, MapPin, Clock, Users, ArrowRight, CalendarDays, ListChecks } from 'lucide-react';
 
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import LifeCalendarSection from '../../components/features/events/LifeCalendarSection';
 import galaEvent from '../../assets/images/branding/gala-event.jpg';
 import eventHall from '../../assets/images/branding/event-hall.jpg';
@@ -15,6 +17,7 @@ type EventsTab = 'agenda' | 'calendar';
 
 const EventsPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
   const [activeTab, setActiveTab] = useState<EventsTab>('agenda');
 
   const upcomingEvents = [
@@ -47,28 +50,13 @@ const EventsPage: React.FC = () => {
         ])}
       />
 
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage
-            src={galaEvent}
-            alt="Événements Cosmos Angré"
-            containerClassName="w-full h-full"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">
-            {t('events.hero.overline')}
-          </span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">
-            {t('events.hero.title')}
-          </h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('events.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('events.hero.image') || galaEvent}
+        alt="Événements Cosmos Angré"
+        overline={c('events.hero.overline', t('events.hero.overline'))}
+        title={c('events.hero.title', t('events.hero.title'))}
+        subtitle={c('events.hero.subtitle', t('events.hero.subtitle'))}
+      />
 
       {/* Tabs */}
       <nav

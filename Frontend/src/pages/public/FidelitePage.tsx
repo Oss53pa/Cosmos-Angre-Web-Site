@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Star, Crown, Award, Gift, ArrowRight, Percent, Calendar, Car } from 'lucide-react';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 
 const FidelitePage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
   const navigate = useNavigate();
 
   const tiers = [
@@ -46,10 +48,10 @@ const FidelitePage: React.FC = () => {
       <section className="relative py-32 md:py-40 bg-cosmos-night overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-cosmos-gold/5 to-transparent" />
         <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('fidelity.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('fidelity.hero.title')}</h1>
+          <span className="overline mb-4 block animate-fade-in-down">{c('fidelity.hero.overline', t('fidelity.hero.overline'))}</span>
+          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up text-balance">{c('fidelity.hero.title', t('fidelity.hero.title'))}</h1>
           <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('fidelity.hero.subtitle')}
+            {c('fidelity.hero.subtitle', t('fidelity.hero.subtitle'))}
           </p>
         </div>
       </section>

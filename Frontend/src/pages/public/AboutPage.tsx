@@ -5,8 +5,11 @@ import { Award, MapPin, ArrowRight } from 'lucide-react';
 import { BRANDING, LOCATION, WHY_CHOOSE, SUSTAINABILITY, KEY_FIGURES } from '../../utils/brochureData';
 
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
+import Reveal from '../../components/common/Reveal';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import heroExterior from '../../assets/images/branding/hero-exterior.jpg';
 import locationAerial from '../../assets/images/branding/location-aerial.jpg';
 import edgeBuilding from '../../assets/images/branding/edge-building.jpg';
@@ -17,6 +20,7 @@ import familyLifestyle from '../../assets/images/branding/family-lifestyle.jpg';
 
 const AboutPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   return (
     <div className="bg-cosmos-warm">
@@ -29,22 +33,13 @@ const AboutPage: React.FC = () => {
           { name: 'À propos', url: '/a-propos' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage src={heroExterior} alt="Cosmos Angre Exterieur" containerClassName="w-full h-full" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('about.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">
-            {BRANDING.tagline}
-          </h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            "{BRANDING.mainSlogan}"
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('about.hero.image') || heroExterior}
+        alt="Cosmos Angré"
+        overline={c('about.hero.overline', t('about.hero.overline'))}
+        title={c('about.hero.title', BRANDING.tagline)}
+        subtitle={c('about.hero.subtitle', BRANDING.mainSlogan)}
+      />
 
       {/* Introduction */}
       <section className="section bg-cosmos-warm">

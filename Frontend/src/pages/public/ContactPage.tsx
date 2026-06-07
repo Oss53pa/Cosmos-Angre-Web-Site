@@ -4,6 +4,8 @@ import { Mail, MapPin, Phone, Clock, Send, CheckCircle, AlertCircle } from 'luci
 import { BRANDING } from '../../utils/brochureData';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import PageHero from '../../components/common/PageHero';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import locationAerial from '../../assets/images/branding/location-aerial.jpg';
 import { submitContact } from '../../lib/api/contact';
 import { toast } from '../../lib/ui/toast';
@@ -18,6 +20,7 @@ interface FormData {
 
 const ContactPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -69,17 +72,13 @@ const ContactPage: React.FC = () => {
           { name: 'Contact', url: '/contact' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative py-32 md:py-40 bg-cosmos-night overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-cosmos-gold/5 to-transparent" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('contact.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('contact.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('contact.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('contact.hero.image') || locationAerial}
+        alt="Contact — Cosmos Angré"
+        overline={c('contact.hero.overline', t('contact.hero.overline'))}
+        title={c('contact.hero.title', t('contact.hero.title'))}
+        subtitle={c('contact.hero.subtitle', t('contact.hero.subtitle'))}
+      />
 
       {/* Form + Info */}
       <section className="section bg-cosmos-warm">

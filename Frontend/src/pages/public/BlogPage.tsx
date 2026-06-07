@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import OptimizedImage from '../../components/common/OptimizedImage';
+import PageHero from '../../components/common/PageHero';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import familyLifestyle from '../../assets/images/branding/family-lifestyle.jpg';
 import galleryInterior from '../../assets/images/branding/gallery-interior.jpg';
 import artisanMarket from '../../assets/images/branding/artisan-market.jpg';
 
 const BlogPage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const articles = [
     { id: 1, slug: 'ouverture-cosmos-angre', key: 'ouverture', image: galleryInterior },
@@ -29,20 +32,13 @@ const BlogPage: React.FC = () => {
           { name: 'Magazine', url: '/blog' },
         ])}
       />
-      {/* Hero */}
-      <section className="relative h-[50vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
-          <OptimizedImage src={familyLifestyle} alt="Blog Cosmos Angre" containerClassName="w-full h-full" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmos-night/80 via-cosmos-night/60 to-cosmos-night/80" />
-        <div className="container-cosmos relative z-10 text-center">
-          <span className="overline mb-4 block animate-fade-in-down">{t('blog.hero.overline')}</span>
-          <h1 className="font-cormorant text-5xl md:text-7xl text-cosmos-cream font-light mb-4 animate-fade-in-up">{t('blog.hero.title')}</h1>
-          <p className="text-base text-cosmos-cream/60 font-inter font-light max-w-xl mx-auto">
-            {t('blog.hero.subtitle')}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={c('blog.hero.image') || familyLifestyle}
+        alt="Magazine Cosmos Angré"
+        overline={c('blog.hero.overline', t('blog.hero.overline'))}
+        title={c('blog.hero.title', t('blog.hero.title'))}
+        subtitle={c('blog.hero.subtitle', t('blog.hero.subtitle'))}
+      />
 
       {/* Articles */}
       <section className="section bg-cosmos-warm">
