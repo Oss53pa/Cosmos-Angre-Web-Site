@@ -76,6 +76,17 @@ const StoresPage: React.FC = () => {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [brands, selectedCategory, searchTerm]);
 
+  // Regroupement par catégorie (rendu annuaire éditorial quand "Toutes" est actif)
+  const groups = useMemo(() => {
+    const map = new Map<string, { label: string; items: Brand[] }>();
+    for (const b of filtered) {
+      const key = b.categoryKey || 'autres';
+      if (!map.has(key)) map.set(key, { label: b.category || 'Autres', items: [] });
+      map.get(key)!.items.push(b);
+    }
+    return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
+  }, [filtered]);
+
   const openBrand = (b: Brand) =>
     setSelectedStore({
       id: b.slug,
@@ -149,44 +160,51 @@ const StoresPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Mur de logos */}
+      {/* Annuaire des enseignes */}
       <section className="section bg-cosmos-warm">
         <div className="container-cosmos">
+          {/* Compteur de résultats */}
+          <div className="flex items-baseline justify-between mb-10">
+            <p className="text-xs uppercase tracking-[0.2em] text-cosmos-night/45 font-inter">
+              {filtered.length} {filtered.length > 1 ? 'enseignes' : 'enseigne'}
+              {selectedCategory !== 'all' && (
+                <span className="text-cosmos-night/30"> · {categories.find((c2) => c2.key === selectedCategory)?.label}</span>
+              )}
+            </p>
+          </div>
+
           {filtered.length === 0 ? (
             <p className="text-center text-cosmos-night/50 font-inter font-light py-20">
               Aucune enseigne pour ce filtre.
             </p>
+          ) : selectedCategory === 'all' && searchTerm.trim() === '' ? (
+            // Vue annuaire : sections par catégorie
+            <div className="space-y-16">
+              {groups.map((g) => (
+                <div key={g.label}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <h2 className="font-cormorant text-2xl md:text-3xl text-cosmos-night font-light whitespace-nowrap">
+                      {g.label}
+                    </h2>
+                    <span className="text-[11px] text-cosmos-night/40 font-inter">{g.items.length}</span>
+                    <span className="flex-1 h-px bg-cosmos-night/10" />
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+                    {g.items.map((b, i) => (
+                      <Reveal key={b.slug} delay={Math.min(i, 10) * 30}>
+                        <BrandTile brand={b} onOpen={() => openBrand(b)} />
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 md:gap-3">
+            // Vue filtrée / recherche : grille simple
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
               {filtered.map((b, i) => (
-                <Reveal key={b.slug} delay={Math.min(i, 14) * 30}>
-                  <button
-                    type="button"
-                    onClick={() => openBrand(b)}
-                    className="group w-full h-28 md:h-32 bg-white rounded-lg border border-cosmos-night/5 flex flex-col items-center justify-center px-3 text-center transition-all duration-400 hover:-translate-y-1 hover:border-cosmos-gold/40 hover:shadow-[0_16px_36px_-22px_rgb(var(--cosmos-night)/0.35)]"
-                  >
-                    {b.logo ? (
-                      <img
-                        src={b.logo}
-                        alt={b.name}
-                        className="max-h-10 md:max-h-12 max-w-[78%] object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span className="font-cormorant text-base md:text-lg text-cosmos-night font-light leading-tight line-clamp-2 group-hover:text-cosmos-gold transition-colors">
-                        {b.name}
-                      </span>
-                    )}
-                    <span className="mt-1.5 text-[9px] uppercase tracking-[0.14em] text-cosmos-night/45 font-inter line-clamp-1">
-                      {b.category}
-                    </span>
-                    {b.zone && (
-                      <span className="mt-0.5 inline-flex items-center gap-1 text-[9px] text-cosmos-night/35 font-inter line-clamp-1">
-                        <MapPin className="w-2.5 h-2.5" strokeWidth={1.5} />
-                        {b.zone}
-                      </span>
-                    )}
-                  </button>
+                <Reveal key={b.slug} delay={Math.min(i, 14) * 25}>
+                  <BrandTile brand={b} onOpen={() => openBrand(b)} />
                 </Reveal>
               ))}
             </div>
@@ -217,6 +235,54 @@ const StoresPage: React.FC = () => {
         </div>
       </section>
     </div>
+  );
+};
+
+const BrandTile: React.FC<{ brand: Brand; onOpen: () => void }> = ({ brand: b, onOpen }) => {
+  const initial = (b.name.trim().charAt(0) || '·').toUpperCase();
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className="group relative w-full aspect-[4/5] sm:aspect-square bg-white rounded-xl border border-cosmos-night/[0.06] overflow-hidden flex flex-col items-center justify-center px-3 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-cosmos-gold/40 hover:shadow-[0_22px_48px_-26px_rgb(var(--cosmos-night)/0.45)]"
+    >
+      {/* Monogramme filigrane */}
+      {!b.logo && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -top-3 -right-1 font-cormorant text-[5.5rem] leading-none text-cosmos-gold/[0.06] group-hover:text-cosmos-gold/[0.12] transition-colors select-none"
+        >
+          {initial}
+        </span>
+      )}
+
+      <div className="relative z-10 flex flex-col items-center justify-center">
+        {b.logo ? (
+          <img
+            src={b.logo}
+            alt={b.name}
+            className="max-h-12 md:max-h-14 max-w-[80%] object-contain grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+            loading="lazy"
+          />
+        ) : (
+          <span className="font-cormorant text-lg md:text-xl text-cosmos-night font-light leading-tight line-clamp-2 group-hover:text-cosmos-gold transition-colors">
+            {b.name}
+          </span>
+        )}
+
+        <span className="mt-2 h-px w-6 bg-cosmos-gold/40 group-hover:w-10 transition-all duration-500" />
+
+        <span className="mt-2 text-[9px] uppercase tracking-[0.16em] text-cosmos-night/40 font-inter line-clamp-1">
+          {b.category}
+        </span>
+        {b.zone && (
+          <span className="mt-1 inline-flex items-center gap-1 text-[9px] text-cosmos-night/30 font-inter line-clamp-1">
+            <MapPin className="w-2.5 h-2.5" strokeWidth={1.5} />
+            {b.zone}
+          </span>
+        )}
+      </div>
+    </button>
   );
 };
 
