@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import PracticalBar from '../components/layout/PracticalBar';
 import PageTransition from '../components/common/PageTransition';
 
 const PublicLayout: React.FC = () => {
@@ -16,6 +17,7 @@ const PublicLayout: React.FC = () => {
           <Outlet />
         </PageTransition>
       </main>
+      <PracticalBar />
       <Footer />
     </div>
   );

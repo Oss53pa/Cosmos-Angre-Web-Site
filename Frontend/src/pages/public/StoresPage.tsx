@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search } from 'lucide-react';
+import { ArrowRight, Search, MapPin } from 'lucide-react';
 
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd } from '../../lib/seo/jsonLd';
@@ -177,9 +177,15 @@ const StoresPage: React.FC = () => {
                         {b.name}
                       </span>
                     )}
-                    <span className="mt-1.5 text-[9px] uppercase tracking-[0.14em] text-cosmos-night/40 font-inter line-clamp-1">
+                    <span className="mt-1.5 text-[9px] uppercase tracking-[0.14em] text-cosmos-night/45 font-inter line-clamp-1">
                       {b.category}
                     </span>
+                    {b.zone && (
+                      <span className="mt-0.5 inline-flex items-center gap-1 text-[9px] text-cosmos-night/35 font-inter line-clamp-1">
+                        <MapPin className="w-2.5 h-2.5" strokeWidth={1.5} />
+                        {b.zone}
+                      </span>
+                    )}
                   </button>
                 </Reveal>
               ))}
