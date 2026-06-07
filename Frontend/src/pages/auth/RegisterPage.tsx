@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Eye, EyeOff, Mail, Lock, User, Phone, ArrowRight, Check } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { supabase } from '../../lib/supabase';
+import { subscribeNewsletter } from '../../lib/api/contact';
 import CosmosLogo from '../../components/ui/CosmosLogo';
 
 const RegisterPage: React.FC = () => {
@@ -46,9 +46,10 @@ const RegisterPage: React.FC = () => {
       setError(signUpError);
       return;
     }
-    // Newsletter opt-in
+    // Newsletter opt-in — via l'Edge Function (rate-limit + honeypot) plutôt
+    // qu'un insert anon direct.
     if (formData.newsletter) {
-      await supabase.from('newsletter_subscribers').insert({
+      await subscribeNewsletter({
         email: formData.email,
         name: `${formData.firstName} ${formData.lastName}`.trim(),
         source: 'registration',

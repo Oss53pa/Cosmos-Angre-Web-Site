@@ -16,15 +16,22 @@ import type { Profile, UserRole } from '../types/database';
 const DEV_BYPASS_KEY = 'cosmos_dev_admin';
 
 // ============================================================
-// ⚠️ LIBRE ACCÈS TEMPORAIRE (pré-lancement)
+// 🔒 LIBRE ACCÈS — DÉSACTIVÉ (lancement public)
 // ------------------------------------------------------------
-// Quand `true`, un profil SUPER_ADMIN factice est injecté sans connexion :
-// tous les espaces (admin, enseigne, superadmin) sont accessibles librement,
-// en DEV **et** en PROD. Aucun mot de passe requis.
+// Quand `true`, un profil SUPER_ADMIN factice était injecté sans connexion :
+// tous les espaces (admin, enseigne, superadmin) étaient accessibles
+// librement, en DEV **et** en PROD, sans mot de passe.
 //
-// 🔒 À REPASSER À `false` AVANT LA VRAIE MISE EN LIGNE.
+// Repassé à `false` pour le lancement public : l'accès admin passe désormais
+// par la vraie authentification Supabase (LoginPage → signIn →
+// supabase.auth.signInWithPassword), et les routes sont gardées par
+// ProtectedRoute selon le rôle du profil.
+//
+// ⚠️ NE PAS REMETTRE À `true` EN PRODUCTION.
+// Pour un accès console en dev local sans login : voir le DEV BYPASS
+// ci-dessus (localStorage `cosmos_dev_admin = '1'`, dev uniquement).
 // ============================================================
-const OPEN_ACCESS = true;
+const OPEN_ACCESS = false;
 
 const isDevBypassActive = (): boolean => {
   if (!import.meta.env.DEV) return false;

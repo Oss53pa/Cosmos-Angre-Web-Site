@@ -5,7 +5,7 @@ import Seo from '../../lib/seo/Seo';
 import GalaxyCanvas from '../../components/features/galaxy/GalaxyCanvas';
 import GrainOverlay from '../../components/features/galaxy/GrainOverlay';
 import CosmosLogo from '../../components/ui/CosmosLogo';
-import { supabase } from '../../lib/supabase';
+import { subscribeNewsletter } from '../../lib/api/contact';
 
 /**
  * PreLaunchPage — Page de pré-lancement (vague 1, teasing).
@@ -109,10 +109,10 @@ const PreLaunchPage: React.FC = () => {
       setStatus('loading');
       setMessage('');
       try {
-        const { error } = await supabase
-          .from('newsletter_subscribers')
-          .upsert({ email: value, status: 'active' }, { onConflict: 'email' });
-        if (error) throw error;
+        // Passe par l'Edge Function (rate-limit + honeypot) plutôt qu'un
+        // insert anon direct — l'anti-spam est appliqué côté serveur.
+        const res = await subscribeNewsletter({ email: value, source: 'prelaunch' });
+        if (!res.ok) throw new Error(res.error);
         setStatus('success');
       } catch {
         setStatus('error');

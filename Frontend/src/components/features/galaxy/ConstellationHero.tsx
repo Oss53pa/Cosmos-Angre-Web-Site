@@ -333,20 +333,30 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
       </div>
       )}
 
-      {/* ── En-tête (mode "section navigation" sous le hero) ── */}
+      {/* ── En-tête (mode "section navigation") — au CENTRE de la galaxie ── */}
       {!showSignature && (
-        <div className="relative z-20 pt-20 md:pt-28 text-center px-5">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <span className="w-6 h-px bg-cosmos-gold/60" />
-            <span className="overline text-cosmos-gold">{overline}</span>
-            <span className="w-6 h-px bg-cosmos-gold/60" />
+        <div className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-5 pointer-events-none">
+          {/* Voile de lisibilité au cœur */}
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] max-w-[90vw] h-[320px] pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse at center, rgb(var(--cosmos-night-deep) / 0.7) 0%, transparent 65%)',
+            }}
+          />
+          <div className="relative">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="w-6 h-px bg-cosmos-gold/60" />
+              <span className="overline text-cosmos-gold">{overline}</span>
+              <span className="w-6 h-px bg-cosmos-gold/60" />
+            </div>
+            <h2
+              className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-cosmos-cream font-light text-balance"
+              style={{ textShadow: '0 2px 24px rgb(var(--cosmos-night-deep) / 0.8)' }}
+            >
+              {heading}
+            </h2>
           </div>
-          <h2
-            className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-cosmos-cream font-light text-balance"
-            style={{ textShadow: '0 2px 24px rgb(var(--cosmos-night-deep) / 0.8)' }}
-          >
-            {heading}
-          </h2>
         </div>
       )}
 
