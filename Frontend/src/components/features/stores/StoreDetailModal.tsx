@@ -49,6 +49,9 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
                   src={store.logo}
                   alt={store.name}
                   className="relative max-h-16 md:max-h-20 max-w-[55%] object-contain"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                  }}
                 />
               ) : null}
 

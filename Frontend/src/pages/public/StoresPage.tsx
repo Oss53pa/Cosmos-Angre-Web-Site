@@ -367,20 +367,22 @@ const StoresPage: React.FC = () => {
 
 const BrandTile: React.FC<{ brand: Brand; onOpen: () => void }> = ({ brand: b, onOpen }) => {
   const initial = (b.name.trim().charAt(0) || '·').toUpperCase();
+  const [logoOk, setLogoOk] = useState(!!b.logo);
   return (
     <button
       type="button"
       onClick={onOpen}
       className="group relative w-full h-full bg-white rounded-2xl border border-cosmos-night/[0.07] px-4 py-6 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-cosmos-gold/45 hover:shadow-[0_26px_54px_-28px_rgb(var(--cosmos-night)/0.5)]"
     >
-      {/* Médaillon : logo si dispo, sinon monogramme or */}
+      {/* Médaillon : logo si dispo (repli monogramme si l'image échoue) */}
       <div className="relative w-16 h-16 mb-4 rounded-full flex items-center justify-center bg-cosmos-cream/60 ring-1 ring-cosmos-gold/20 group-hover:ring-cosmos-gold/55 transition-all duration-500 overflow-hidden">
-        {b.logo ? (
+        {b.logo && logoOk ? (
           <img
             src={b.logo}
             alt={b.name}
             className="max-h-10 max-w-[78%] object-contain"
             loading="lazy"
+            onError={() => setLogoOk(false)}
           />
         ) : (
           <span className="font-cormorant text-2xl text-cosmos-gold font-light leading-none select-none">
