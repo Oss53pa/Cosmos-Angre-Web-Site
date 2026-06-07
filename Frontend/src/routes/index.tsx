@@ -75,6 +75,7 @@ const SiteContentManagement = lazy(() => import('../pages/admin/SiteContentManag
 const ClubManagement = lazy(() => import('../pages/admin/ClubManagement'));
 const WayfindingManagement = lazy(() => import('../pages/admin/WayfindingManagement'));
 const PagesManagement = lazy(() => import('../pages/admin/PagesManagement'));
+const BlocksManagement = lazy(() => import('../pages/admin/BlocksManagement'));
 
 // Store Pages
 const StoreDashboard = lazy(() => import('../pages/store/StoreDashboard'));
@@ -220,6 +221,7 @@ const router = createBrowserRouter([
           { path: 'cosmos-club', element: wrap(<ClubManagement />, 'admin') },
           { path: 'wayfinding', element: wrap(<WayfindingManagement />, 'admin') },
           { path: 'pages', element: wrap(<PagesManagement />, 'admin') },
+          { path: 'blocs', element: wrap(<BlocksManagement />, 'admin') },
           { path: 'newsletter', element: wrap(<NewsletterManagement />, 'admin') },
           { path: 'messages', element: wrap(<ContactsManagement />, 'admin') },
           { path: 'blog', element: wrap(<BlogManagement />, 'admin') },

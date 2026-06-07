@@ -25,6 +25,7 @@ import {
   Crown,
   MapPin,
   Files,
+  Layers,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -83,6 +84,7 @@ const AdminLayout: React.FC = () => {
     { icon: Image, label: t('admin.sidebar.media', 'Medias'), path: '/admin/medias' },
     { icon: MapPin, label: t('admin.sidebar.wayfinding', 'Plan / Wayfinding'), path: '/admin/wayfinding' },
     { icon: Files, label: t('admin.sidebar.pages', 'Pages du site'), path: '/admin/pages' },
+    { icon: Layers, label: t('admin.sidebar.blocks', 'Blocs de page'), path: '/admin/blocs' },
     { icon: Settings, label: t('admin.sidebar.settings', 'Parametres'), path: '/admin/parametres' },
   ];
 

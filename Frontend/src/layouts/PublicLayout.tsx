@@ -4,6 +4,7 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import PracticalBar from '../components/layout/PracticalBar';
 import PageTransition from '../components/common/PageTransition';
+import PageBlocks from '../components/common/PageBlocks';
 
 const PublicLayout: React.FC = () => {
   const location = useLocation();
@@ -16,6 +17,8 @@ const PublicLayout: React.FC = () => {
         <PageTransition>
           <Outlet />
         </PageTransition>
+        {/* Blocs additionnels gérés depuis l'admin (Console → Blocs de page) */}
+        <PageBlocks />
       </main>
       <PracticalBar />
       <Footer />
