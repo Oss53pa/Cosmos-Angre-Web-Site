@@ -20,8 +20,12 @@ import {
   Trash2,
   X,
   Save,
+  Upload,
+  Loader2,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useStores } from '../../hooks/useStores';
+import { supabase } from '../../lib/supabase';
 
 interface StoreType {
   id: string;
@@ -39,6 +43,7 @@ interface StoreType {
   revenue: number;
   views: number;
   rating: number;
+  logo?: string;
   description?: string;
   openingHours?: string;
   website?: string;
@@ -54,6 +59,7 @@ interface StoreType {
 interface StoreFormData {
   name: string;
   slug: string;
+  logo: string;
   description: string;
   category: string;
   zone: string;
@@ -69,6 +75,7 @@ interface StoreFormData {
 const emptyStoreForm: StoreFormData = {
   name: '',
   slug: '',
+  logo: '',
   description: '',
   category: '',
   zone: '',
@@ -99,6 +106,30 @@ const StoresManagement: React.FC = () => {
   const [deleteStoreModal, setDeleteStoreModal] = useState<StoreType | null>(null);
   const [formData, setFormData] = useState<StoreFormData>(emptyStoreForm);
   const [isSaving, setIsSaving] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+
+  const uploadLogo = async (file: File) => {
+    setUploadingLogo(true);
+    try {
+      const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+      const base = (formData.slug || formData.name || 'logo').replace(/[^a-z0-9._-]/gi, '_');
+      const path = `logos/${base}-${Date.now()}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from('site')
+        .upload(path, file, { upsert: true, cacheControl: '3600' });
+      if (upErr) {
+        setFeedbackMessage({ type: 'error', text: 'Téléversement du logo échoué.' });
+        return;
+      }
+      const { data } = supabase.storage.from('site').getPublicUrl(path);
+      setFormData((prev) => ({ ...prev, logo: data.publicUrl }));
+      setFeedbackMessage({ type: 'success', text: 'Logo téléversé — pensez à Enregistrer.' });
+    } catch {
+      setFeedbackMessage({ type: 'error', text: 'Téléversement du logo échoué.' });
+    } finally {
+      setUploadingLogo(false);
+    }
+  };
   const [feedbackMessage, setFeedbackMessage] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -140,6 +171,7 @@ const StoresManagement: React.FC = () => {
       revenue: 0, // Placeholder - to be populated from analytics later
       views: store.view_count,
       rating: store.rating,
+      logo: store.logo || undefined,
       description: store.description || undefined,
       openingHours: store.hours || undefined,
       website: store.website || undefined,
@@ -249,6 +281,7 @@ const StoresManagement: React.FC = () => {
     setFormData({
       name: store.name,
       slug: store.slug,
+      logo: store.logo || '',
       description: store.description || '',
       category: store.category === 'Non catégorisé' ? '' : store.category,
       zone: store.floor,
@@ -294,6 +327,7 @@ const StoresManagement: React.FC = () => {
       const payload = {
         name: formData.name,
         slug: formData.slug,
+        logo: formData.logo || null,
         description: formData.description || null,
         category: formData.category || null,
         zone: formData.zone || null,
@@ -395,6 +429,53 @@ const StoresManagement: React.FC = () => {
                   className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light bg-gray-50"
                   placeholder={t('admin.stores.form.slugPlaceholder', 'auto-genere-depuis-nom')}
                 />
+              </div>
+
+              {/* Logo */}
+              <div>
+                <label className="block text-sm font-light text-text-secondary mb-1">
+                  {t('admin.stores.form.logo', 'Logo')}
+                </label>
+                <div className="flex items-start gap-3">
+                  {formData.logo ? (
+                    <img
+                      src={formData.logo}
+                      alt="logo"
+                      className="w-20 h-20 object-contain rounded border border-cosmos-cream bg-white flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded border border-dashed border-cosmos-cream flex items-center justify-center text-text-secondary flex-shrink-0">
+                      <ImageIcon className="w-6 h-6" strokeWidth={1.25} />
+                    </div>
+                  )}
+                  <div className="flex-1 space-y-2">
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-cosmos-night text-white text-sm font-light cursor-pointer hover:bg-opacity-90 transition-colors">
+                      {uploadingLogo ? (
+                        <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                      ) : (
+                        <Upload className="w-4 h-4" strokeWidth={1.5} />
+                      )}
+                      {t('admin.stores.form.uploadLogo', 'Téléverser un logo')}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void uploadLogo(f);
+                          e.currentTarget.value = '';
+                        }}
+                      />
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.logo}
+                      onChange={(e) => handleFormChange('logo', e.target.value)}
+                      placeholder="…ou collez une URL de logo"
+                      className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Description */}

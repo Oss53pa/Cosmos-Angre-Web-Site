@@ -195,14 +195,18 @@ const StoresPage: React.FC = () => {
         <GrainOverlay opacity={0.05} />
         <div className="container-cosmos relative z-10 text-center">
           <CosmicDivider variant="dark" className="mb-10" />
-          <span className="overline mb-4 block">Espace Pro</span>
-          <h2 className="section-title-light">Vous voulez ouvrir une enseigne ?</h2>
+          <span className="overline mb-4 block">{c('stores.pro.overline', 'Espace Pro')}</span>
+          <h2 className="section-title-light">
+            {c('stores.pro.title', 'Vous voulez ouvrir une enseigne ?')}
+          </h2>
           <p className="section-subtitle-light max-w-lg mx-auto">
-            Rejoignez la destination qui fait déjà parler tout Angré. Notre équipe leasing vous
-            accompagne, de l'emplacement à l'ouverture.
+            {c(
+              'stores.pro.subtitle',
+              "Rejoignez la destination qui fait déjà parler tout Angré. Notre équipe leasing vous accompagne, de l'emplacement à l'ouverture."
+            )}
           </p>
           <Link to="/professionnels/devenir-enseigne" className="btn-primary">
-            Devenir enseigne <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+            {c('stores.pro.cta', 'Devenir enseigne')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
           </Link>
         </div>
       </section>
