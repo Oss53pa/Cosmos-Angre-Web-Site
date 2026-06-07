@@ -150,14 +150,9 @@
   --color-text-muted: #5c4a3a;
 
   /* === Gradients === */
-  /* Dégradés "Or Cuivré" : highlight cuivre clair → cuivré → cuivre profond,
-     sans dérive champagne (l'Or Doux était trop jaune sur les CTA / accents). */
-  --gradient-gold: linear-gradient(
-    135deg,
-    #ddaa55 0%,
-    rgb(var(--cosmos-gold)) 52%,
-    rgb(var(--cosmos-accent)) 100%
-  );
+  /* Or Cuivré MAT : cuivré → cuivre profond, sans highlight clair ni champagne.
+     Plage resserrée = rendu plat/mat (pas d'effet brillant). */
+  --gradient-gold: linear-gradient(135deg, rgb(var(--cosmos-gold)), rgb(var(--cosmos-accent)));
   --gradient-accent: linear-gradient(135deg, rgb(var(--cosmos-gold)), rgb(var(--cosmos-accent)));
   --gradient-night: linear-gradient(
     180deg,
