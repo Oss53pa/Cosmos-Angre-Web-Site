@@ -282,44 +282,42 @@ const BrandTile: React.FC<{ brand: Brand; onOpen: () => void }> = ({ brand: b, o
     <button
       type="button"
       onClick={onOpen}
-      className="group relative w-full aspect-[4/5] sm:aspect-square bg-white rounded-xl border border-cosmos-night/[0.06] overflow-hidden flex flex-col items-center justify-center px-3 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-cosmos-gold/40 hover:shadow-[0_22px_48px_-26px_rgb(var(--cosmos-night)/0.45)]"
+      className="group relative w-full h-full bg-white rounded-2xl border border-cosmos-night/[0.07] px-4 py-6 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-cosmos-gold/45 hover:shadow-[0_26px_54px_-28px_rgb(var(--cosmos-night)/0.5)]"
     >
-      {/* Monogramme filigrane */}
-      {!b.logo && (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-3 -right-1 font-cormorant text-[5.5rem] leading-none text-cosmos-gold/[0.06] group-hover:text-cosmos-gold/[0.12] transition-colors select-none"
-        >
-          {initial}
-        </span>
-      )}
-
-      <div className="relative z-10 flex flex-col items-center justify-center">
+      {/* Médaillon : logo si dispo, sinon monogramme or */}
+      <div className="relative w-16 h-16 mb-4 rounded-full flex items-center justify-center bg-cosmos-cream/60 ring-1 ring-cosmos-gold/20 group-hover:ring-cosmos-gold/55 transition-all duration-500 overflow-hidden">
         {b.logo ? (
           <img
             src={b.logo}
             alt={b.name}
-            className="max-h-12 md:max-h-14 max-w-[80%] object-contain grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+            className="max-h-10 max-w-[78%] object-contain"
             loading="lazy"
           />
         ) : (
-          <span className="font-cormorant text-lg md:text-xl text-cosmos-night font-light leading-tight line-clamp-2 group-hover:text-cosmos-gold transition-colors">
-            {b.name}
-          </span>
-        )}
-
-        <span className="mt-2 h-px w-6 bg-cosmos-gold/40 group-hover:w-10 transition-all duration-500" />
-
-        <span className="mt-2 text-[9px] uppercase tracking-[0.16em] text-cosmos-night/40 font-inter line-clamp-1">
-          {b.category}
-        </span>
-        {b.zone && (
-          <span className="mt-1 inline-flex items-center gap-1 text-[9px] text-cosmos-night/30 font-inter line-clamp-1">
-            <MapPin className="w-2.5 h-2.5" strokeWidth={1.5} />
-            {b.zone}
+          <span className="font-cormorant text-2xl text-cosmos-gold font-light leading-none select-none">
+            {initial}
           </span>
         )}
       </div>
+
+      <h3 className="font-cormorant text-base md:text-lg text-cosmos-night font-light leading-tight line-clamp-2 group-hover:text-cosmos-gold transition-colors">
+        {b.name}
+      </h3>
+
+      <span className="mt-1.5 text-[9px] uppercase tracking-[0.16em] text-cosmos-night/40 font-inter line-clamp-1">
+        {b.category}
+      </span>
+      {b.zone && (
+        <span className="mt-1 inline-flex items-center gap-1 text-[9px] text-cosmos-night/30 font-inter line-clamp-1">
+          <MapPin className="w-2.5 h-2.5" strokeWidth={1.5} />
+          {b.zone}
+        </span>
+      )}
+
+      {/* Révélé au survol */}
+      <span className="mt-3 inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.14em] text-cosmos-gold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+        Découvrir <ArrowRight className="w-3 h-3" strokeWidth={1.5} />
+      </span>
     </button>
   );
 };
