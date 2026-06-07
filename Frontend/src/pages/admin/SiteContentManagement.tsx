@@ -17,6 +17,8 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
   X,
+  ChevronDown,
+  ChevronRight,
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
@@ -83,6 +85,7 @@ const SiteContentManagement: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const [editorCollapsed, setEditorCollapsed] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showPreview, setShowPreview] = useState(true);
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop');
@@ -269,7 +272,10 @@ const SiteContentManagement: React.FC = () => {
                   return (
                     <button
                       key={g}
-                      onClick={() => setActiveGroup(g)}
+                      onClick={() => {
+                        setActiveGroup(g);
+                        setEditorCollapsed(false);
+                      }}
                       className={`w-full text-left px-3 py-2 rounded-md text-sm font-inter transition-colors flex items-center justify-between gap-2 ${
                         active
                           ? 'bg-cosmos-night text-cosmos-cream'
@@ -297,10 +303,22 @@ const SiteContentManagement: React.FC = () => {
 
           {/* Éditeur du groupe */}
           <div className="flex-1 min-w-0 overflow-y-auto px-4">
-            <h2 className="text-xs uppercase tracking-[0.2em] text-cosmos-gold font-medium mb-4">
+            <button
+              onClick={() => setEditorCollapsed((c) => !c)}
+              className="w-full flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-cosmos-gold font-medium mb-4 hover:text-cosmos-night transition-colors"
+              title={editorCollapsed ? 'Déplier' : 'Replier'}
+            >
+              {editorCollapsed ? (
+                <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
+              ) : (
+                <ChevronDown className="w-4 h-4" strokeWidth={1.5} />
+              )}
               {activeGroup}
-            </h2>
-            <div className="space-y-4 pb-8">
+              <span className="text-text-secondary/60 normal-case tracking-normal">
+                ({activeItems.length})
+              </span>
+            </button>
+            <div className={`space-y-4 pb-8 ${editorCollapsed ? 'hidden' : ''}`}>
               {activeItems.map((r) => (
                 <div key={r.key} className="bg-white rounded-lg border border-cosmos-cream p-4">
                   <label className="flex items-center gap-2 text-xs text-text-secondary font-medium mb-2">
