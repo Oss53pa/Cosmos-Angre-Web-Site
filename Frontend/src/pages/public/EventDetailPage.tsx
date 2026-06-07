@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Calendar, Clock, MapPin, Users, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import Seo from '../../lib/seo/Seo';
 import { breadcrumbJsonLd, eventJsonLd } from '../../lib/seo/jsonLd';
+import Reveal from '../../components/common/Reveal';
 import galaEvent from '../../assets/images/branding/gala-event.jpg';
 import fashionShow from '../../assets/images/branding/fashion-show.jpg';
 import christmasMarket from '../../assets/images/branding/christmas-market.jpg';
@@ -109,15 +110,15 @@ const EventDetailPage: React.FC = () => {
               { icon: MapPin, label: t('eventDetail.location'), value: event.location },
               { icon: Users, label: t('eventDetail.capacity'), value: event.attendees },
             ].map((item, i) => (
-              <div key={i} className="card p-5 text-center">
+              <Reveal key={i} delay={i * 70} className="card p-5 text-center">
                 <item.icon className="w-5 h-5 text-cosmos-gold mx-auto mb-2" strokeWidth={1.5} />
                 <p className="text-[10px] uppercase tracking-[0.15em] text-text-secondary font-inter mb-1">{item.label}</p>
                 <p className="text-sm font-inter font-medium text-cosmos-night">{item.value}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="card p-6 sm:p-10">
+          <Reveal className="card p-6 sm:p-10">
             <h2 className="font-cormorant text-2xl text-cosmos-night font-light mb-6">{t('eventDetail.about')}</h2>
             <p className="text-sm text-text-secondary font-inter font-light leading-relaxed mb-8">{event.description}</p>
             <div className="flex flex-wrap gap-4">
@@ -128,7 +129,7 @@ const EventDetailPage: React.FC = () => {
                 <Share2 className="w-4 h-4" strokeWidth={1.5} /> {t('eventDetail.share')}
               </button>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </div>
