@@ -26,13 +26,14 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
             onClick={onClose}
           />
 
-          {/* Modal */}
+          {/* Modal — centré via flex (sinon le transform de framer-motion casse le -translate) */}
+          <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-3 md:p-4 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 bg-white rounded-lg overflow-hidden md:w-[640px] md:max-h-[85vh] flex flex-col shadow-luxury-lg"
+            className="pointer-events-auto bg-white rounded-xl overflow-hidden w-full max-w-[560px] max-h-[88vh] flex flex-col shadow-luxury-lg"
           >
             {/* Header — logo (ou nom) sur fond forêt, jamais de photo stock */}
             <div className="relative h-44 md:h-52 flex-shrink-0 bg-cosmos-night flex items-center justify-center overflow-hidden">
@@ -91,73 +92,71 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
               )}
 
               {/* Description */}
-              <p className="text-sm text-text-secondary font-inter font-light leading-relaxed">
-                {store.description}
-              </p>
+              {store.description && (
+                <p className="text-sm text-text-secondary font-inter font-light leading-relaxed">
+                  {store.description}
+                </p>
+              )}
 
-              {/* Info Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
-                  <MapPin
-                    className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0"
-                    strokeWidth={1.5}
-                  />
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
-                      {t('storeDirectory.modal.location')}
-                    </p>
-                    <p className="text-sm text-cosmos-night font-inter font-light">
-                      {store.zone} — {store.locationCode}
-                    </p>
-                  </div>
-                </div>
+              {/* Info Grid — uniquement les infos renseignées */}
+              {(store.category || store.zone || store.locationCode || store.hours || store.phone) && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {store.category && (
+                    <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
+                      <Tag className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0" strokeWidth={1.5} />
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
+                          {t('storeDirectory.modal.segment', 'Segment')}
+                        </p>
+                        <p className="text-sm text-cosmos-night font-inter font-light">{store.category}</p>
+                      </div>
+                    </div>
+                  )}
 
-                <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
-                  <Clock
-                    className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0"
-                    strokeWidth={1.5}
-                  />
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
-                      {t('storeDirectory.modal.hours')}
-                    </p>
-                    <p className="text-sm text-cosmos-night font-inter font-light">{store.hours}</p>
-                  </div>
-                </div>
+                  {(store.zone || store.locationCode) && (
+                    <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
+                      <MapPin className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0" strokeWidth={1.5} />
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
+                          {t('storeDirectory.modal.location')}
+                        </p>
+                        <p className="text-sm text-cosmos-night font-inter font-light">
+                          {[store.zone, store.locationCode].filter(Boolean).join(' — ')}
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
-                <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
-                  <Phone
-                    className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0"
-                    strokeWidth={1.5}
-                  />
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
-                      {t('storeDirectory.modal.phone')}
-                    </p>
-                    <a
-                      href={`tel:${store.phone.replace(/\s/g, '')}`}
-                      className="text-sm text-cosmos-night font-inter font-light hover:text-cosmos-gold transition-colors"
-                    >
-                      {store.phone}
-                    </a>
-                  </div>
-                </div>
+                  {store.hours && (
+                    <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
+                      <Clock className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0" strokeWidth={1.5} />
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
+                          {t('storeDirectory.modal.hours')}
+                        </p>
+                        <p className="text-sm text-cosmos-night font-inter font-light">{store.hours}</p>
+                      </div>
+                    </div>
+                  )}
 
-                <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
-                  <Star
-                    className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0"
-                    strokeWidth={1.5}
-                  />
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
-                      {t('storeDirectory.modal.rating')}
-                    </p>
-                    <p className="text-sm text-cosmos-night font-inter font-light">
-                      {store.rating}/5
-                    </p>
-                  </div>
+                  {store.phone && (
+                    <div className="flex items-start gap-3 p-4 bg-cosmos-cream/50 rounded-md">
+                      <Phone className="w-4 h-4 text-cosmos-gold mt-0.5 flex-shrink-0" strokeWidth={1.5} />
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.1em] text-text-secondary font-inter font-medium mb-1">
+                          {t('storeDirectory.modal.phone')}
+                        </p>
+                        <a
+                          href={`tel:${store.phone.replace(/\s/g, '')}`}
+                          className="text-sm text-cosmos-night font-inter font-light hover:text-cosmos-gold transition-colors"
+                        >
+                          {store.phone}
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
 
               {/* Current Offers */}
               {store.currentOffers && store.currentOffers.length > 0 && (
@@ -200,6 +199,7 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
               </div>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

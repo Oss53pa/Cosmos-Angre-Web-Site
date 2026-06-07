@@ -157,27 +157,27 @@ const StoresPage: React.FC = () => {
               Aucune enseigne pour ce filtre.
             </p>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 md:gap-3">
               {filtered.map((b, i) => (
-                <Reveal key={b.slug} delay={Math.min(i, 12) * 40}>
+                <Reveal key={b.slug} delay={Math.min(i, 14) * 30}>
                   <button
                     type="button"
                     onClick={() => openBrand(b)}
-                    className="group w-full aspect-[4/3] bg-white rounded-xl border border-cosmos-night/5 flex flex-col items-center justify-center px-4 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-cosmos-gold/40 hover:shadow-[0_20px_44px_-22px_rgb(var(--cosmos-night)/0.3)]"
+                    className="group w-full h-28 md:h-32 bg-white rounded-lg border border-cosmos-night/5 flex flex-col items-center justify-center px-3 text-center transition-all duration-400 hover:-translate-y-1 hover:border-cosmos-gold/40 hover:shadow-[0_16px_36px_-22px_rgb(var(--cosmos-night)/0.35)]"
                   >
                     {b.logo ? (
                       <img
                         src={b.logo}
                         alt={b.name}
-                        className="max-h-12 md:max-h-14 max-w-[80%] object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                        className="max-h-10 md:max-h-12 max-w-[78%] object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                         loading="lazy"
                       />
                     ) : (
-                      <span className="font-cormorant text-xl md:text-2xl text-cosmos-night font-light leading-tight group-hover:text-cosmos-gold transition-colors">
+                      <span className="font-cormorant text-base md:text-lg text-cosmos-night font-light leading-tight line-clamp-2 group-hover:text-cosmos-gold transition-colors">
                         {b.name}
                       </span>
                     )}
-                    <span className="mt-2 text-[10px] uppercase tracking-[0.16em] text-cosmos-night/40 font-inter">
+                    <span className="mt-1.5 text-[9px] uppercase tracking-[0.14em] text-cosmos-night/40 font-inter line-clamp-1">
                       {b.category}
                     </span>
                   </button>
