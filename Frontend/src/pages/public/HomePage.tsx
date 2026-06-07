@@ -24,6 +24,7 @@ import AmbientMusic from '../../components/features/AmbientMusic';
 import TestimonialsSection from '../../components/features/TestimonialsSection';
 import OptimizedImage from '../../components/common/OptimizedImage';
 import Reveal from '../../components/common/Reveal';
+import HeroPhoto from '../../components/features/HeroPhoto';
 import ConstellationHero from '../../components/features/galaxy/ConstellationHero';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
 import GrainOverlay from '../../components/features/galaxy/GrainOverlay';
@@ -118,7 +119,10 @@ const HomePage: React.FC = () => {
 
       <AmbientMusic />
 
-      {/* ════════ HERO = CONSTELLATION (prototype A) ════════ */}
+      {/* ════════ HERO PHOTOGRAPHIQUE (direction B) ════════ */}
+      <HeroPhoto />
+
+      {/* ════════ UNIVERS EN CONSTELLATION (navigation signature) ════════ */}
       <ConstellationHero />
 
       {/* ════════ À LA UNE — Bento ════════ */}
