@@ -1,15 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
 import { useTestimonials, type Testimonial } from '../../hooks/useTestimonials';
-
-interface FallbackTestimonial {
-  id: string;
-  author_name: string;
-  content: string;
-  rating: number;
-  source: Testimonial['source'];
-}
 
 const TestimonialsSection: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -21,50 +13,11 @@ const TestimonialsSection: React.FC = () => {
     limit: 8,
   });
 
-  // Fallback i18n (utilisé si Supabase est vide ou indisponible)
-  const fallback: FallbackTestimonial[] = useMemo(
-    () => [
-      {
-        id: 'fb-1',
-        author_name: t('home.testimonials.reviews.1.name'),
-        content: t('home.testimonials.reviews.1.text'),
-        rating: 5,
-        source: 'Google',
-      },
-      {
-        id: 'fb-2',
-        author_name: t('home.testimonials.reviews.2.name'),
-        content: t('home.testimonials.reviews.2.text'),
-        rating: 5,
-        source: 'TripAdvisor',
-      },
-      {
-        id: 'fb-3',
-        author_name: t('home.testimonials.reviews.3.name'),
-        content: t('home.testimonials.reviews.3.text'),
-        rating: 4,
-        source: 'Google',
-      },
-      {
-        id: 'fb-4',
-        author_name: t('home.testimonials.reviews.4.name'),
-        content: t('home.testimonials.reviews.4.text'),
-        rating: 5,
-        source: 'Google',
-      },
-      {
-        id: 'fb-5',
-        author_name: t('home.testimonials.reviews.5.name'),
-        content: t('home.testimonials.reviews.5.text'),
-        rating: 5,
-        source: 'TripAdvisor',
-      },
-    ],
-    [t]
-  );
+  // Pas de faux avis : on n'affiche que les vrais témoignages de la base.
+  const items: Testimonial[] = dbTestimonials;
 
-  const items: Array<FallbackTestimonial | Testimonial> =
-    dbTestimonials.length > 0 ? dbTestimonials : fallback;
+  // Aucun vrai avis (ex. pré-lancement) → on masque la section.
+  if (!isLoading && items.length === 0) return null;
 
   if (isLoading && dbTestimonials.length === 0) {
     return (

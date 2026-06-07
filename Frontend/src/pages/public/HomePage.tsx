@@ -167,7 +167,7 @@ const HomePage: React.FC = () => {
                 <h3 className="font-cormorant text-3xl md:text-4xl text-cosmos-cream font-light mb-2">
                   Grande Inauguration
                 </h3>
-                <p className="text-sm text-cosmos-cream/60 font-inter font-light mb-4 max-w-md">
+                <p className="text-sm text-cosmos-cream/80 font-inter font-light mb-4 max-w-md">
                   Octobre 2026, le jour où Angré change de dimension. Soyez là dès
                   la première heure, là où tout commence.
                 </p>
@@ -213,7 +213,7 @@ const HomePage: React.FC = () => {
                 <h4 className="font-cormorant text-2xl text-cosmos-cream font-light mb-2">
                   Membres fondateurs
                 </h4>
-                <p className="text-sm text-cosmos-cream/60 font-inter font-light">
+                <p className="text-sm text-cosmos-cream/80 font-inter font-light">
                   Entrez dans le cercle avant tout le monde. Les premiers membres
                   gardent toujours une longueur d'avance.
                 </p>
@@ -263,9 +263,9 @@ const HomePage: React.FC = () => {
               >
                 <div className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-cosmos-cream font-light mb-2">
                   {stat.count.toLocaleString()}
-                  <span className="text-cosmos-cream/60">{stat.suffix}</span>
+                  <span className="text-cosmos-cream/80">{stat.suffix}</span>
                 </div>
-                <div className="text-[11px] text-cosmos-cream/60 uppercase tracking-[0.15em] font-inter font-light">
+                <div className="text-[11px] text-cosmos-cream/80 uppercase tracking-[0.15em] font-inter font-light">
                   {stat.label}
                 </div>
               </div>
@@ -354,7 +354,7 @@ const HomePage: React.FC = () => {
             <div>
               <span className="overline mb-4 block">{t('home.club.overline')}</span>
               <h2 className="section-title-light mb-6">{t('home.club.title')}</h2>
-              <p className="text-cosmos-cream/60 font-inter font-light mb-10 leading-relaxed">
+              <p className="text-cosmos-cream/80 font-inter font-light mb-10 leading-relaxed">
                 {t('home.club.description')}
               </p>
 
@@ -368,10 +368,10 @@ const HomePage: React.FC = () => {
                     key={index}
                     className="flex items-start gap-4 p-4 bg-white/5 rounded-md border border-white/5 hover:border-white/20 transition-colors"
                   >
-                    <tier.icon className="w-5 h-5 text-cosmos-cream/60 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                    <tier.icon className="w-5 h-5 text-cosmos-cream/80 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                     <div>
                       <span className="text-sm text-cosmos-cream font-inter font-medium">{tier.level}</span>
-                      <p className="text-xs text-cosmos-cream/60 font-inter font-light mt-0.5">{tier.desc}</p>
+                      <p className="text-xs text-cosmos-cream/80 font-inter font-light mt-0.5">{tier.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -472,7 +472,7 @@ const HomePage: React.FC = () => {
                   />
                   <div className="absolute top-4 left-4 bg-cosmos-night/90 backdrop-blur-sm text-cosmos-cream px-3 py-2 rounded-md text-center border border-white/10">
                     <div className="font-cormorant text-xl font-semibold leading-none">{event.date.day}</div>
-                    <div className="text-[10px] uppercase tracking-wider font-inter text-cosmos-cream/60">{event.date.month}</div>
+                    <div className="text-[10px] uppercase tracking-wider font-inter text-cosmos-cream/80">{event.date.month}</div>
                   </div>
                 </div>
                 <div className="p-6">
@@ -519,7 +519,7 @@ const HomePage: React.FC = () => {
           <h2 className="font-cormorant text-3xl md:text-5xl text-cosmos-cream font-light mb-4">
             {t('home.newsletter.title')}
           </h2>
-          <p className="text-sm text-cosmos-cream/60 font-inter font-light mb-10 max-w-lg mx-auto">
+          <p className="text-sm text-cosmos-cream/80 font-inter font-light mb-10 max-w-lg mx-auto">
             {t('home.newsletter.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

@@ -27,7 +27,7 @@ const STEPS = [
 const REASONS = [
   { title: 'Localisation stratégique', description: 'Au cœur de Cocody-Angré, accessible depuis tout Abidjan.' },
   { title: 'Mix tenant unique', description: "Sélection d'enseignes complémentaires, pas de concurrence directe." },
-  { title: 'Marketing partagé', description: 'Campagnes mensuelles, événementiel, presse — relayés sur tous les canaux.' },
+  { title: 'Marketing partagé', description: 'Campagnes mensuelles, événementiel, presse, relayés sur tous les canaux.' },
   { title: 'Services premium', description: 'Conciergerie, parking, sécurité 24/7, climatisation, Wi-Fi gratuit.' },
 ];
 

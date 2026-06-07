@@ -75,7 +75,7 @@ const PageHero: React.FC<PageHeroProps> = ({
         </h1>
 
         {subtitle ? (
-          <p className="mt-6 text-base md:text-lg text-cosmos-cream/65 font-inter font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-base md:text-lg text-cosmos-cream/85 font-inter font-light max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
         ) : null}

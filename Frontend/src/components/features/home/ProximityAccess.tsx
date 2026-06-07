@@ -63,7 +63,7 @@ const ProximityAccess: React.FC = () => {
               <div className="font-cormorant text-xl md:text-2xl text-cosmos-cream font-light leading-tight">
                 {it.label}
               </div>
-              <div className="text-[11px] uppercase tracking-[0.14em] text-cosmos-cream/50 font-inter mt-1.5">
+              <div className="text-[11px] uppercase tracking-[0.14em] text-cosmos-cream/70 font-inter mt-1.5">
                 {it.sub}
               </div>
             </Reveal>
