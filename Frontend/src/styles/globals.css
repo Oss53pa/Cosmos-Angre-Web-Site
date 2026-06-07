@@ -108,6 +108,8 @@
    ============================================================ */
 :root,
 [data-theme='proximite'] {
+  /* Design clair maîtrisé : pas d'inversion auto par le mode sombre de l'OS. */
+  color-scheme: light;
   /* === Tokens principaux — Palette officielle du cahier des charges (juin 2026) ===
      Forêt Profond · Forêt Dark · Or Cuivré · Or Doux · Sable · Kaki · Noir Chaud */
   --cosmos-night: 47 84 57; /* Forêt Profond #2F5439 — surface dark */
