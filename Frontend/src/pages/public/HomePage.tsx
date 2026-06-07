@@ -123,7 +123,7 @@ const HomePage: React.FC = () => {
       <HeroPhoto />
 
       {/* ════════ UNIVERS EN CONSTELLATION (navigation signature) ════════ */}
-      <ConstellationHero />
+      <ConstellationHero showSignature={false} overline="Explorez" heading="Nos univers" />
 
       {/* ════════ À LA UNE — Bento ════════ */}
       <section id="apres-hero" className="section bg-cosmos-warm" ref={bentoReveal.ref}>

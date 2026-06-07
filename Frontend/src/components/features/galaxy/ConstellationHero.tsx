@@ -53,7 +53,20 @@ const ELLIPSE = 0.55;
 const PAD_X = 180;
 const PAD_Y = 110;
 
-const ConstellationHero: React.FC = () => {
+interface ConstellationHeroProps {
+  /** true = hero plein écran avec signature ; false = section "navigation" sous le hero */
+  showSignature?: boolean;
+  /** overline affichée en mode section */
+  overline?: string;
+  /** titre affiché en mode section */
+  heading?: string;
+}
+
+const ConstellationHero: React.FC<ConstellationHeroProps> = ({
+  showSignature = true,
+  overline = 'Explorez',
+  heading = 'Nos univers',
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const orbitRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -263,7 +276,8 @@ const ConstellationHero: React.FC = () => {
         })}
       </div>
 
-      {/* ── Contenu central (signature flottante) ── */}
+      {/* ── Contenu central (signature flottante) — hero uniquement ── */}
+      {showSignature && (
       <div className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-5 py-24 pointer-events-none">
         {/* Voile de lisibilité */}
         <div
@@ -314,6 +328,24 @@ const ConstellationHero: React.FC = () => {
           </div>
         </div>
       </div>
+      )}
+
+      {/* ── En-tête (mode "section navigation" sous le hero) ── */}
+      {!showSignature && (
+        <div className="relative z-20 pt-20 md:pt-28 text-center px-5">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <span className="w-6 h-px bg-cosmos-gold/60" />
+            <span className="overline text-cosmos-gold">{overline}</span>
+            <span className="w-6 h-px bg-cosmos-gold/60" />
+          </div>
+          <h2
+            className="font-cormorant text-4xl md:text-5xl lg:text-6xl text-cosmos-cream font-light text-balance"
+            style={{ textShadow: '0 2px 24px rgb(var(--cosmos-night-deep) / 0.8)' }}
+          >
+            {heading}
+          </h2>
+        </div>
+      )}
 
       {/* ── Repli univers (mobile / tablette) ── */}
       <div className="relative z-20 lg:hidden container-cosmos pb-20 -mt-10">
@@ -338,17 +370,19 @@ const ConstellationHero: React.FC = () => {
         </div>
       </div>
 
-      {/* Indice de scroll */}
-      <button
-        onClick={scrollDown}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-30 hidden lg:flex flex-col items-center gap-2 group"
-        aria-label="Découvrir la suite"
-      >
-        <span className="text-[10px] uppercase tracking-[0.25em] font-inter font-light text-cosmos-cream/40 group-hover:text-cosmos-gold/80 transition-colors">
-          Découvrir
-        </span>
-        <ChevronDown className="w-4 h-4 text-cosmos-gold/50 animate-bounce" strokeWidth={1.5} />
-      </button>
+      {/* Indice de scroll — hero uniquement */}
+      {showSignature && (
+        <button
+          onClick={scrollDown}
+          className="absolute bottom-7 left-1/2 -translate-x-1/2 z-30 hidden lg:flex flex-col items-center gap-2 group"
+          aria-label="Découvrir la suite"
+        >
+          <span className="text-[10px] uppercase tracking-[0.25em] font-inter font-light text-cosmos-cream/40 group-hover:text-cosmos-gold/80 transition-colors">
+            Découvrir
+          </span>
+          <ChevronDown className="w-4 h-4 text-cosmos-gold/50 animate-bounce" strokeWidth={1.5} />
+        </button>
+      )}
     </section>
   );
 };
