@@ -49,26 +49,11 @@ export default defineConfig(({ mode }) => {
       cssMinify: true,
       reportCompressedSize: false,
       chunkSizeWarningLimit: 600,
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (!id.includes('node_modules')) return undefined;
-            if (id.includes('react-dom') || id.includes('scheduler')) return 'react-dom';
-            if (id.includes('react-router')) return 'router';
-            if (id.includes('@supabase')) return 'supabase';
-            if (id.includes('i18next') || id.includes('react-i18next')) return 'i18n';
-            if (id.includes('@reduxjs') || id.includes('react-redux')) return 'redux';
-            if (id.includes('framer-motion')) return 'motion';
-            if (id.includes('three')) return 'three';
-            if (id.includes('chart.js') || id.includes('react-chartjs-2')) return 'charts';
-            if (id.includes('quill') || id.includes('react-quill')) return 'editor';
-            if (id.includes('@mui')) return 'mui';
-            if (id.includes('lucide-react')) return 'icons';
-            if (id.includes('swiper')) return 'swiper';
-            return 'vendor';
-          },
-        },
-      },
+      // Pas de manualChunks : un découpage manuel séparait React des libs qui
+      // lisent ses internals (react-dom, use-sync-external-store…), provoquant
+      // "Cannot read properties of undefined (reading '__SECRET_INTERNALS…' /
+      // 'useSyncExternalStore')" et une page blanche en prod. Rollup gère seul
+      // le partage de React avec le bon ordre d'initialisation.
     },
 
     define: {
