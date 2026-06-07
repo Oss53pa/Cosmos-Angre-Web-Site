@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search, MapPin } from 'lucide-react';
 
 import Seo from '../../lib/seo/Seo';
@@ -27,6 +27,8 @@ interface Brand {
   description: string;
   hours: string;
   phone: string;
+  website?: string;
+  photos?: string[];
   locationCode: string;
   rating: number;
 }
@@ -41,21 +43,33 @@ const StoresPage: React.FC = () => {
 
   const brands: Brand[] = useMemo(
     () =>
-      supabaseStores.map((s) => ({
-        slug: s.slug ?? s.id,
-        name: s.name,
-        category: s.category ?? '',
-        categoryKey: s.category_key ?? 'all',
-        zone: s.zone ?? '',
-        zoneKey: s.zone_key ?? 'gallery',
-        logo: s.logo ?? undefined,
-        image: s.cover_image ?? undefined,
-        description: s.description ?? '',
-        hours: s.hours ?? '',
-        phone: s.phone ?? '',
-        locationCode: s.location_code ?? '',
-        rating: s.rating ?? 0,
-      })),
+      supabaseStores.map((s) => {
+        const sx = s as typeof s & {
+          gallery?: { url?: string }[] | null;
+          website?: string | null;
+        };
+        const photos = [
+          s.cover_image ?? undefined,
+          ...((sx.gallery ?? []).map((g) => g?.url).filter(Boolean) as string[]),
+        ].filter(Boolean) as string[];
+        return {
+          slug: s.slug ?? s.id,
+          name: s.name,
+          category: s.category ?? '',
+          categoryKey: s.category_key ?? 'all',
+          zone: s.zone ?? '',
+          zoneKey: s.zone_key ?? 'gallery',
+          logo: s.logo ?? undefined,
+          image: s.cover_image ?? undefined,
+          description: s.description ?? '',
+          hours: s.hours ?? '',
+          phone: s.phone ?? '',
+          website: sx.website ?? undefined,
+          photos,
+          locationCode: s.location_code ?? '',
+          rating: s.rating ?? 0,
+        };
+      }),
     [supabaseStores]
   );
 
@@ -87,6 +101,29 @@ const StoresPage: React.FC = () => {
     return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
   }, [filtered]);
 
+  // Ouverture auto du modal depuis ?store=slug (liens directs / anciennes URLs /boutiques/:id)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const autoOpenedRef = useRef<string | null>(null);
+  useEffect(() => {
+    const slug = searchParams.get('store');
+    if (!slug || autoOpenedRef.current === slug || brands.length === 0) return;
+    const b = brands.find((x) => x.slug === slug);
+    if (b) {
+      autoOpenedRef.current = slug;
+      openBrand(b);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, brands]);
+
+  const closeModal = () => {
+    setSelectedStore(null);
+    if (searchParams.get('store')) {
+      const next = new URLSearchParams(searchParams);
+      next.delete('store');
+      setSearchParams(next, { replace: true });
+    }
+  };
+
   const openBrand = (b: Brand) =>
     setSelectedStore({
       id: b.slug,
@@ -102,6 +139,8 @@ const StoresPage: React.FC = () => {
       rating: b.rating,
       image: b.image ?? '',
       logo: b.logo,
+      website: b.website,
+      photos: b.photos,
     });
 
   return (
@@ -212,7 +251,7 @@ const StoresPage: React.FC = () => {
         </div>
       </section>
 
-      <StoreDetailModal store={selectedStore} onClose={() => setSelectedStore(null)} />
+      <StoreDetailModal store={selectedStore} onClose={closeModal} />
 
       {/* CTA leasing */}
       <section className="section-dark relative overflow-hidden">

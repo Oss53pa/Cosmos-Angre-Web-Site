@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Clock, Phone, Star, Tag, Map, ArrowRight } from 'lucide-react';
+import { X, MapPin, Clock, Phone, Star, Tag, Map, Globe } from 'lucide-react';
 import { type StoreData } from './StoreCard';
 
 interface StoreDetailModalProps {
@@ -73,6 +73,21 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+              {/* Galerie photos (quelques visuels) */}
+              {store.photos && store.photos.length > 0 && (
+                <div className="-mx-1 flex gap-3 overflow-x-auto pb-1 snap-x">
+                  {store.photos.slice(0, 8).map((src, i) => (
+                    <img
+                      key={i}
+                      src={src}
+                      alt={`${store.name} ${i + 1}`}
+                      loading="lazy"
+                      className="h-40 w-64 flex-shrink-0 object-cover rounded-lg border border-cosmos-cream snap-start"
+                    />
+                  ))}
+                </div>
+              )}
+
               {/* Rating */}
               {store.rating > 0 && (
                 <div className="flex items-center gap-2">
@@ -180,22 +195,27 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
 
               {/* Actions */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Link
-                  to={`/boutiques/${store.id}`}
-                  className="btn-primary flex-1 justify-center"
-                  onClick={onClose}
-                >
-                  {t('storeDirectory.modal.viewFullPage')}
-                  <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-                </Link>
-                <Link
-                  to={`/plan-interactif?store=${store.locationCode}`}
-                  className="btn-outline flex-1 justify-center"
-                  onClick={onClose}
-                >
-                  <Map className="w-4 h-4" strokeWidth={1.5} />
-                  {t('storeDirectory.modal.viewOnMap')}
-                </Link>
+                {store.website && (
+                  <a
+                    href={store.website.startsWith('http') ? store.website : `https://${store.website}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary flex-1 justify-center"
+                  >
+                    <Globe className="w-4 h-4" strokeWidth={1.5} />
+                    {t('storeDirectory.modal.visitWebsite', 'Visiter le site')}
+                  </a>
+                )}
+                {store.locationCode && (
+                  <Link
+                    to={`/plan-interactif?store=${store.locationCode}`}
+                    className={`${store.website ? 'btn-outline' : 'btn-primary'} flex-1 justify-center`}
+                    onClick={onClose}
+                  >
+                    <Map className="w-4 h-4" strokeWidth={1.5} />
+                    {t('storeDirectory.modal.viewOnMap', 'Voir sur le plan')}
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>

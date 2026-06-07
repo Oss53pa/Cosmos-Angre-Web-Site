@@ -18,6 +18,8 @@ export interface StoreData {
   rating: number;
   image: string;
   logo?: string;
+  website?: string;
+  photos?: string[];
   currentOffers?: string[];
 }
 
