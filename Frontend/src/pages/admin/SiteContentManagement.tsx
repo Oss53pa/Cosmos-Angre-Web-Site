@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { Save, RefreshCw, Image as ImageIcon, Type, AlignLeft } from 'lucide-react';
+import { Save, RefreshCw, Image as ImageIcon, Type, AlignLeft, Upload, Loader2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 /**
@@ -35,6 +35,30 @@ const SiteContentManagement: React.FC = () => {
   const [dirty, setDirty] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState<string | null>(null);
+
+  const uploadImage = async (key: string, file: File) => {
+    setUploading(key);
+    try {
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const safe = key.replace(/[^a-z0-9._-]/gi, '_');
+      const path = `content/${safe}-${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('site')
+        .upload(path, file, { upsert: true, cacheControl: '3600' });
+      if (error) {
+        toast.error('Téléversement échoué');
+        return;
+      }
+      const { data } = supabase.storage.from('site').getPublicUrl(path);
+      setVal(key, data.publicUrl);
+      toast.success('Image téléversée — pense à Enregistrer');
+    } catch {
+      toast.error('Téléversement échoué');
+    } finally {
+      setUploading(null);
+    }
+  };
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -156,21 +180,45 @@ const SiteContentManagement: React.FC = () => {
                         className="input w-full"
                       />
                     ) : r.type === 'image' ? (
-                      <div className="flex items-start gap-4">
-                        <input
-                          type="url"
-                          value={valueOf(r)}
-                          onChange={(e) => setVal(r.key, e.target.value)}
-                          placeholder="https://…  (vide = image par défaut)"
-                          className="input flex-1"
-                        />
+                      <div className="flex items-start gap-3">
                         {valueOf(r) ? (
                           <img
                             src={valueOf(r)}
                             alt="aperçu"
-                            className="w-24 h-16 object-cover rounded border border-gray-200"
+                            className="w-28 h-20 object-cover rounded-md border border-gray-200 flex-shrink-0"
                           />
-                        ) : null}
+                        ) : (
+                          <div className="w-28 h-20 rounded-md border border-dashed border-gray-300 flex items-center justify-center text-gray-300 flex-shrink-0">
+                            <ImageIcon className="w-6 h-6" strokeWidth={1.25} />
+                          </div>
+                        )}
+                        <div className="flex-1 space-y-2">
+                          <label className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-cosmos-night text-cosmos-cream text-xs font-inter cursor-pointer hover:bg-cosmos-night-light transition-colors">
+                            {uploading === r.key ? (
+                              <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                            ) : (
+                              <Upload className="w-4 h-4" strokeWidth={1.5} />
+                            )}
+                            Téléverser une image
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                const f = e.target.files?.[0];
+                                if (f) void uploadImage(r.key, f);
+                                e.currentTarget.value = '';
+                              }}
+                            />
+                          </label>
+                          <input
+                            type="url"
+                            value={valueOf(r)}
+                            onChange={(e) => setVal(r.key, e.target.value)}
+                            placeholder="…ou colle une URL  (vide = image par défaut)"
+                            className="input w-full"
+                          />
+                        </div>
                       </div>
                     ) : (
                       <input
