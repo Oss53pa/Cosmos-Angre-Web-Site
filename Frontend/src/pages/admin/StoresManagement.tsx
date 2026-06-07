@@ -56,10 +56,17 @@ interface StoreType {
   lastSale?: string;
 }
 
+interface GalleryItem {
+  url: string;
+  title?: string;
+}
+
 interface StoreFormData {
   name: string;
   slug: string;
   logo: string;
+  cover_image: string;
+  gallery: GalleryItem[];
   description: string;
   category: string;
   zone: string;
@@ -76,6 +83,8 @@ const emptyStoreForm: StoreFormData = {
   name: '',
   slug: '',
   logo: '',
+  cover_image: '',
+  gallery: [],
   description: '',
   category: '',
   zone: '',
@@ -107,29 +116,75 @@ const StoresManagement: React.FC = () => {
   const [formData, setFormData] = useState<StoreFormData>(emptyStoreForm);
   const [isSaving, setIsSaving] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
+
+  // Upload générique vers le bucket Storage "site", renvoie l'URL publique.
+  const uploadToStorage = async (file: File, folder: string): Promise<string | null> => {
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const base = (formData.slug || formData.name || 'store').replace(/[^a-z0-9._-]/gi, '_');
+    const path = `${folder}/${base}-${Date.now()}-${Math.round(performance.now())}.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from('site')
+      .upload(path, file, { upsert: true, cacheControl: '3600' });
+    if (upErr) return null;
+    return supabase.storage.from('site').getPublicUrl(path).data.publicUrl;
+  };
 
   const uploadLogo = async (file: File) => {
     setUploadingLogo(true);
     try {
-      const ext = (file.name.split('.').pop() || 'png').toLowerCase();
-      const base = (formData.slug || formData.name || 'logo').replace(/[^a-z0-9._-]/gi, '_');
-      const path = `logos/${base}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage
-        .from('site')
-        .upload(path, file, { upsert: true, cacheControl: '3600' });
-      if (upErr) {
+      const url = await uploadToStorage(file, 'logos');
+      if (!url) {
         setFeedbackMessage({ type: 'error', text: 'Téléversement du logo échoué.' });
         return;
       }
-      const { data } = supabase.storage.from('site').getPublicUrl(path);
-      setFormData((prev) => ({ ...prev, logo: data.publicUrl }));
+      setFormData((prev) => ({ ...prev, logo: url }));
       setFeedbackMessage({ type: 'success', text: 'Logo téléversé — pensez à Enregistrer.' });
-    } catch {
-      setFeedbackMessage({ type: 'error', text: 'Téléversement du logo échoué.' });
     } finally {
       setUploadingLogo(false);
     }
   };
+
+  const uploadCover = async (file: File) => {
+    setUploadingCover(true);
+    try {
+      const url = await uploadToStorage(file, 'covers');
+      if (!url) {
+        setFeedbackMessage({ type: 'error', text: 'Téléversement de la couverture échoué.' });
+        return;
+      }
+      setFormData((prev) => ({ ...prev, cover_image: url }));
+      setFeedbackMessage({ type: 'success', text: 'Couverture téléversée — pensez à Enregistrer.' });
+    } finally {
+      setUploadingCover(false);
+    }
+  };
+
+  const uploadGalleryFiles = async (files: FileList) => {
+    setUploadingGallery(true);
+    try {
+      const added: GalleryItem[] = [];
+      for (const file of Array.from(files)) {
+        const url = await uploadToStorage(file, 'gallery');
+        if (url) added.push({ url, title: '' });
+      }
+      if (added.length === 0) {
+        setFeedbackMessage({ type: 'error', text: 'Téléversement des photos échoué.' });
+        return;
+      }
+      setFormData((prev) => ({ ...prev, gallery: [...prev.gallery, ...added] }));
+      setFeedbackMessage({
+        type: 'success',
+        text: `${added.length} photo(s) ajoutée(s) — pensez à Enregistrer.`,
+      });
+    } finally {
+      setUploadingGallery(false);
+    }
+  };
+
+  const removeGalleryItem = (i: number) =>
+    setFormData((prev) => ({ ...prev, gallery: prev.gallery.filter((_, idx) => idx !== i) }));
   const [feedbackMessage, setFeedbackMessage] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -278,10 +333,16 @@ const StoresManagement: React.FC = () => {
   };
 
   const openEditForm = (store: StoreType) => {
+    // Récupère les champs bruts (cover_image, gallery) depuis la source Supabase.
+    const raw = supabaseStores.find((s) => s.id === store.id) as
+      | { cover_image?: string | null; gallery?: GalleryItem[] | null }
+      | undefined;
     setFormData({
       name: store.name,
       slug: store.slug,
       logo: store.logo || '',
+      cover_image: raw?.cover_image || '',
+      gallery: Array.isArray(raw?.gallery) ? raw!.gallery : [],
       description: store.description || '',
       category: store.category === 'Non catégorisé' ? '' : store.category,
       zone: store.floor,
@@ -328,6 +389,8 @@ const StoresManagement: React.FC = () => {
         name: formData.name,
         slug: formData.slug,
         logo: formData.logo || null,
+        cover_image: formData.cover_image || null,
+        gallery: formData.gallery.filter((g) => g.url.trim().length > 0),
         description: formData.description || null,
         category: formData.category || null,
         zone: formData.zone || null,
@@ -341,13 +404,13 @@ const StoresManagement: React.FC = () => {
       };
 
       if (editStore) {
-        await updateStore(editStore.id, payload);
+        await updateStore(editStore.id, payload as unknown as Parameters<typeof updateStore>[1]);
         setFeedbackMessage({
           type: 'success',
           text: t('admin.stores.form.updateSuccess', 'Boutique mise à jour avec succès.'),
         });
       } else {
-        await createStore(payload);
+        await createStore(payload as unknown as Parameters<typeof createStore>[0]);
         setFeedbackMessage({
           type: 'success',
           text: t('admin.stores.form.createSuccess', 'Boutique créée avec succès.'),
@@ -476,6 +539,105 @@ const StoresManagement: React.FC = () => {
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* Image de couverture */}
+              <div>
+                <label className="block text-sm font-light text-text-secondary mb-1">
+                  {t('admin.stores.form.cover', 'Image de couverture')}
+                </label>
+                <div className="flex items-start gap-3">
+                  {formData.cover_image ? (
+                    <img
+                      src={formData.cover_image}
+                      alt="couverture"
+                      className="w-28 h-20 object-cover rounded border border-cosmos-cream bg-white flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-28 h-20 rounded border border-dashed border-cosmos-cream flex items-center justify-center text-text-secondary flex-shrink-0">
+                      <ImageIcon className="w-6 h-6" strokeWidth={1.25} />
+                    </div>
+                  )}
+                  <div className="flex-1 space-y-2">
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-cosmos-night text-white text-sm font-light cursor-pointer hover:bg-opacity-90 transition-colors">
+                      {uploadingCover ? (
+                        <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                      ) : (
+                        <Upload className="w-4 h-4" strokeWidth={1.5} />
+                      )}
+                      {t('admin.stores.form.uploadCover', 'Téléverser une couverture')}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void uploadCover(f);
+                          e.currentTarget.value = '';
+                        }}
+                      />
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.cover_image}
+                      onChange={(e) => handleFormChange('cover_image', e.target.value)}
+                      placeholder="…ou collez une URL d'image"
+                      className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Galerie photos (multi) */}
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-sm font-light text-text-secondary">
+                    {t('admin.stores.form.gallery', 'Galerie photos')}
+                  </label>
+                  <label className="inline-flex items-center gap-2 px-3 py-1.5 border border-cosmos-cream hover:border-gray-900 text-sm font-light cursor-pointer transition-colors">
+                    {uploadingGallery ? (
+                      <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Plus className="w-4 h-4" strokeWidth={1.5} />
+                    )}
+                    {t('admin.stores.form.addPhotos', 'Ajouter des photos')}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files.length) void uploadGalleryFiles(e.target.files);
+                        e.currentTarget.value = '';
+                      }}
+                    />
+                  </label>
+                </div>
+                {formData.gallery.length === 0 ? (
+                  <p className="text-xs text-text-secondary font-light">
+                    {t('admin.stores.form.galleryEmpty', 'Aucune photo. Ajoutez plusieurs visuels (montrés dans la fiche enseigne).')}
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {formData.gallery.map((g, i) => (
+                      <div key={i} className="relative group">
+                        <img
+                          src={g.url}
+                          alt={`photo ${i + 1}`}
+                          className="w-full h-20 object-cover rounded border border-cosmos-cream"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeGalleryItem(i)}
+                          className="absolute top-1 right-1 w-6 h-6 flex items-center justify-center bg-white/90 border border-cosmos-cream rounded hover:border-red-600 hover:bg-red-50 transition-colors"
+                          title="Retirer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5 text-red-600" strokeWidth={1.5} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Description */}

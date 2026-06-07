@@ -39,6 +39,7 @@ const Header: React.FC = () => {
     { label: t('nav.enseignes', 'Les Enseignes'), path: '/boutiques' },
     { label: t('nav.restaurants', 'Restaurants & Cafés'), path: '/gastronomie' },
     { label: t('nav.leisure'), path: '/loisirs' },
+    { label: t('nav.hotel', 'Hôtel'), path: '/hotel' },
     { label: t('nav.agenda', "L'Agenda"), path: '/evenements' },
     { label: t('nav.club', 'Cosmos Club'), path: '/fidelite' },
     { label: t('nav.infosPratiques', 'Infos pratiques'), path: '/preparer-visite' },
