@@ -31,6 +31,10 @@ export const supabase = createClient<Database>(
   supabaseUrl ?? 'https://placeholder.supabase.co',
   supabaseAnonKey ?? 'placeholder-key',
   {
+    // Le contenu Cosmos vit dans un schéma dédié "cosmos" (isolé du schéma
+    // public partagé). Cast nécessaire car le type Database ne décrit que
+    // "public" ; la forme des tables cosmos est identique.
+    db: { schema: 'cosmos' as 'public' },
     auth: {
       autoRefreshToken: true,
       persistSession: true,
