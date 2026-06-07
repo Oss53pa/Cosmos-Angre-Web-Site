@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Clock, Phone, Star, Tag, Map, ArrowRight } from 'lucide-react';
 import { type StoreData } from './StoreCard';
-import OptimizedImage from '../../common/OptimizedImage';
 
 interface StoreDetailModalProps {
   store: StoreData | null;
@@ -35,14 +34,22 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 bg-white rounded-lg overflow-hidden md:w-[640px] md:max-h-[85vh] flex flex-col shadow-luxury-lg"
           >
-            {/* Header Image */}
-            <div className="relative h-52 md:h-64 flex-shrink-0">
-              <OptimizedImage
-                src={store.image}
-                alt={store.name}
-                containerClassName="w-full h-full"
-                overlay="gradient-bottom"
+            {/* Header — logo (ou nom) sur fond forêt, jamais de photo stock */}
+            <div className="relative h-44 md:h-52 flex-shrink-0 bg-cosmos-night flex items-center justify-center overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    'radial-gradient(circle at 50% 38%, rgb(var(--cosmos-gold) / 0.14), transparent 70%)',
+                }}
               />
+              {store.logo ? (
+                <img
+                  src={store.logo}
+                  alt={store.name}
+                  className="relative max-h-16 md:max-h-20 max-w-[55%] object-contain"
+                />
+              ) : null}
 
               {/* Close button */}
               <button
@@ -52,7 +59,7 @@ const StoreDetailModal: React.FC<StoreDetailModalProps> = ({ store, onClose }) =
                 <X className="w-4 h-4" strokeWidth={1.5} />
               </button>
 
-              {/* Store name on image */}
+              {/* Catégorie + nom */}
               <div className="absolute bottom-4 left-6 right-6 z-10">
                 <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium">
                   {store.category}

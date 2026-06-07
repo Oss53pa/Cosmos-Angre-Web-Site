@@ -17,6 +17,7 @@ export interface StoreData {
   description: string;
   rating: number;
   image: string;
+  logo?: string;
   currentOffers?: string[];
 }
 

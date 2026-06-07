@@ -14,7 +14,6 @@ import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
 import { useContent } from '../../lib/content/SiteContentProvider';
 
 import galleryInterior from '../../assets/images/branding/gallery-interior.jpg';
-import luxuryBoutique from '../../assets/images/branding/luxury-boutique.jpg';
 
 interface Brand {
   slug: string;
@@ -90,7 +89,8 @@ const StoresPage: React.FC = () => {
       phone: b.phone,
       description: b.description,
       rating: b.rating,
-      image: b.image ?? luxuryBoutique,
+      image: b.image ?? '',
+      logo: b.logo,
     });
 
   return (
