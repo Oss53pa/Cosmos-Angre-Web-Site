@@ -146,6 +146,47 @@ const GastronomiePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Bande d'ambiance en mouvement (effet vidéo, sans fichier vidéo) */}
+      <section className="bg-cosmos-night py-10 md:py-14 overflow-hidden">
+        <div className="container-cosmos mb-6 text-center">
+          <span className="overline text-cosmos-gold">
+            {c('gastronomy.motion.overline', "L'ambiance Cosmos")}
+          </span>
+        </div>
+        <div className="relative">
+          {/* fondus latéraux */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-cosmos-night to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-cosmos-night to-transparent" />
+          <div className="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none">
+            {[
+              luxuryRestaurant,
+              restaurantInterior,
+              sushiJapanese,
+              italianRestaurant,
+              fineDiningFood,
+              luxuryRestaurant,
+              restaurantInterior,
+              sushiJapanese,
+              italianRestaurant,
+              fineDiningFood,
+            ].map((src, i) => (
+              <div
+                key={i}
+                className="w-64 md:w-80 h-44 md:h-52 flex-shrink-0 overflow-hidden rounded-xl ring-1 ring-white/10"
+              >
+                <img
+                  src={src}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Restaurants */}
       <section id="reservation" className="section bg-cosmos-cream scroll-mt-24">
         <div className="container-cosmos">

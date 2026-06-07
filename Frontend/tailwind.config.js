@@ -149,6 +149,8 @@ export default {
         'ken-burns': 'kenBurns 20s ease-out infinite alternate',
         'spin-slow': 'spin 8s linear infinite',
         'count-up': 'countUp 2s ease-out',
+        'marquee': 'marquee 45s linear infinite',
+        'marquee-slow': 'marquee 70s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -202,6 +204,10 @@ export default {
         kenBurns: {
           '0%': { transform: 'scale(1)' },
           '100%': { transform: 'scale(1.08)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       transitionTimingFunction: {
