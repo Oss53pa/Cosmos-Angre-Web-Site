@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { store } from './store';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { SiteContentProvider } from './lib/content/SiteContentProvider';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import CookieConsent from './components/common/CookieConsent';
 import App from './App';
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
           <ThemeProvider>
             <AuthProvider>
+              <SiteContentProvider>
               <App />
               <Toaster
                 position="top-right"
@@ -44,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 }}
               />
               <CookieConsent />
+              </SiteContentProvider>
             </AuthProvider>
           </ThemeProvider>
         </Provider>

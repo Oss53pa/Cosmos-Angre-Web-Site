@@ -166,7 +166,10 @@ const ConstellationHero: React.FC<ConstellationHeroProps> = ({
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-cosmos-night-deep">
+    <section
+      id={showSignature ? undefined : 'univers'}
+      className="relative min-h-screen w-full overflow-hidden bg-cosmos-night-deep scroll-mt-20"
+    >
       {/* Galaxie */}
       <div className="absolute inset-0">
         <GalaxyCanvas

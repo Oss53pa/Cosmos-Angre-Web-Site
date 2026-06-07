@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import GrainOverlay from './galaxy/GrainOverlay';
 import CosmosLogo from '../ui/CosmosLogo';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import heroImage from '../../assets/images/branding/edge-building.jpg';
 
 /**
@@ -12,8 +13,11 @@ import heroImage from '../../assets/images/branding/edge-building.jpg';
  * (léger ken-burns), registre « quiet luxury ».
  */
 const HeroPhoto: React.FC = () => {
+  const { c } = useContent();
   const scrollDown = useCallback(() => {
-    document.getElementById('apres-hero')?.scrollIntoView({ behavior: 'smooth' });
+    const target =
+      document.getElementById('univers') ?? document.getElementById('apres-hero');
+    target?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   return (
@@ -21,7 +25,7 @@ const HeroPhoto: React.FC = () => {
       {/* Photo plein cadre */}
       <div className="absolute inset-0 animate-ken-burns">
         <img
-          src={heroImage}
+          src={c('home.hero.image') || heroImage}
           alt="Cosmos Angré — la destination de Cocody-Angré"
           className="w-full h-full object-cover"
           loading="eager"
@@ -51,7 +55,9 @@ const HeroPhoto: React.FC = () => {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-5 py-24">
         <div className="inline-flex items-center gap-3 mb-6 animate-fade-in-down">
           <span className="w-6 h-px bg-cosmos-gold/60" />
-          <span className="overline text-cosmos-gold">Angré · Cocody · Abidjan</span>
+          <span className="overline text-cosmos-gold">
+            {c('home.hero.overline', 'Angré · Cocody · Abidjan')}
+          </span>
           <span className="w-6 h-px bg-cosmos-gold/60" />
         </div>
 
@@ -66,12 +72,15 @@ const HeroPhoto: React.FC = () => {
           className="font-cormorant text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cosmos-cream font-light leading-[1.05] mb-9 animate-fade-in-up text-balance"
           style={{ textShadow: '0 2px 30px rgb(var(--cosmos-night-deep) / 0.9)' }}
         >
-          Le meilleur du quotidien, <span className="text-gradient-gold italic">ici.</span>
+          {c('home.hero.tagline', 'Le meilleur du quotidien,')}{' '}
+          <span className="text-gradient-gold italic">
+            {c('home.hero.tagline_accent', 'ici.')}
+          </span>
         </h1>
 
         <div className="flex justify-center mb-10 animate-fade-in-up">
           <Link to="/preparer-visite" className="btn-primary">
-            Préparer ma visite
+            {c('home.hero.cta', 'Préparer ma visite')}
             <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
           </Link>
         </div>
@@ -82,7 +91,7 @@ const HeroPhoto: React.FC = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cosmos-gold" />
           </span>
           <span className="text-[11px] text-cosmos-cream/70 font-inter font-light uppercase tracking-[0.2em]">
-            Soft opening · Octobre 2026
+            {c('home.hero.badge', 'Soft opening · Octobre 2026')}
           </span>
         </div>
       </div>

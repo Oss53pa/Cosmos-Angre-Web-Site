@@ -70,6 +70,7 @@ const LifeCalendarManagement = lazy(() => import('../pages/admin/LifeCalendarMan
 const UsersManagement = lazy(() => import('../pages/admin/UsersManagement'));
 const SettingsPage = lazy(() => import('../pages/admin/SettingsPage'));
 const MediaManagement = lazy(() => import('../pages/admin/MediaManagement'));
+const SiteContentManagement = lazy(() => import('../pages/admin/SiteContentManagement'));
 
 // Store Pages
 const StoreDashboard = lazy(() => import('../pages/store/StoreDashboard'));
@@ -202,6 +203,7 @@ const router = createBrowserRouter([
           { path: 'moderation', element: wrap(<ModerationPage />, 'admin') },
           { path: 'facturation', element: wrap(<BillingManagement />, 'admin') },
           { path: 'contenu', element: wrap(<ContentManagement />, 'admin') },
+          { path: 'contenu-site', element: wrap(<SiteContentManagement />, 'admin') },
           { path: 'newsletter', element: wrap(<NewsletterManagement />, 'admin') },
           { path: 'messages', element: wrap(<ContactsManagement />, 'admin') },
           { path: 'blog', element: wrap(<BlogManagement />, 'admin') },

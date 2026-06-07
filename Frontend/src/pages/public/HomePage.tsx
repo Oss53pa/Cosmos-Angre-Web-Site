@@ -24,6 +24,7 @@ import AmbientMusic from '../../components/features/AmbientMusic';
 import TestimonialsSection from '../../components/features/TestimonialsSection';
 import OptimizedImage from '../../components/common/OptimizedImage';
 import Reveal from '../../components/common/Reveal';
+import { useContent } from '../../lib/content/SiteContentProvider';
 import HeroPhoto from '../../components/features/HeroPhoto';
 import ConstellationHero from '../../components/features/galaxy/ConstellationHero';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
@@ -90,6 +91,7 @@ function useScrollReveal() {
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
+  const { c } = useContent();
 
   const stat1 = useCountUp(17400, 2000);
   const stat2 = useCountUp(63, 2000);
@@ -123,7 +125,11 @@ const HomePage: React.FC = () => {
       <HeroPhoto />
 
       {/* ════════ UNIVERS EN CONSTELLATION (navigation signature) ════════ */}
-      <ConstellationHero showSignature={false} overline="Explorez" heading="Nos univers" />
+      <ConstellationHero
+        showSignature={false}
+        overline={c('home.univers.overline', 'Explorez')}
+        heading={c('home.univers.heading', 'Nos univers')}
+      />
 
       {/* ════════ À LA UNE — Bento ════════ */}
       <section id="apres-hero" className="section bg-cosmos-warm" ref={bentoReveal.ref}>

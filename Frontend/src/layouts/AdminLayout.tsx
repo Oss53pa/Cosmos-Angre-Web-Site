@@ -21,6 +21,7 @@ import {
   BookOpen,
   Image,
   MessageSquare,
+  Pencil,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -62,6 +63,11 @@ const AdminLayout: React.FC = () => {
       path: '/admin/facturation',
     },
     { icon: Globe, label: t('admin.sidebar.content', 'Contenu Site'), path: '/admin/contenu' },
+    {
+      icon: Pencil,
+      label: t('admin.sidebar.pageContent', 'Contenu des pages'),
+      path: '/admin/contenu-site',
+    },
     { icon: Mail, label: t('admin.sidebar.newsletter', 'Newsletter'), path: '/admin/newsletter' },
     {
       icon: MessageSquare,
