@@ -25,6 +25,10 @@ import TestimonialsSection from '../../components/features/TestimonialsSection';
 import OptimizedImage from '../../components/common/OptimizedImage';
 import Reveal from '../../components/common/Reveal';
 import { useContent } from '../../lib/content/SiteContentProvider';
+import FeaturedBrands from '../../components/features/home/FeaturedBrands';
+import ServicesStrip from '../../components/features/home/ServicesStrip';
+import ProximityAccess from '../../components/features/home/ProximityAccess';
+import InstagramUGC from '../../components/features/home/InstagramUGC';
 import HeroPhoto from '../../components/features/HeroPhoto';
 import ConstellationHero from '../../components/features/galaxy/ConstellationHero';
 import CosmicDivider from '../../components/features/galaxy/CosmicDivider';
@@ -225,6 +229,9 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* ════════ MAISONS À LA UNE (curation) ════════ */}
+      <FeaturedBrands />
+
       {/* ════════ EN CHIFFRES ════════ */}
       <section className="py-20 md:py-28 bg-cosmos-night relative overflow-hidden">
         <div
@@ -266,6 +273,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ════════ PROXIMITÉ & ACCÈS ════════ */}
+      <ProximityAccess />
 
       {/* ════════ TÉMOIGNAGES ════════ */}
       <TestimonialsSection />
@@ -485,6 +495,12 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ════════ SERVICES ════════ */}
+      <ServicesStrip />
+
+      {/* ════════ COMMUNAUTÉ / UGC ════════ */}
+      <InstagramUGC />
 
       {/* ════════ NEWSLETTER ════════ */}
       <section className="py-20 bg-cosmos-night-deep relative overflow-hidden">
