@@ -22,6 +22,7 @@ import {
   Image,
   MessageSquare,
   Pencil,
+  Crown,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -68,6 +69,7 @@ const AdminLayout: React.FC = () => {
       label: t('admin.sidebar.pageContent', 'Contenu des pages'),
       path: '/admin/contenu-site',
     },
+    { icon: Crown, label: t('admin.sidebar.club', 'Cosmos Club'), path: '/admin/cosmos-club' },
     { icon: Mail, label: t('admin.sidebar.newsletter', 'Newsletter'), path: '/admin/newsletter' },
     {
       icon: MessageSquare,
