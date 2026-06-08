@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import {
   type BlogPost,
@@ -29,7 +29,7 @@ export function useBlog(filters: UseBlogFilters = {}): UseBlogReturn {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -65,7 +65,7 @@ export function useBlog(filters: UseBlogFilters = {}): UseBlogReturn {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [filters.status, filters.category, filters.search]);
 
   const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
     try {
@@ -153,7 +153,7 @@ export function useBlog(filters: UseBlogFilters = {}): UseBlogReturn {
 
   useEffect(() => {
     fetchPosts();
-  }, [filters.status, filters.category, filters.search]);
+  }, [fetchPosts]);
 
   return {
     posts,
