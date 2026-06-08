@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useBlog } from '../../hooks/useBlog';
+import { supabase } from '../../lib/supabase';
 import {
   FileText,
   Search,
@@ -17,6 +18,9 @@ import {
   Heart,
   Link as LinkIcon,
   CheckCircle,
+  Upload,
+  Image as ImageIcon,
+  Loader2,
 } from 'lucide-react';
 
 interface BlogPost {
@@ -73,6 +77,64 @@ const BlogManagement: React.FC = () => {
   );
   const [isSaving, setIsSaving] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>('');
+  const [uploadingFeatured, setUploadingFeatured] = useState(false);
+  const [uploadingContent, setUploadingContent] = useState(false);
+  const [contentPreview, setContentPreview] = useState<string | null>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const featuredRef = useRef<HTMLInputElement>(null);
+
+  // Upload vers le Storage "site" (dossier blog), renvoie l'URL publique.
+  const uploadBlogImage = async (file: File): Promise<string | null> => {
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const path = `blog/${Date.now()}-${Math.round(performance.now())}.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from('site')
+      .upload(path, file, { upsert: true, cacheControl: '3600' });
+    if (upErr) return null;
+    return supabase.storage.from('site').getPublicUrl(path).data.publicUrl;
+  };
+
+  const handleFeaturedUpload = async (file: File) => {
+    setUploadingFeatured(true);
+    try {
+      const url = await uploadBlogImage(file);
+      if (!url) {
+        setFeedback({ type: 'error', message: "Téléversement de l'image échoué." });
+        return;
+      }
+      if (featuredRef.current) featuredRef.current.value = url;
+      setImagePreview(url);
+    } finally {
+      setUploadingFeatured(false);
+    }
+  };
+
+  // Insère du texte au curseur dans le textarea de contenu
+  const insertInContent = (text: string) => {
+    const ta = contentRef.current;
+    if (!ta) return;
+    const s = ta.selectionStart ?? ta.value.length;
+    const e = ta.selectionEnd ?? ta.value.length;
+    ta.value = ta.value.slice(0, s) + text + ta.value.slice(e);
+    ta.focus();
+    const pos = s + text.length;
+    ta.selectionStart = ta.selectionEnd = pos;
+  };
+
+  const handleContentImageUpload = async (file: File) => {
+    setUploadingContent(true);
+    try {
+      const url = await uploadBlogImage(file);
+      if (!url) {
+        setFeedback({ type: 'error', message: "Téléversement de l'image échoué." });
+        return;
+      }
+      insertInContent(`\n<img src="${url}" alt="" style="max-width:100%;border-radius:12px;margin:16px 0;" />\n`);
+      setFeedback({ type: 'success', message: 'Image insérée dans le contenu.' });
+    } finally {
+      setUploadingContent(false);
+    }
+  };
 
   // Fetch posts on component mount
   useEffect(() => {
@@ -872,19 +934,52 @@ const BlogManagement: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-cosmos-night font-light mb-2">
-                    {t('admin.blog.form.content', 'Contenu')}
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm text-cosmos-night font-light">
+                      {t('admin.blog.form.content', 'Contenu')}
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <label className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-cosmos-cream hover:border-gray-900 text-xs font-light cursor-pointer transition-colors">
+                        {uploadingContent ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" strokeWidth={1.5} />
+                        ) : (
+                          <ImageIcon className="w-3.5 h-3.5" strokeWidth={1.5} />
+                        )}
+                        Insérer une image
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) void handleContentImageUpload(f);
+                            e.currentTarget.value = '';
+                          }}
+                        />
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => setContentPreview(contentRef.current?.value || '')}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-cosmos-cream hover:border-gray-900 text-xs font-light transition-colors"
+                      >
+                        <Eye className="w-3.5 h-3.5" strokeWidth={1.5} /> Aperçu
+                      </button>
+                    </div>
+                  </div>
                   <textarea
+                    ref={contentRef}
                     name="content"
                     defaultValue={editingPost?.content}
-                    rows={10}
+                    rows={12}
                     placeholder={t(
                       'admin.blog.form.contentPlaceholder',
-                      "Contenu complet de l'article..."
+                      "Contenu complet de l'article… (HTML simple accepté : <h2>, <p>, <img>, <ul>…)"
                     )}
-                    className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light resize-none"
+                    className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light font-mono text-sm resize-y"
                   />
+                  <p className="text-xs text-text-secondary font-light mt-1">
+                    Utilise « Insérer une image » pour téléverser et placer une image au curseur.
+                  </p>
                 </div>
 
                 <div>
@@ -894,18 +989,39 @@ const BlogManagement: React.FC = () => {
                       {t('admin.blog.form.featuredImageUrl', "URL de l'image à la une")}
                     </span>
                   </label>
-                  <input
-                    type="url"
-                    name="featuredImage"
-                    defaultValue={editingPost?.featuredImage || ''}
-                    onChange={(e) => setImagePreview(e.target.value)}
-                    placeholder="https://exemple.com/image.jpg"
-                    className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
-                  />
+                  <div className="flex gap-2">
+                    <input
+                      ref={featuredRef}
+                      type="url"
+                      name="featuredImage"
+                      defaultValue={editingPost?.featuredImage || ''}
+                      onChange={(e) => setImagePreview(e.target.value)}
+                      placeholder="https://exemple.com/image.jpg  ou téléversez →"
+                      className="flex-1 px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light"
+                    />
+                    <label className="inline-flex items-center gap-2 px-4 py-3 bg-cosmos-night text-white text-sm font-light cursor-pointer hover:bg-opacity-90 transition-colors whitespace-nowrap">
+                      {uploadingFeatured ? (
+                        <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
+                      ) : (
+                        <Upload className="w-4 h-4" strokeWidth={1.5} />
+                      )}
+                      Téléverser
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void handleFeaturedUpload(f);
+                          e.currentTarget.value = '';
+                        }}
+                      />
+                    </label>
+                  </div>
                   <p className="text-xs text-text-secondary font-light mt-1">
                     {t(
                       'admin.blog.form.imageUrlHint',
-                      "Entrez l'URL directe d'une image (JPG, PNG, WebP)"
+                      "Téléversez une image ou collez son URL (JPG, PNG, WebP)"
                     )}
                   </p>
                   {imagePreview && (
@@ -976,6 +1092,36 @@ const BlogManagement: React.FC = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Aperçu du contenu (rendu HTML) */}
+      {contentPreview !== null && (
+        <>
+          <div className="fixed inset-0 bg-black/50 z-[60]" onClick={() => setContentPreview(null)} />
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="px-6 py-4 border-b border-cosmos-cream flex items-center justify-between sticky top-0 bg-white">
+                <h3 className="font-cormorant text-2xl text-cosmos-night font-light">Aperçu de l'article</h3>
+                <button onClick={() => setContentPreview(null)} className="text-text-secondary hover:text-cosmos-night">
+                  <XCircle className="w-6 h-6" strokeWidth={1.5} />
+                </button>
+              </div>
+              <div className="p-6 md:p-10">
+                {imagePreview && (
+                  <img src={imagePreview} alt="" className="w-full rounded-xl mb-6 object-cover max-h-72" />
+                )}
+                {contentPreview.trim() ? (
+                  <div
+                    className="font-inter font-light text-cosmos-night/80 leading-relaxed space-y-4 [&_h2]:font-cormorant [&_h2]:text-2xl [&_h2]:text-cosmos-night [&_img]:rounded-xl [&_a]:text-cosmos-gold"
+                    dangerouslySetInnerHTML={{ __html: contentPreview }}
+                  />
+                ) : (
+                  <p className="text-text-secondary font-light text-sm">Le contenu est vide.</p>
+                )}
+              </div>
             </div>
           </div>
         </>
