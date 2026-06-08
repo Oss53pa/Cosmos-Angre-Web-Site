@@ -13,7 +13,7 @@ const ServicesStrip: React.FC = () => {
   const services = [
     { icon: Car, label: c('home.services.parking', 'Parking gratuit') },
     { icon: Wifi, label: c('home.services.wifi', 'Wi-Fi gratuit') },
-    { icon: ConciergeBell, label: c('home.services.concierge', 'ConciergeBellrie') },
+    { icon: ConciergeBell, label: c('home.services.concierge', 'Conciergerie') },
     { icon: Baby, label: c('home.services.family', 'Espace famille') },
     { icon: Gift, label: c('home.services.giftcard', 'Carte cadeau') },
     { icon: CreditCard, label: c('home.services.club', 'Cosmos Club') },

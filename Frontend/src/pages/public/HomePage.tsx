@@ -166,11 +166,10 @@ const HomePage: React.FC = () => {
         <div className="container-cosmos">
           <CosmicDivider className="mb-12" />
           <div className="text-center mb-16">
-            <span className="overline mb-4 block">Temps forts</span>
-            <h2 className="section-title">À la une</h2>
+            <span className="overline mb-4 block">{c('home.spotlight.overline', 'Temps forts')}</span>
+            <h2 className="section-title">{c('home.spotlight.title', 'À la une')}</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Les ouvertures, les rendez-vous, les moments qui font parler tout Angré.
-              Voici ce qu'il ne faut surtout pas manquer en ce moment.
+              {c('home.spotlight.subtitle', "Les ouvertures, les rendez-vous, les moments qui font parler tout Angré. Voici ce qu'il ne faut surtout pas manquer en ce moment.")}
             </p>
           </div>
 
@@ -189,19 +188,18 @@ const HomePage: React.FC = () => {
                 overlay="gradient-bottom"
               />
               <div className="relative z-10 flex flex-col justify-end h-full min-h-[400px] md:min-h-[500px] p-8">
-                <span className="overline mb-3">Édition spéciale</span>
+                <span className="overline mb-3">{c('home.spotlight.event.tag', 'Édition spéciale')}</span>
                 <h3 className="font-cormorant text-3xl md:text-4xl text-cosmos-cream font-light mb-2">
-                  Grande Inauguration
+                  {c('home.spotlight.event.title', 'Grande Inauguration')}
                 </h3>
                 <p className="text-sm text-cosmos-cream/80 font-inter font-light mb-4 max-w-md">
-                  Octobre 2026, le jour où Angré change de dimension. Soyez là dès
-                  la première heure, là où tout commence.
+                  {c('home.spotlight.event.desc', "Octobre 2026, le jour où Angré change de dimension. Soyez là dès la première heure, là où tout commence.")}
                 </p>
                 <Link
                   to="/evenements"
                   className="inline-flex items-center gap-2 text-cosmos-gold text-xs uppercase tracking-[0.15em] font-inter font-medium hover:gap-3 transition-all"
                 >
-                  En savoir plus <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  {c('common.learnMore', 'En savoir plus')} <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
                 </Link>
               </div>
             </div>
@@ -209,19 +207,19 @@ const HomePage: React.FC = () => {
             {/* Petite carte — Nouvelle enseigne */}
             <div className="card group p-6 flex flex-col justify-between min-h-[220px]">
               <div>
-                <span className="overline mb-3 block">Nouvelle enseigne</span>
+                <span className="overline mb-3 block">{c('home.spotlight.brand.tag', 'Nouvelle enseigne')}</span>
                 <h4 className="font-cormorant text-2xl text-cosmos-night font-light mb-2">
-                  Carrefour Market
+                  {c('home.spotlight.brand.title', 'Carrefour Market')}
                 </h4>
                 <p className="text-sm text-text-secondary font-inter font-light">
-                  Vos courses du quotidien, enfin au même endroit que tout le reste.
+                  {c('home.spotlight.brand.desc', 'Vos courses du quotidien, enfin au même endroit que tout le reste.')}
                 </p>
               </div>
               <Link
                 to="/boutiques"
                 className="inline-flex items-center gap-2 text-cosmos-gold text-xs uppercase tracking-[0.15em] font-inter font-medium hover:gap-3 transition-all mt-4"
               >
-                Voir les enseignes <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {c('home.spotlight.brand.cta', 'Voir les enseignes')} <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
               </Link>
             </div>
 
@@ -235,20 +233,19 @@ const HomePage: React.FC = () => {
                 }}
               />
               <div className="relative">
-                <span className="overline mb-3 block">Avant-première</span>
+                <span className="overline mb-3 block">{c('home.spotlight.club.tag', 'Avant-première')}</span>
                 <h4 className="font-cormorant text-2xl text-cosmos-cream font-light mb-2">
-                  Membres fondateurs
+                  {c('home.spotlight.club.title', 'Membres fondateurs')}
                 </h4>
                 <p className="text-sm text-cosmos-cream/80 font-inter font-light">
-                  Entrez dans le cercle avant tout le monde. Les premiers membres
-                  gardent toujours une longueur d'avance.
+                  {c('home.spotlight.club.desc', "Entrez dans le cercle avant tout le monde. Les premiers membres gardent toujours une longueur d'avance.")}
                 </p>
               </div>
               <Link
                 to="/fidelite"
                 className="relative inline-flex items-center gap-2 text-cosmos-gold text-xs uppercase tracking-[0.15em] font-inter font-medium hover:gap-3 transition-all mt-4"
               >
-                Pré-inscription <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {c('home.spotlight.club.cta', 'Pré-inscription')} <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
               </Link>
             </div>
           </div>

@@ -62,14 +62,14 @@ const BrandMarquee: React.FC = () => {
       <div className="container-cosmos">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <span className="overline mb-3 block">{c('home.brands.overline', 'Les enseignes')}</span>
-            <h2 className="section-title">{c('home.brands.title', 'Ils sont à Cosmos')}</h2>
+            <span className="overline mb-3 block">{c('home.marquee.overline', 'Les enseignes')}</span>
+            <h2 className="section-title">{c('home.marquee.title', 'Ils sont à Cosmos')}</h2>
           </div>
           <Link
             to="/boutiques"
             className="hidden md:inline-flex items-center gap-2 text-cosmos-gold text-xs uppercase tracking-[0.15em] font-inter font-medium hover:gap-3 transition-all"
           >
-            {c('home.brands.cta', 'Toutes les enseignes')} <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+            {c('home.marquee.cta', 'Toutes les enseignes')} <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
           </Link>
         </div>
       </div>
@@ -86,7 +86,7 @@ const BrandMarquee: React.FC = () => {
 
       <div className="md:hidden container-cosmos mt-8 text-center">
         <Link to="/boutiques" className="btn-secondary">
-          {c('home.brands.cta', 'Toutes les enseignes')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+          {c('home.marquee.cta', 'Toutes les enseignes')} <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
         </Link>
       </div>
     </section>

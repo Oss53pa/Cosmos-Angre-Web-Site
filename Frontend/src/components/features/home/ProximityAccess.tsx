@@ -25,7 +25,7 @@ const ProximityAccess: React.FC = () => {
     },
     {
       icon: Car,
-      label: c('home.proximity.parking', '1 200 places'),
+      label: c('home.proximity.parking', '400+ places'),
       sub: c('home.proximity.parkingSub', 'Parking gratuit'),
     },
     {

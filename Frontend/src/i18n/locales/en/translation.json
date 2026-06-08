@@ -60,7 +60,6 @@
     "saveChanges": "Save changes",
     "saving": "Saving..."
   },
-
   "nav": {
     "home": "Home",
     "shopping": "Shopping",
@@ -77,7 +76,7 @@
     "infosPratiques": "Visitor Info",
     "stores": "Stores",
     "services": "Services",
-    "blog": "Blog",
+    "blog": "Journal",
     "contact": "Contact",
     "login": "Login",
     "register": "Sign up",
@@ -87,10 +86,8 @@
     "myAccount": "My Account",
     "about": "Discover",
     "journal": "Cosmos Journal",
-    "searchPlaceholder": "Search for a store, restaurant, or service...",
-    "blog": "Journal"
+    "searchPlaceholder": "Search for a store, restaurant, or service..."
   },
-
   "footer": {
     "tagline": "The best of everyday life, here.",
     "description": "A life destination in the heart of Cocody-Angre, Abidjan. Stores, dining, what's on, wellness and more.",
@@ -129,7 +126,7 @@
     "openingHoursWeekValue": "9am - 9pm",
     "openingHoursSun": "Sun:",
     "openingHoursSunValue": "10am - 8pm",
-    "copyright": "\u00a9 {{year}} Cosmos Angre — New Heaven SA. All rights reserved.",
+    "copyright": "© {{year}} Cosmos Angre — New Heaven SA. All rights reserved.",
     "legalNotice": "Legal notice",
     "privacy": "Privacy",
     "terms": "Terms",
@@ -140,7 +137,6 @@
     "newsletterLink": "Newsletter",
     "about": "About"
   },
-
   "home": {
     "hero": {
       "slide1": {
@@ -163,7 +159,12 @@
       },
       "discoverCta": "Discover Cosmos Angre",
       "planVisitCta": "Plan my visit",
-      "openingDate": "Opening November 2026"
+      "openingDate": "Opening November 2026",
+      "overline": "Angré · Cocody · Abidjan",
+      "tagline": "The best of everyday life,",
+      "tagline_accent": "here.",
+      "badge": "Soft opening · October 2026",
+      "cta": "Plan your visit"
     },
     "cinematic": {
       "tagline": "The best of everyday life, here.",
@@ -199,20 +200,44 @@
       "overline": "The Cosmos Experience",
       "title": "Explore our worlds",
       "subtitle": "Eight exceptional spaces for a complete experience. Each world is a promise of emotion.",
-      "shopping": { "title": "Shopping", "desc": "Fashion, beauty, lifestyle" },
-      "gastronomy": { "title": "Dining", "desc": "Restaurants, cafes and world cuisines" },
-      "leisure": { "title": "Leisure & Culture", "desc": "Cinema, games, exhibitions" },
-      "wellness": { "title": "Wellness", "desc": "Fitness, spa, health" },
-      "hotel": { "title": "Hotel", "desc": "Stay at the heart of the experience" },
-      "offices": { "title": "Offices", "desc": "Premium workspaces" },
-      "events": { "title": "Events", "desc": "Calendar, exhibitions, concerts" },
-      "artisan": { "title": "Artisan Market", "desc": "50 artisans, unique creations" },
+      "shopping": {
+        "title": "Shopping",
+        "desc": "Fashion, beauty, lifestyle"
+      },
+      "gastronomy": {
+        "title": "Dining",
+        "desc": "Restaurants, cafes and world cuisines"
+      },
+      "leisure": {
+        "title": "Leisure & Culture",
+        "desc": "Cinema, games, exhibitions"
+      },
+      "wellness": {
+        "title": "Wellness",
+        "desc": "Fitness, spa, health"
+      },
+      "hotel": {
+        "title": "Hotel",
+        "desc": "Stay at the heart of the experience"
+      },
+      "offices": {
+        "title": "Offices",
+        "desc": "Premium workspaces"
+      },
+      "events": {
+        "title": "Events",
+        "desc": "Calendar, exhibitions, concerts"
+      },
+      "artisan": {
+        "title": "Artisan Market",
+        "desc": "50 artisans, unique creations"
+      },
       "discoverCta": "Discover"
     },
     "spotlight": {
-      "overline": "News",
+      "overline": "Highlights",
       "title": "In the spotlight",
-      "subtitle": "Events, new arrivals, offers and inspirations — the best of Cosmos Angre.",
+      "subtitle": "Openings, events, the moments everyone in Angré is talking about. Here is what you really should not miss right now.",
       "upcomingEvent": "Upcoming event",
       "grandOpening": "Grand Opening",
       "grandOpeningDesc": "December 2026 — Be among the first to discover the Cosmos Angre experience.",
@@ -222,7 +247,24 @@
       "viewStores": "View stores",
       "specialOffer": "Special offer",
       "openingOffers": "Opening offers",
-      "openingOffersDesc": "Exclusive promotions at opening in over 30 stores."
+      "openingOffersDesc": "Exclusive promotions at opening in over 30 stores.",
+      "event": {
+        "tag": "Special edition",
+        "title": "Grand Opening",
+        "desc": "October 2026, the day Angré moves up a dimension. Be there from the very first hour, where it all begins."
+      },
+      "brand": {
+        "tag": "New store",
+        "title": "Carrefour Market",
+        "desc": "Your everyday shopping, finally in the same place as everything else.",
+        "cta": "See the brands"
+      },
+      "club": {
+        "tag": "Preview",
+        "title": "Founding members",
+        "desc": "Step into the circle before everyone else. The first members always keep an edge.",
+        "cta": "Pre-register"
+      }
     },
     "stats": {
       "overline": "In numbers",
@@ -244,8 +286,14 @@
       "overline": "Loyalty program",
       "title": "Cosmos Club",
       "description": "Join an exceptional community. Accumulate points, unlock privileges, enjoy exclusive experiences reserved for members.",
-      "silver": { "level": "Silver", "desc": "Free — Exclusive offers, points on every purchase" },
-      "gold": { "level": "Gold", "desc": "Premium parking, private event access, early access" },
+      "silver": {
+        "level": "Silver",
+        "desc": "Free — Exclusive offers, points on every purchase"
+      },
+      "gold": {
+        "level": "Gold",
+        "desc": "Premium parking, private event access, early access"
+      },
       "platinum": {
         "level": "Platinum",
         "desc": "By invitation — Private concierge, bespoke experiences"
@@ -306,14 +354,52 @@
           "text": "The Cosmos Club is truly worth it. Member offers are generous and the VIP lounge is a real haven between shopping sessions."
         }
       }
+    },
+    "univers": {
+      "overline": "Explore",
+      "heading": "Our worlds"
+    },
+    "marquee": {
+      "overline": "The brands",
+      "title": "They are at Cosmos",
+      "cta": "All brands"
+    },
+    "brands": {
+      "overline": "Featured",
+      "title": "Featured houses",
+      "cta": "All brands"
+    },
+    "proximity": {
+      "overline": "Proximity",
+      "title": "Just around the corner",
+      "distance": "10 min away",
+      "address": "Bd Latrille, Angré",
+      "addressSub": "Cocody · Abidjan",
+      "hoursSub": "Shops & restaurants",
+      "parking": "400+ spaces",
+      "parkingSub": "Free parking",
+      "cta": "Plan your visit"
+    },
+    "ugc": {
+      "overline": "Community",
+      "title": "Live Cosmos, share it",
+      "handle": "@cosmos.angre"
+    },
+    "services": {
+      "wifi": "Free Wi-Fi",
+      "parking": "Free parking",
+      "concierge": "Concierge",
+      "family": "Family area",
+      "giftcard": "Gift card",
+      "club": "Cosmos Club"
     }
   },
-
   "stores": {
     "hero": {
-      "overline": "63 stores",
-      "title": "Shopping",
-      "subtitle": "Discover {{count}} exceptional stores in a premium setting"
+      "overline": "The Brands",
+      "title": "Your brands,",
+      "subtitle": "Signed brands: fashion, beauty, restaurants, high-tech and much more. Tap to explore each one.",
+      "accent": "together."
     },
     "searchPlaceholder": "Search for a store...",
     "allCategories": "All",
@@ -332,9 +418,14 @@
     "noResults": "No stores found",
     "ctaOverline": "Professionals",
     "ctaTitle": "Want to open a store?",
-    "ctaSubtitle": "Join the premier premium urban destination in Ivory Coast"
+    "ctaSubtitle": "Join the premier premium urban destination in Ivory Coast",
+    "pro": {
+      "overline": "For business",
+      "title": "Want to open a store?",
+      "subtitle": "Join the destination everyone in Angré is already talking about. Our leasing team guides you, from location to opening.",
+      "cta": "Become a brand"
+    }
   },
-
   "storeDetail": {
     "notFound": "Store not found",
     "backToStores": "Back to stores",
@@ -367,7 +458,6 @@
       }
     }
   },
-
   "events": {
     "hero": {
       "overline": "Calendar",
@@ -424,7 +514,6 @@
       "subtitle": "Flexible and modern spaces for all your professional and private events."
     }
   },
-
   "eventDetail": {
     "notFound": "Event not found",
     "backToEvents": "Back to events",
@@ -437,7 +526,6 @@
     "register": "Register",
     "share": "Share"
   },
-
   "gastronomy": {
     "hero": {
       "overline": "World flavors",
@@ -446,7 +534,7 @@
     },
     "restaurants": {
       "overline": "Our tables",
-      "title": "Restaurants & Bars",
+      "title": "The dining brands",
       "terraceAvailable": "Terrace available",
       "leCosmos": {
         "cuisine": "African cuisine",
@@ -470,9 +558,25 @@
       "title": "La Halle Gourmande",
       "description": "A convivial space bringing together the best flavors from around the world — from African grills to Asian bowls.",
       "viewPlan": "View the map"
+    },
+    "halls": {
+      "overline": "Two gourmet worlds",
+      "title": "La Halle Gourmande & Le Comptoir des Douceurs",
+      "savory": {
+        "name": "La Halle Gourmande",
+        "tag": "Savoury",
+        "desc": "Burgers, pizzas, world cuisines and premium street-food gathered in one convivial hall."
+      },
+      "sweet": {
+        "name": "Le Comptoir des Douceurs",
+        "tag": "Sweet",
+        "desc": "Pastries, ice cream, smoothies and artisan treats for a gourmet break any time."
+      }
+    },
+    "motion": {
+      "overline": "The Cosmos vibe"
     }
   },
-
   "leisure": {
     "hero": {
       "overline": "Entertainment",
@@ -506,9 +610,11 @@
       "title": "Upcoming programming",
       "subtitle": "Discover upcoming films, exhibitions and activities.",
       "viewAgenda": "View calendar"
+    },
+    "motion": {
+      "overline": "The Cosmos energy"
     }
   },
-
   "hotel": {
     "hero": {
       "overline": "Stay at the heart of the experience",
@@ -556,9 +662,29 @@
       "overline": "Exclusive packages",
       "title": "Stay + Cosmos Experience",
       "description": "Combine your stay with shopping, dining and spa for a complete experience."
+    },
+    "perks": {
+      "location": {
+        "title": "At the heart of Cosmos",
+        "desc": "Right inside the destination, Cocody-Angré."
+      },
+      "access": {
+        "title": "Direct access",
+        "desc": "Shops, restaurants and leisure at your door."
+      },
+      "parking": {
+        "title": "Free parking",
+        "desc": "Over 400 free spaces for guests."
+      },
+      "service": {
+        "title": "Concierge",
+        "desc": "Attentive service, 7 days a week."
+      }
+    },
+    "motion": {
+      "overline": "Your stay at Cosmos"
     }
   },
-
   "retailPark": {
     "hero": {
       "overline": "Retail & Office Park",
@@ -650,7 +776,6 @@
       "description": "Contact us to discover the opportunities within the Cosmos Angre Retail Park."
     }
   },
-
   "visit": {
     "hero": {
       "overline": "Practical information",
@@ -692,7 +817,10 @@
     "services": {
       "overline": "At your service",
       "title": "Visitor services",
-      "wifi": { "label": "Free WiFi", "desc": "High-speed connection throughout the center." },
+      "wifi": {
+        "label": "Free WiFi",
+        "desc": "High-speed connection throughout the center."
+      },
       "nursery": {
         "label": "Baby room / Nursery",
         "desc": "Dedicated space for the comfort of parents and toddlers."
@@ -701,12 +829,18 @@
         "label": "Disabled access",
         "desc": "Easy access for people with reduced mobility."
       },
-      "atm": { "label": "Currency exchange / ATM", "desc": "ATMs and currency exchange offices." },
+      "atm": {
+        "label": "Currency exchange / ATM",
+        "desc": "ATMs and currency exchange offices."
+      },
       "charging": {
         "label": "Charging stations",
         "desc": "Charge your phone or electric vehicle."
       },
-      "concierge": { "label": "Concierge", "desc": "Welcome and personalized guidance service." }
+      "concierge": {
+        "label": "Concierge",
+        "desc": "Welcome and personalized guidance service."
+      }
     },
     "faq": {
       "overline": "Help",
@@ -727,7 +861,6 @@
       "openMap": "Open the map"
     }
   },
-
   "fidelity": {
     "hero": {
       "overline": "Loyalty program",
@@ -787,9 +920,24 @@
       "title": "Ready to live the exception?",
       "subtitle": "Registration is free and gives you immediate access to Silver benefits.",
       "createAccount": "Create my account"
+    },
+    "how": {
+      "overline": "Simple and free",
+      "title": "How it works",
+      "step1": {
+        "title": "Sign up",
+        "desc": "In seconds, for free. Your Cosmos Club card is active right away."
+      },
+      "step2": {
+        "title": "Earn on every visit",
+        "desc": "Your purchases and visits move you up tiers, automatically."
+      },
+      "step3": {
+        "title": "Enjoy the perks",
+        "desc": "Discounts, invitations, parking and member-only services."
+      }
     }
   },
-
   "services": {
     "hero": {
       "overline": "At your service",
@@ -817,7 +965,10 @@
         "name": "Digital Guide",
         "description": "Interactive map of the center on your phone."
       },
-      "concierge": { "name": "Concierge", "description": "Personalized assistance and guidance." },
+      "concierge": {
+        "name": "Concierge",
+        "description": "Personalized assistance and guidance."
+      },
       "support": {
         "name": "Customer Support",
         "description": "Available 7 days a week to help you."
@@ -838,7 +989,6 @@
       "contact": "Contact us"
     }
   },
-
   "premiumServices": {
     "hero": {
       "overline": "Exclusive",
@@ -971,7 +1121,11 @@
         "label": "Basic access",
         "price": "0 FCFA",
         "period": "Per year",
-        "features": ["Click & Collect", "Standard parking", "AR Navigation"],
+        "features": [
+          "Click & Collect",
+          "Standard parking",
+          "AR Navigation"
+        ],
         "cta": "Free sign up"
       },
       "gold": {
@@ -1011,7 +1165,6 @@
       "signUp": "Sign up now"
     }
   },
-
   "spaces": {
     "hero": {
       "overline": "Worlds",
@@ -1026,7 +1179,6 @@
       "title": "Ready to join us?"
     }
   },
-
   "about": {
     "hero": {
       "overline": "About"
@@ -1055,7 +1207,6 @@
       "discoverSpaces": "Discover our spaces"
     }
   },
-
   "blog": {
     "hero": {
       "overline": "Journal",
@@ -1087,13 +1238,11 @@
       }
     }
   },
-
   "blogPost": {
     "notFound": "Article not found",
     "backToBlog": "Back to blog",
     "allArticles": "All articles"
   },
-
   "contact": {
     "hero": {
       "overline": "Let's talk",
@@ -1130,7 +1279,6 @@
       "hoursValue": "Mon-Sat: 9am-9pm | Sun: 10am-8pm"
     }
   },
-
   "interactiveMap": {
     "hero": {
       "badge": "Interactive Digital Guide",
@@ -1179,7 +1327,6 @@
       "arNavigation": "AR Navigation"
     }
   },
-
   "arNavigation": {
     "hero": {
       "title": "AR Navigation",
@@ -1205,8 +1352,14 @@
         "title": "Real-time guidance",
         "desc": "Optimized routes to your destinations"
       },
-      "storeLocation": { "title": "Store location", "desc": "Instantly find your favorite stores" },
-      "poi": { "title": "Points of interest", "desc": "Services, restrooms, emergency exits" },
+      "storeLocation": {
+        "title": "Store location",
+        "desc": "Instantly find your favorite stores"
+      },
+      "poi": {
+        "title": "Points of interest",
+        "desc": "Services, restrooms, emergency exits"
+      },
       "geoPromos": {
         "title": "Geo-targeted promotions",
         "desc": "Receive offers based on your location"
@@ -1234,7 +1387,6 @@
       "downloadApp": "Download the app"
     }
   },
-
   "auth": {
     "login": {
       "brandingTitle": "A world\napart",
@@ -1285,7 +1437,6 @@
       "signIn": "Log in"
     }
   },
-
   "admin": {
     "sidebar": {
       "dashboard": "Dashboard",
@@ -2192,7 +2343,6 @@
       }
     }
   },
-
   "store": {
     "dashboard": {
       "title": "Dashboard",
@@ -2390,7 +2540,6 @@
       "deleteAccountWarning": "This action is irreversible"
     }
   },
-
   "storeDirectory": {
     "zones": {
       "gallery": "Commercial Gallery",
@@ -2493,7 +2642,6 @@
       }
     }
   },
-
   "errors": {
     "404": {
       "title": "404",
@@ -2508,6 +2656,19 @@
     "network": {
       "title": "Network error",
       "message": "Unable to connect to server"
+    }
+  },
+  "practical": {
+    "access": "Access & directions",
+    "hours": "Every day · 10am – 10pm",
+    "parking": "Free parking",
+    "plan": "Interactive map"
+  },
+  "retailpark": {
+    "hero": {
+      "overline": "Retail Park",
+      "title": "Four giants,",
+      "accent": "soon."
     }
   }
 }

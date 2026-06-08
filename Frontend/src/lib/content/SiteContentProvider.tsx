@@ -111,8 +111,15 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [load]);
 
   const c = useCallback(
-    (key: string, fallback = '') => (isFr ? map[key] ?? fallback : fallback),
-    [map, isFr]
+    (key: string, fallback = '') => {
+      // FR : surcharge CMS (cosmos.site_content) sinon le texte par défaut.
+      if (isFr) return map[key] ?? fallback;
+      // EN : traduction i18n si la clé existe dans le bundle anglais, sinon
+      // le fallback (français) — évite d'afficher du français quand une clé EN
+      // est disponible.
+      return i18n.exists(key, { lng: 'en' }) ? (i18n.getFixedT('en')(key) as string) : fallback;
+    },
+    [map, isFr, i18n]
   );
 
   const getByPage = useCallback(
