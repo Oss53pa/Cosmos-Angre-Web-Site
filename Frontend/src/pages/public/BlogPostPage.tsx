@@ -4,71 +4,169 @@ import { Calendar, User, ArrowLeft, Clock, Share2, Check, Copy } from 'lucide-re
 import OptimizedImage from '../../components/common/OptimizedImage';
 import Seo from '../../lib/seo/Seo';
 import { articleJsonLd, breadcrumbJsonLd } from '../../lib/seo/jsonLd';
+import { supabase } from '../../lib/supabase';
+import type { BlogPost } from '../../types/database';
 import galleryInterior from '../../assets/images/branding/gallery-interior.jpg';
 import artisanMarket from '../../assets/images/branding/artisan-market.jpg';
 import familyLifestyle from '../../assets/images/branding/family-lifestyle.jpg';
 
-const ARTICLES = [
+interface DisplayArticle {
+  slug: string;
+  title: string;
+  date: string;
+  author: string;
+  category: string;
+  image: string;
+  /** Rendered as HTML (real Supabase posts). */
+  html?: string;
+  /** Rendered as paragraphs (static fallback articles). */
+  paragraphs?: string[];
+  excerpt: string;
+}
+
+const ARTICLES: DisplayArticle[] = [
   {
     slug: 'ouverture-cosmos-angre',
-    title: 'Ouverture prochaine de Cosmos Angr\u00e9',
+    title: 'Ouverture prochaine de Cosmos Angré',
     date: '15 Nov 2025',
-    author: '\u00c9quipe Cosmos',
-    category: 'Actualit\u00e9s',
+    author: 'Équipe Cosmos',
+    category: 'Actualités',
     image: galleryInterior,
+    excerpt: '',
     paragraphs: [
-      'Cosmos Angr\u00e9, le centre de vie de C\u00f4te d\u2019Ivoire, ouvrira bient\u00f4t ses portes \u00e0 Cocody-Angr\u00e9. Avec plus de 17 400 m\u00b2 de surface, ce lieu d\u2019exception accueillera plus de 55 enseignes, des restaurants, un cin\u00e9ma derni\u00e8re g\u00e9n\u00e9ration, un h\u00f4tel et bien plus encore.',
-      'Con\u00e7u pour offrir une exp\u00e9rience in\u00e9gal\u00e9e, Cosmos Angr\u00e9 est certifi\u00e9 EDGE Advanced, t\u00e9moignant de son engagement envers le d\u00e9veloppement durable. Chaque d\u00e9tail a \u00e9t\u00e9 pens\u00e9 pour cr\u00e9er un lieu o\u00f9 se m\u00ealent \u00e9l\u00e9gance, confort et innovation.',
-      'La galerie commerciale, v\u00e9ritable colonne vert\u00e9brale du complexe, accueillera des marques internationales et locales soigneusement s\u00e9lectionn\u00e9es. Du pr\u00eat-\u00e0-porter de luxe aux cr\u00e9ateurs ivoiriens \u00e9mergents, chaque boutique a \u00e9t\u00e9 pens\u00e9e comme une destination \u00e0 part enti\u00e8re.',
-      'La Halle Gourmande, au c\u0153ur du complexe, proposera une offre culinaire vari\u00e9e : cuisine ivoirienne contemporaine, cuisine asiatique, brasserie parisienne et bien plus. Chaque restaurant a \u00e9t\u00e9 con\u00e7u comme un univers sensoriel unique.',
-      'Rejoignez-nous pour d\u00e9couvrir un monde \u00e0 part. L\u2019inauguration sera un \u00e9v\u00e9nement exceptionnel, avec des surprises, des spectacles et des offres exclusives pour les premiers visiteurs.',
+      'Cosmos Angré, le centre de vie de Côte d’Ivoire, ouvrira bientôt ses portes à Cocody-Angré. Avec plus de 17 400 m² de surface, ce lieu d’exception accueillera plus de 55 enseignes, des restaurants, un cinéma dernière génération, un hôtel et bien plus encore.',
+      'Conçu pour offrir une expérience inégalée, Cosmos Angré est certifié EDGE Advanced, témoignant de son engagement envers le développement durable. Chaque détail a été pensé pour créer un lieu où se mêlent élégance, confort et innovation.',
+      'La galerie commerciale, véritable colonne vertébrale du complexe, accueillera des marques internationales et locales soigneusement sélectionnées. Du prêt-à-porter de luxe aux créateurs ivoiriens émergents, chaque boutique a été pensée comme une destination à part entière.',
+      'La Halle Gourmande, au cœur du complexe, proposera une offre culinaire variée : cuisine ivoirienne contemporaine, cuisine asiatique, brasserie parisienne et bien plus. Chaque restaurant a été conçu comme un univers sensoriel unique.',
+      'Rejoignez-nous pour découvrir un monde à part. L’inauguration sera un événement exceptionnel, avec des surprises, des spectacles et des offres exclusives pour les premiers visiteurs.',
     ],
   },
   {
     slug: 'artisans-locaux',
-    title: 'Les artisans locaux \u00e0 l\u2019honneur',
+    title: 'Les artisans locaux à l’honneur',
     date: '10 Nov 2025',
-    author: '\u00c9quipe Cosmos',
+    author: 'Équipe Cosmos',
     category: 'Culture',
     image: artisanMarket,
+    excerpt: '',
     paragraphs: [
-      'Le March\u00e9 Artisanal de Cosmos Angr\u00e9 met en lumi\u00e8re le savoir-faire ivoirien et africain. Artisans, cr\u00e9ateurs et designers locaux y pr\u00e9sentent leurs \u0153uvres dans un \u00e9crin premium.',
-      'Des textiles traditionnels aux bijoux contemporains, en passant par la maroquinerie et l\u2019art d\u00e9coratif, chaque pi\u00e8ce raconte une histoire. C\u2019est un voyage au c\u0153ur de la cr\u00e9ativit\u00e9 africaine.',
-      'Nous avons s\u00e9lectionn\u00e9 chaque artisan pour la qualit\u00e9 de son travail, l\u2019originalit\u00e9 de ses cr\u00e9ations et son engagement envers des pratiques durables. Le march\u00e9 n\u2019est pas un simple espace de vente \u2014 c\u2019est une c\u00e9l\u00e9bration du talent local.',
-      'Des ateliers d\u00e9couverte seront organis\u00e9s r\u00e9guli\u00e8rement, permettant aux visiteurs de s\u2019initier aux techniques artisanales : tissage du pagne, travail du cuir, cr\u00e9ation de bijoux en perles de verre.',
-      'Venez d\u00e9couvrir ces talents exceptionnels et repartez avec des pi\u00e8ces uniques, charg\u00e9es de sens et d\u2019authenticit\u00e9.',
+      'Le Marché Artisanal de Cosmos Angré met en lumière le savoir-faire ivoirien et africain. Artisans, créateurs et designers locaux y présentent leurs œuvres dans un écrin premium.',
+      'Des textiles traditionnels aux bijoux contemporains, en passant par la maroquinerie et l’art décoratif, chaque pièce raconte une histoire. C’est un voyage au cœur de la créativité africaine.',
+      'Nous avons sélectionné chaque artisan pour la qualité de son travail, l’originalité de ses créations et son engagement envers des pratiques durables. Le marché n’est pas un simple espace de vente — c’est une célébration du talent local.',
+      'Des ateliers découverte seront organisés régulièrement, permettant aux visiteurs de s’initier aux techniques artisanales : tissage du pagne, travail du cuir, création de bijoux en perles de verre.',
+      'Venez découvrir ces talents exceptionnels et repartez avec des pièces uniques, chargées de sens et d’authenticité.',
     ],
   },
   {
     slug: 'destination-famille',
     title: 'Une destination pour toute la famille',
     date: '5 Nov 2025',
-    author: '\u00c9quipe Cosmos',
+    author: 'Équipe Cosmos',
     category: 'Lifestyle',
     image: familyLifestyle,
+    excerpt: '',
     paragraphs: [
-      'Cosmos Angr\u00e9 a \u00e9t\u00e9 con\u00e7u pour que chaque membre de la famille y trouve son bonheur. Les enfants profitent d\u2019espaces de jeux s\u00e9curis\u00e9s et d\u2019ateliers cr\u00e9atifs, tandis que les parents explorent les boutiques et les restaurants.',
-      'Le cin\u00e9ma propose une programmation vari\u00e9e, l\u2019entertainment zone offre bowling et r\u00e9alit\u00e9 virtuelle, et La Halle Gourmande satisfait toutes les envies culinaires.',
-      'Pour les plus jeunes, un espace Kids Club avec animateurs professionnels permet aux parents de profiter du centre en toute s\u00e9r\u00e9nit\u00e9. Ateliers de dessin, jeux \u00e9ducatifs et activit\u00e9s ludiques sont au programme chaque week-end.',
-      'Les espaces de bien-\u00eatre ne sont pas en reste : spa, salon de coiffure, espace fitness \u2014 chaque visiteur peut s\u2019accorder un moment de d\u00e9tente dans un cadre premium.',
-      'Une journ\u00e9e ne suffit pas pour tout d\u00e9couvrir \u2014 c\u2019est la promesse d\u2019une exp\u00e9rience renouvel\u00e9e \u00e0 chaque visite.',
+      'Cosmos Angré a été conçu pour que chaque membre de la famille y trouve son bonheur. Les enfants profitent d’espaces de jeux sécurisés et d’ateliers créatifs, tandis que les parents explorent les boutiques et les restaurants.',
+      'Le cinéma propose une programmation variée, l’entertainment zone offre bowling et réalité virtuelle, et La Halle Gourmande satisfait toutes les envies culinaires.',
+      'Pour les plus jeunes, un espace Kids Club avec animateurs professionnels permet aux parents de profiter du centre en toute sérénité. Ateliers de dessin, jeux éducatifs et activités ludiques sont au programme chaque week-end.',
+      'Les espaces de bien-être ne sont pas en reste : spa, salon de coiffure, espace fitness — chaque visiteur peut s’accorder un moment de détente dans un cadre premium.',
+      'Une journée ne suffit pas pour tout découvrir — c’est la promesse d’une expérience renouvelée à chaque visite.',
     ],
   },
 ];
 
+const FALLBACK_IMAGES = [galleryInterior, artisanMarket, familyLifestyle];
+
+function formatDate(value: string | null): string {
+  if (!value) return '';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function mapPost(post: BlogPost, index = 0): DisplayArticle {
+  const html = post.content ?? '';
+  const excerpt = post.excerpt ?? stripHtml(html).slice(0, 160);
+  return {
+    slug: post.slug,
+    title: post.title,
+    date: formatDate(post.publish_date ?? post.created_at),
+    author: post.author_name ?? 'Équipe Cosmos',
+    category: post.category ?? 'Actualités',
+    image: post.featured_image || FALLBACK_IMAGES[index % FALLBACK_IMAGES.length],
+    html,
+    excerpt,
+  };
+}
+
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [linkCopied, setLinkCopied] = useState(false);
+  const [article, setArticle] = useState<DisplayArticle | null>(null);
+  const [related, setRelated] = useState<DisplayArticle[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const article = useMemo(() => ARTICLES.find(a => a.slug === slug), [slug]);
-  const relatedArticles = useMemo(
-    () => ARTICLES.filter(a => a.slug !== slug).slice(0, 2),
-    [slug]
-  );
+  useEffect(() => {
+    let active = true;
+
+    const staticArticle = ARTICLES.find((a) => a.slug === slug) ?? null;
+
+    (async () => {
+      setLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('slug', slug)
+          .eq('status', 'published')
+          .maybeSingle();
+
+        if (!active) return;
+
+        if (!error && data) {
+          setArticle(mapPost(data as BlogPost));
+
+          // Fetch a couple of related published posts (same category preferred).
+          const { data: rel } = await supabase
+            .from('blog_posts')
+            .select('*')
+            .eq('status', 'published')
+            .neq('slug', slug)
+            .order('publish_date', { ascending: false, nullsFirst: false })
+            .limit(2);
+
+          if (active && rel && rel.length > 0) {
+            setRelated((rel as BlogPost[]).map((p, i) => mapPost(p, i)));
+          } else if (active) {
+            setRelated(ARTICLES.filter((a) => a.slug !== slug).slice(0, 2));
+          }
+        } else {
+          // No DB row — fall back to the static seed articles.
+          setArticle(staticArticle);
+          setRelated(ARTICLES.filter((a) => a.slug !== slug).slice(0, 2));
+        }
+      } catch {
+        if (!active) return;
+        setArticle(staticArticle);
+        setRelated(ARTICLES.filter((a) => a.slug !== slug).slice(0, 2));
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [slug]);
 
   const readingTime = useMemo(() => {
     if (!article) return 0;
-    const words = article.paragraphs.join(' ').split(/\s+/).length;
+    const text = article.html ? stripHtml(article.html) : (article.paragraphs ?? []).join(' ');
+    const words = text.split(/\s+/).filter(Boolean).length;
     return Math.max(1, Math.round(words / 200));
   }, [article]);
 
@@ -82,6 +180,15 @@ const BlogPostPage: React.FC = () => {
     setTimeout(() => setLinkCopied(false), 2000);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cosmos-night flex items-center justify-center">
+        <Seo title="Chargement…" noindex />
+        <div className="w-10 h-10 border-2 border-cosmos-gold/30 border-t-cosmos-gold rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   if (!article) {
     return (
       <div className="min-h-screen bg-cosmos-night flex items-center justify-center">
@@ -94,7 +201,7 @@ const BlogPostPage: React.FC = () => {
     );
   }
 
-  const articleExcerpt = article.paragraphs[0]?.slice(0, 160) ?? '';
+  const articleExcerpt = article.excerpt || (article.paragraphs?.[0]?.slice(0, 160) ?? '');
 
   return (
     <div className="bg-cosmos-warm">
@@ -160,16 +267,23 @@ const BlogPostPage: React.FC = () => {
           <div className="divider-gold-center mb-12" />
 
           <article className="card p-8 md:p-12">
-            {article.paragraphs.map((paragraph, i) => (
-              <p
-                key={i}
-                className={`text-base text-cosmos-night/80 font-inter font-light leading-[1.9] mb-6 last:mb-0 ${
-                  i === 0 ? 'first-letter:text-4xl first-letter:font-cormorant first-letter:font-light first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:text-cosmos-night' : ''
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
+            {article.html ? (
+              <div
+                className="blog-content text-base text-cosmos-night/80 font-inter font-light leading-[1.9]"
+                dangerouslySetInnerHTML={{ __html: article.html }}
+              />
+            ) : (
+              (article.paragraphs ?? []).map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={`text-base text-cosmos-night/80 font-inter font-light leading-[1.9] mb-6 last:mb-0 ${
+                    i === 0 ? 'first-letter:text-4xl first-letter:font-cormorant first-letter:font-light first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:text-cosmos-night' : ''
+                  }`}
+                >
+                  {paragraph}
+                </p>
+              ))
+            )}
           </article>
 
           {/* Share */}
@@ -205,29 +319,29 @@ const BlogPostPage: React.FC = () => {
       </section>
 
       {/* Related Articles */}
-      {relatedArticles.length > 0 && (
+      {related.length > 0 && (
         <section className="py-16 bg-cosmos-cream">
           <div className="container-cosmos">
             <div className="text-center mb-12">
-              <span className="overline mb-3 block">\u00c0 lire aussi</span>
+              <span className="overline mb-3 block">À lire aussi</span>
               <h2 className="section-title">Articles similaires</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              {relatedArticles.map((related) => (
-                <Link key={related.slug} to={`/blog/${related.slug}`} className="card group overflow-hidden">
+              {related.map((rel) => (
+                <Link key={rel.slug} to={`/blog/${rel.slug}`} className="card group overflow-hidden">
                   <div className="aspect-[16/10]">
-                    <OptimizedImage src={related.image} alt={related.title} containerClassName="w-full h-full" hoverZoom overlay="gradient-bottom" />
+                    <OptimizedImage src={rel.image} alt={rel.title} containerClassName="w-full h-full" hoverZoom overlay="gradient-bottom" />
                   </div>
                   <div className="p-6">
                     <span className="text-[10px] uppercase tracking-[0.15em] text-cosmos-gold font-inter font-medium mb-2 block">
-                      {related.category}
+                      {rel.category}
                     </span>
                     <h3 className="font-cormorant text-xl text-cosmos-night font-light mb-2 group-hover:text-cosmos-gold transition-colors">
-                      {related.title}
+                      {rel.title}
                     </h3>
                     <div className="flex items-center gap-2 text-xs text-text-secondary font-inter font-light">
                       <Calendar className="w-3 h-3" strokeWidth={1.5} />
-                      {related.date}
+                      {rel.date}
                     </div>
                   </div>
                 </Link>

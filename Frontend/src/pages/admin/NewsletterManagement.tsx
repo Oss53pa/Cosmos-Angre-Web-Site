@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNewsletter } from '../../hooks/useNewsletter';
+import { supabase } from '../../lib/supabase';
 import {
   Mail,
   Search,
@@ -25,6 +26,10 @@ import {
   Image,
   Type,
   AlignLeft,
+  Upload,
+  Loader2,
+  Smartphone,
+  Monitor,
 } from 'lucide-react';
 
 interface Subscriber {
@@ -92,7 +97,143 @@ const NewsletterManagement: React.FC = () => {
     useState<Template['category']>('promotional');
   const [editTemplateSubject, setEditTemplateSubject] = useState('');
   const [editTemplateContent, setEditTemplateContent] = useState('');
+  const [editTemplateHeaderImage, setEditTemplateHeaderImage] = useState('');
   const [templateSuccessMsg, setTemplateSuccessMsg] = useState('');
+
+  // Premium preview + image insertion
+  const [showTemplatePreview, setShowTemplatePreview] = useState(false);
+  const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop');
+  const [uploadingHeader, setUploadingHeader] = useState(false);
+  const [uploadingContentImg, setUploadingContentImg] = useState(false);
+  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const headerFileRef = useRef<HTMLInputElement>(null);
+  const contentFileRef = useRef<HTMLInputElement>(null);
+
+  // Upload an image to Supabase Storage and return its public URL.
+  const uploadNewsletterImage = useCallback(async (file: File): Promise<string | null> => {
+    try {
+      const ext = file.name.split('.').pop() || 'jpg';
+      const safe = `newsletter/${Date.now()}-${Math.round(performance.now())}.${ext}`;
+      const { error: upErr } = await supabase.storage.from('site').upload(safe, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+      if (upErr) throw upErr;
+      const { data } = supabase.storage.from('site').getPublicUrl(safe);
+      return data.publicUrl;
+    } catch (err) {
+      window.alert(
+        t('admin.newsletter.templates.uploadError', "Échec du téléversement de l'image.") +
+          ' ' +
+          (err instanceof Error ? err.message : '')
+      );
+      return null;
+    }
+  }, [t]);
+
+  // Insert text/HTML at the cursor position in the main content textarea.
+  const insertInContent = useCallback((snippet: string) => {
+    const ta = contentTextareaRef.current;
+    if (!ta) {
+      setEditTemplateContent((prev) => prev + snippet);
+      return;
+    }
+    const start = ta.selectionStart ?? ta.value.length;
+    const end = ta.selectionEnd ?? ta.value.length;
+    setEditTemplateContent((prev) => prev.slice(0, start) + snippet + prev.slice(end));
+    // Restore focus after React re-render.
+    setTimeout(() => {
+      ta.focus();
+      const pos = start + snippet.length;
+      ta.setSelectionRange(pos, pos);
+    }, 0);
+  }, []);
+
+  const handleHeaderUpload = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setUploadingHeader(true);
+      const url = await uploadNewsletterImage(file);
+      setUploadingHeader(false);
+      if (url) setEditTemplateHeaderImage(url);
+      if (headerFileRef.current) headerFileRef.current.value = '';
+    },
+    [uploadNewsletterImage]
+  );
+
+  const handleContentImageUpload = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setUploadingContentImg(true);
+      const url = await uploadNewsletterImage(file);
+      setUploadingContentImg(false);
+      if (url) {
+        insertInContent(
+          `\n<img src="${url}" alt="" style="max-width:100%;border-radius:12px;margin:16px 0;display:block;" />\n`
+        );
+      }
+      if (contentFileRef.current) contentFileRef.current.value = '';
+    },
+    [uploadNewsletterImage, insertInContent]
+  );
+
+  // Build a premium branded HTML email for the live preview (iframe srcDoc).
+  const buildEmailPreview = useCallback(() => {
+    const subject = editTemplateSubject || t('admin.newsletter.templates.noSubject', '(Sans sujet)');
+    const headerImg = editTemplateHeaderImage;
+    // If content already contains HTML tags, keep it; otherwise convert line breaks.
+    const rawContent = editTemplateContent || '';
+    const looksHtml = /<[a-z][\s\S]*>/i.test(rawContent);
+    const bodyHtml = looksHtml
+      ? rawContent
+      : rawContent
+          .split(/\n{2,}/)
+          .map((p) => `<p style="margin:0 0 16px;">${p.replace(/\n/g, '<br/>')}</p>`)
+          .join('');
+
+    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+  body { margin:0; padding:0; background:#EDE4D3; font-family: 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:600px; margin:0 auto; background:#ffffff; }
+  .topbar { height:4px; background:linear-gradient(90deg,#C9A961,#E4CE94,#C9A961); }
+  .brand { text-align:center; padding:28px 24px 8px; }
+  .brand .name { font-family: Georgia, 'Times New Roman', serif; font-size:26px; letter-spacing:2px; color:#2F5439; font-weight:400; }
+  .brand .tag { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#C9A961; margin-top:6px; }
+  .hero img { width:100%; display:block; }
+  .content { padding:32px 40px; color:#3a3a3a; font-size:16px; line-height:1.8; font-weight:300; }
+  .content h1,.content h2,.content h3 { font-family: Georgia, serif; color:#2F5439; font-weight:400; line-height:1.3; }
+  .content img { max-width:100%; height:auto; border-radius:12px; margin:16px 0; }
+  .content a { color:#C9A961; }
+  .divider { width:48px; height:2px; background:#C9A961; margin:8px auto 28px; }
+  .footer { background:#2F5439; color:#EDE4D3; padding:28px 40px; text-align:center; font-size:12px; line-height:1.7; font-weight:300; }
+  .footer .gold { color:#C9A961; letter-spacing:2px; text-transform:uppercase; font-size:11px; }
+  .footer a { color:#C9A961; text-decoration:none; }
+  .legal { font-size:10px; color:rgba(237,228,211,0.5); margin-top:14px; }
+</style></head>
+<body>
+  <div class="wrap">
+    <div class="topbar"></div>
+    <div class="brand">
+      <div class="name">COSMOS&nbsp;ANGRÉ</div>
+      <div class="tag">Le centre de vie · Cocody-Angré</div>
+    </div>
+    <div class="divider"></div>
+    ${headerImg ? `<div class="hero"><img src="${headerImg}" alt=""/></div>` : ''}
+    <div class="content">
+      ${bodyHtml || `<p style="color:#bbb;">${t('admin.newsletter.templates.emptyPreview', 'Le contenu de votre email apparaîtra ici…')}</p>`}
+    </div>
+    <div class="footer">
+      <div class="gold">Cosmos Angré</div>
+      <div style="margin-top:8px;">Boulevard Latrille, Angré · Cocody, Abidjan</div>
+      <div>contact@cosmos-angre.ci</div>
+      <div class="legal">Vous recevez cet email car vous êtes abonné(e) à la newsletter Cosmos Angré.<br/>Se désabonner · © 2026 Cosmos Angré</div>
+    </div>
+  </div>
+</body></html>`;
+  }, [editTemplateSubject, editTemplateHeaderImage, editTemplateContent, t]);
 
   // Use Supabase hook for subscribers
   const { subscribers: supabaseSubscribers, isLoading, error, deleteSubscriber } = useNewsletter();
@@ -558,6 +699,7 @@ const NewsletterManagement: React.FC = () => {
     setEditTemplateCategory(template.category);
     setEditTemplateSubject(template.subject);
     setEditTemplateContent(template.content);
+    setEditTemplateHeaderImage('');
     setTemplateSuccessMsg('');
     setEditTemplate(template);
   }, []);
@@ -1934,21 +2076,68 @@ const NewsletterManagement: React.FC = () => {
                           <label className="block text-sm text-cosmos-night font-light mb-2">
                             {t('admin.newsletter.templates.headerImage', "Logo / Image d'en-tete")}
                           </label>
-                          <div className="border-2 border-dashed border-cosmos-cream p-8 text-center hover:border-gray-400 transition-colors cursor-pointer">
-                            <Image
-                              className="w-8 h-8 text-text-secondary mx-auto mb-2"
-                              strokeWidth={1.5}
-                            />
-                            <p className="text-sm text-text-secondary font-light mb-1">
-                              {t(
-                                'admin.newsletter.templates.clickToAddImage',
-                                'Cliquez pour ajouter une image'
+                          <input
+                            ref={headerFileRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleHeaderUpload}
+                            className="hidden"
+                          />
+                          {editTemplateHeaderImage ? (
+                            <div className="relative group">
+                              <img
+                                src={editTemplateHeaderImage}
+                                alt=""
+                                className="w-full h-40 object-cover border border-cosmos-cream"
+                              />
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                                <button
+                                  onClick={() => headerFileRef.current?.click()}
+                                  className="px-3 py-2 bg-white text-cosmos-night text-sm font-light flex items-center gap-2"
+                                >
+                                  <Upload className="w-4 h-4" strokeWidth={1.5} />
+                                  {t('admin.newsletter.templates.replace', 'Remplacer')}
+                                </button>
+                                <button
+                                  onClick={() => setEditTemplateHeaderImage('')}
+                                  className="px-3 py-2 bg-red-600 text-white text-sm font-light flex items-center gap-2"
+                                >
+                                  <Trash2 className="w-4 h-4" strokeWidth={1.5} />
+                                  {t('common.delete', 'Supprimer')}
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => headerFileRef.current?.click()}
+                              disabled={uploadingHeader}
+                              className="w-full border-2 border-dashed border-cosmos-cream p-8 text-center hover:border-cosmos-gold transition-colors cursor-pointer disabled:opacity-60"
+                            >
+                              {uploadingHeader ? (
+                                <Loader2
+                                  className="w-8 h-8 text-cosmos-gold mx-auto mb-2 animate-spin"
+                                  strokeWidth={1.5}
+                                />
+                              ) : (
+                                <Image
+                                  className="w-8 h-8 text-text-secondary mx-auto mb-2"
+                                  strokeWidth={1.5}
+                                />
                               )}
-                            </p>
-                            <p className="text-xs text-text-secondary font-light">
-                              {t('admin.newsletter.templates.imageFormats', "PNG, JPG jusqu'a 2MB")}
-                            </p>
-                          </div>
+                              <p className="text-sm text-text-secondary font-light mb-1">
+                                {uploadingHeader
+                                  ? t('admin.newsletter.templates.uploading', 'Téléversement…')
+                                  : t(
+                                      'admin.newsletter.templates.clickToAddImage',
+                                      'Cliquez pour ajouter une image'
+                                    )}
+                              </p>
+                              <p className="text-xs text-text-secondary font-light">
+                                {t('admin.newsletter.templates.imageFormats', "PNG, JPG jusqu'a 2MB")}
+                              </p>
+                            </button>
+                          )}
                         </div>
                         <div>
                           <label className="block text-sm text-cosmos-night font-light mb-2">
@@ -1981,33 +2170,56 @@ const NewsletterManagement: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm text-cosmos-night font-light mb-2">
-                            {t('admin.newsletter.templates.mainContent', 'Contenu principal')}
-                          </label>
+                          <div className="flex items-center justify-between mb-2">
+                            <label className="block text-sm text-cosmos-night font-light">
+                              {t('admin.newsletter.templates.mainContent', 'Contenu principal')}
+                            </label>
+                            <div className="flex items-center gap-2">
+                              <input
+                                ref={contentFileRef}
+                                type="file"
+                                accept="image/*"
+                                onChange={handleContentImageUpload}
+                                className="hidden"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => contentFileRef.current?.click()}
+                                disabled={uploadingContentImg}
+                                className="flex items-center gap-1.5 px-3 py-1.5 border border-cosmos-cream hover:border-cosmos-gold text-cosmos-night text-xs font-light transition-colors disabled:opacity-60"
+                              >
+                                {uploadingContentImg ? (
+                                  <Loader2 className="w-3.5 h-3.5 animate-spin" strokeWidth={1.5} />
+                                ) : (
+                                  <Image className="w-3.5 h-3.5" strokeWidth={1.5} />
+                                )}
+                                {uploadingContentImg
+                                  ? t('admin.newsletter.templates.uploading', 'Téléversement…')
+                                  : t('admin.newsletter.templates.insertImage', 'Insérer une image')}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setShowTemplatePreview(true)}
+                                className="flex items-center gap-1.5 px-3 py-1.5 border border-cosmos-cream hover:border-cosmos-gold text-cosmos-night text-xs font-light transition-colors"
+                              >
+                                <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />
+                                {t('admin.newsletter.templates.preview', 'Aperçu')}
+                              </button>
+                            </div>
+                          </div>
                           <textarea
-                            rows={8}
+                            ref={contentTextareaRef}
+                            rows={10}
                             value={editTemplateContent}
                             onChange={(e) => setEditTemplateContent(e.target.value)}
-                            className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-light resize-none"
+                            className="w-full px-4 py-3 border border-cosmos-cream focus:outline-none focus:border-gray-900 font-mono text-sm resize-y"
                           />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm text-cosmos-night font-light mb-2">
+                          <p className="text-xs text-text-secondary font-light mt-1.5">
                             {t(
-                              'admin.newsletter.templates.contentImage',
-                              'Image de contenu (optionnel)'
+                              'admin.newsletter.templates.htmlHint',
+                              'Vous pouvez utiliser du HTML simple (titres, gras, listes) et insérer des images.'
                             )}
-                          </label>
-                          <div className="border-2 border-dashed border-cosmos-cream p-6 text-center hover:border-gray-400 transition-colors cursor-pointer">
-                            <Image
-                              className="w-6 h-6 text-text-secondary mx-auto mb-1"
-                              strokeWidth={1.5}
-                            />
-                            <p className="text-xs text-text-secondary font-light">
-                              {t('admin.newsletter.templates.addImage', 'Ajouter une image')}
-                            </p>
-                          </div>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -2277,9 +2489,12 @@ const NewsletterManagement: React.FC = () => {
 
                 {/* Footer Actions */}
                 <div className="flex items-center justify-between gap-3 pt-6 mt-6 border-t border-cosmos-cream">
-                  <button className="flex items-center gap-2 px-4 py-2 border border-cosmos-cream hover:border-gray-900 text-cosmos-night font-light transition-colors">
+                  <button
+                    onClick={() => setShowTemplatePreview(true)}
+                    className="flex items-center gap-2 px-4 py-2 border border-cosmos-cream hover:border-cosmos-gold text-cosmos-night font-light transition-colors"
+                  >
                     <Eye className="w-4 h-4" strokeWidth={1.5} />
-                    {t('admin.newsletter.templates.preview', 'Previsualiser')}
+                    {t('admin.newsletter.templates.previewBtn', 'Prévisualiser')}
                   </button>
                   <div className="flex gap-3">
                     <button
@@ -2303,6 +2518,78 @@ const NewsletterManagement: React.FC = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Premium Email Preview Modal */}
+      {showTemplatePreview && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 z-[60]"
+            onClick={() => setShowTemplatePreview(false)}
+          ></div>
+          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+            <div className="bg-cosmos-cream/30 backdrop-blur border border-cosmos-cream max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl">
+              <div className="p-5 border-b border-cosmos-cream flex items-center justify-between bg-white">
+                <div>
+                  <h2 className="text-xl font-light text-cosmos-night tracking-tight">
+                    {t('admin.newsletter.templates.previewTitle', 'Aperçu de l’email')}
+                  </h2>
+                  <p className="text-xs text-text-secondary font-light mt-0.5">
+                    {t('admin.newsletter.templates.subject', 'Sujet')} :{' '}
+                    <span className="text-cosmos-night">
+                      {editTemplateSubject ||
+                        t('admin.newsletter.templates.noSubject', '(Sans sujet)')}
+                    </span>
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex border border-cosmos-cream">
+                    <button
+                      onClick={() => setPreviewDevice('desktop')}
+                      className={`p-2 transition-colors ${
+                        previewDevice === 'desktop'
+                          ? 'bg-cosmos-night text-white'
+                          : 'text-text-secondary hover:bg-cosmos-cream/50'
+                      }`}
+                      title={t('admin.newsletter.templates.desktop', 'Ordinateur')}
+                    >
+                      <Monitor className="w-4 h-4" strokeWidth={1.5} />
+                    </button>
+                    <button
+                      onClick={() => setPreviewDevice('mobile')}
+                      className={`p-2 transition-colors ${
+                        previewDevice === 'mobile'
+                          ? 'bg-cosmos-night text-white'
+                          : 'text-text-secondary hover:bg-cosmos-cream/50'
+                      }`}
+                      title={t('admin.newsletter.templates.mobile', 'Mobile')}
+                    >
+                      <Smartphone className="w-4 h-4" strokeWidth={1.5} />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setShowTemplatePreview(false)}
+                    className="text-text-secondary hover:text-cosmos-night"
+                  >
+                    <XCircle className="w-6 h-6" strokeWidth={1.5} />
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto p-6 flex justify-center bg-[#EDE4D3]">
+                <iframe
+                  title="email-preview"
+                  srcDoc={buildEmailPreview()}
+                  className="bg-white border border-cosmos-cream shadow-lg transition-all duration-300"
+                  style={{
+                    width: previewDevice === 'mobile' ? 375 : 600,
+                    height: '100%',
+                    minHeight: 600,
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -929,3 +929,100 @@ textarea:focus-visible {
   overflow: visible;
   white-space: nowrap;
 }
+
+/* ========================================
+   Blog / Newsletter rich HTML content
+   (rendered via dangerouslySetInnerHTML)
+   ======================================== */
+
+.blog-content > *:first-child {
+  margin-top: 0;
+}
+
+.blog-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.blog-content p {
+  margin-bottom: 1.4rem;
+  line-height: 1.9;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  color: var(--color-cosmos-night, #2F5439);
+  line-height: 1.2;
+  margin-top: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content h1 { font-size: 2.25rem; }
+.blog-content h2 { font-size: 1.85rem; }
+.blog-content h3 { font-size: 1.45rem; }
+.blog-content h4 { font-size: 1.2rem; }
+
+.blog-content a {
+  color: var(--color-cosmos-gold, #C9A961);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-content a:hover {
+  opacity: 0.8;
+}
+
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin: 0 0 1.4rem 1.25rem;
+  padding-left: 1rem;
+}
+
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+.blog-content blockquote {
+  border-left: 3px solid var(--color-cosmos-gold, #C9A961);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--color-cosmos-night, #2F5439);
+}
+
+.blog-content strong { font-weight: 600; }
+.blog-content em { font-style: italic; }
+
+.blog-content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2.5rem 0;
+}
+
+.blog-content figure {
+  margin: 1.5rem 0;
+}
+
+.blog-content figcaption {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 0.5rem;
+}
